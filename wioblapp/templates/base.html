@@ -21,43 +21,49 @@
 <body>
 
     <!-- Nav Start-->
-    <nav>
+    <nav class="navbar">
         <div class="container">
             <div class="nav-flex">
-                    
                 <!-- Logo -->
-                <a href="#" class="logo">
-                    <img src="{% static 'images/logo.png' %}" alt="">
-                </a>
-            
-                <!-- Burger Icon -->
-                <button class="burger-menu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            
-                <!-- Navigation Links -->
-                <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <!-- <li><a href="#">Code of conduct</a></li>
-                    <li><a href="#">Coaches corner</a></li>
-                    <li><a href="#">Volunteers</a></li> -->
-                    <li><a href="#">Game schedule</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Login</a></li>
-                </ul>
+                <div class="logo">
+                    <a href="#">
+                        <img src="{% static 'images/logo.png' %}" alt="">
+                    </a>
+                </div>
 
+                <!-- Menu -->
+                <div class="menu">
+                    <!-- Login Link -->
+                    <a href="#">Login</a>
+
+                    <!-- Burger menu -->
+                    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+                        <label for="menu-toggle" class="burger">
+                        <i class="fa-solid fa-bars"></i>
+                    </label>
+
+                    <!-- Hidden Menu -->
+                    <ul class="menu-list">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Teams & Schedule</a></li>
+                        <li><a href="#">Registration</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
             </div>
+
         </div>
-      </nav> <!-- Nav End-->
+    </nav>
+    
+    <!-- Main Content Start -->
+    <div>
+    {% block content %}
+    {% endblock %}
+    </div>
 
-      <!-- Main Content Start -->
-      <div>
-        {% block content %}
-        {% endblock %}
-      </div> <!-- Main Content End -->
-
-      <footer>
+    <!-- Footer Start -->
+    <footer>
         <div class="container">
             <div class="footer-flex">
                 <ul>
@@ -88,9 +94,9 @@
                 </ul>
             </div>
         </div>
-      </footer>
+    </footer>
       
-      <!-- JavaScript -->
-      <script src="{% static 'script.js' %}"></script>
+    <!-- JavaScript -->
+    <script src="{% static 'script.js' %}"></script>
 </body>
 </html>
