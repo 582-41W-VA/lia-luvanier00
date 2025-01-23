@@ -19,8 +19,8 @@ body {
 
 /* NAVBAR */
 nav {
-    background-color: #bb5050;
-    padding: 10px;
+    background-color: #d95829;
+    padding: 10px 0px;
 }
 
 .nav-flex {
@@ -52,4 +52,44 @@ nav {
     color: #ffffff;
     text-decoration: none;
     text-transform: capitalize;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* FOOTER */
+footer {
+    background-color: #d95829;
+    border-radius: 90% 90% 0% 0%;
+    padding-top: 70px;
+}
+
+.footer-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer li {
+    margin-bottom: 20px;
+}
+
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer i {
+    font-size: 24px;
 }
