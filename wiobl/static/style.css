@@ -5,8 +5,9 @@
 }
 
 /* GENERAL STYLES */
-
-
+body {
+    font-family: "Libre Baskerville", serif;
+}
 
 /* Re-usable styles */
 .container {
@@ -14,4 +15,41 @@
     width: 90%;
     margin-right: auto;
     margin-left: auto;
+}
+
+/* NAVBAR */
+nav {
+    background-color: #bb5050;
+    padding: 10px;
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 80px;
+}
+
+.burger-menu {
+    background-color: transparent;
+    border: none;
+    color: #ffff;
+    cursor: pointer;
+    font-size: 20px;
+    display: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: capitalize;
 }
