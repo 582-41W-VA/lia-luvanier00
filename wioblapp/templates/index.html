@@ -1,15 +1,20 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-    home page
-    <script src="{% static 'script.js' %}"></script>
-</body>
-</html>
+{% block content %}
+<section class="hero-banner">
+    <video autoplay muted loop class="background-video">
+        <source src="{% static 'videos/bannervid.mp4' %}" type="video/mp4">
+    </video>
+    <div class="hero-content">
+        <div class="container">
+            <h3>2025</h3>
+            <h2>West Island outdoor basketball league</h2>
+            <p>Registration is now open.</p>
+            <a href="#" class="blue-button">Register</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
