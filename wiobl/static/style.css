@@ -11,7 +11,7 @@ body {
 
 /* Re-usable styles */
 .container {
-    max-width: 900px;
+    max-width: 1000px;
     width: 90%;
     margin-right: auto;
     margin-left: auto;
@@ -53,8 +53,24 @@ body {
     position: relative;
 }
 
+.logo a {
+    display: flex;
+    align-items: center;
+}
+
 .logo img {
-    height: 80px;    
+    height: 90px;    
+}
+
+.logo h2 {
+    color: #ffffff;
+    text-transform: capitalize;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
   
 .logo a {
@@ -70,11 +86,16 @@ body {
     font-size: 16px;
 }
 
-.burger {
-    cursor: pointer;
+.burger-nojs {
+    display: none;
 }
 
-.burger i {
+.burger-js {
+    cursor: pointer;
+    display: block;
+}
+
+.burger-js i {
     cursor: pointer;
     font-size: 30px;
     color: #d95829;
@@ -83,20 +104,31 @@ body {
 .menu {
     display: flex;
     justify-content: end;
-    gap: 50px;
+    gap: 10px;
+    align-items: center;
 }
 
 .menu-list {
     list-style: none;
+}
+
+.menu-list-nojs {
+    display: flex;
+}
+
+.menu-list-js {
     display: none;
     position: absolute;
     top: 80px;
     right: -20px;
     background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 20px;
     padding: 50px;
     border-radius: 5px;
     z-index: 10;
+}
+
+.menu-active {
+    display: block;
 }
 
 .menu-list li {
@@ -114,14 +146,14 @@ body {
 .menu a:hover {
     background-color: #555;
 }
-
+/* 
 .menu-toggle {
     display: none;
 }
 
 .menu-toggle:checked ~ .menu-list {
     display: block;
-}
+} */
 
 /* FOOTER */
 footer {
@@ -191,15 +223,6 @@ footer i {
     font-weight: 900;
     letter-spacing: 50px;
     color: rgba(217, 88, 41, 0.7);
-    margin-bottom: 10px;
-}
-
-.hero-content h2 {
-    font-size : 26px;
-    font-family: Montserrat;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.7);
-    text-transform: capitalize;
     margin-bottom: 10px;
 }
 
