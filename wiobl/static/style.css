@@ -10,7 +10,8 @@ body {
 }
 
 section {
-    padding: 50px;
+    padding: 50px 0;
+    border-radius: 10px;
 }
 
 /* Re-usable styles */
@@ -27,8 +28,11 @@ section {
     color: white;
     padding: 12px 24px;
     font-size: 16px;
+    font-weight: 600;
+    font-family: Montserrat;
     text-align: center;
     text-decoration: none;
+    text-transform: uppercase;
     border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -47,6 +51,8 @@ section {
     background-color: #000000;
     color: #ffffff;
     position: relative;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .nav-flex {
@@ -240,6 +246,55 @@ footer i {
     color: #ffffff;
     margin-bottom: 50px;
     font-family: Montserrat;
+}
+
+/* Registration */
+.reg-info-content {
+    background-image: url("/static/images/ballground-bg.jpg");
+    background-color: rgba(99, 99, 99, 0.408);
+    background-blend-mode: lighten;
+    background-position: center;
+    background-size: 100%;
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.reg-info-heading {
+    background-color: #000000;
+    padding: 10px;
+    max-width: 90%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.reg-info-heading h2{
+    color: #FFFFFF;
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.reg-info-container {
+    background-color: #FFFFFF;
+    padding: 50px 20px;
+    margin-bottom: 20px;
+}
+
+.reg-info-container p {
+    font-size: 20px;
+}
+
+.reg-info-container p:nth-of-type(1) {
+    margin-bottom: 20px;
+}
+
+.reg-info-container p:nth-of-type(2) {
+    font-weight: 900;
 }
 
 /* Affiliations */
