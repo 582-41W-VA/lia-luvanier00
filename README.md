@@ -12,7 +12,8 @@
 
 ## Goal 
 
-To create a modern website that acts as a central hub for WIOBL, making communication, registration, and league management easier for parents, players, and coaches.
+To create a website that acts as a central hub for WIOBL, making communication, registration, and league management easier for parents, players, and coaches.
+
 
 ## Our Team 
 
@@ -84,7 +85,7 @@ To contribute:
 2. **Create a feature branch:**
 `git checkout -b feature-branch-name`
 
-3.**Make your changes**
+3. **Make your changes**
 
 4. **Add your changes to the staging area:**
 *Stage all files*
