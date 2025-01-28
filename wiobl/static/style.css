@@ -10,7 +10,32 @@ body {
 }
 
 section {
-    padding: 50px;
+    padding: 50px 0;
+    border-radius: 10px;
+}
+
+h1 {
+    color: #ffffff;
+    text-transform: capitalize;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+h2 {
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 /* Re-usable styles */
@@ -27,8 +52,11 @@ section {
     color: white;
     padding: 12px 24px;
     font-size: 16px;
+    font-weight: 600;
+    font-family: Montserrat;
     text-align: center;
     text-decoration: none;
+    text-transform: uppercase;
     border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -42,11 +70,18 @@ section {
     transform: scale(1);
 }
 
+.section-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 /* Navbar */
 .navbar {
     background-color: #000000;
     color: #ffffff;
     position: relative;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .nav-flex {
@@ -63,17 +98,6 @@ section {
 
 .logo img {
     height: 90px;    
-}
-
-.logo h2 {
-    color: #ffffff;
-    text-transform: capitalize;
-    font-family: Montserrat;
-    font-size: 20px;
-    font-weight: 400;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
 }
   
 .logo a {
@@ -240,6 +264,94 @@ footer i {
     color: #ffffff;
     margin-bottom: 50px;
     font-family: Montserrat;
+}
+
+/* Announcements */
+.announcement-card {
+    background-color: #e3e3e3;
+    background: linear-gradient(to bottom, #d35400, #ffa230 100%);
+    border-radius: 20px;
+    padding: 50px;
+    border: 4px solid #000000;
+}
+
+.announcement-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.announcement-img {
+    height: 100px;
+    width: 200px;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 20px;
+}
+
+.announcements-flex {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+}
+
+.announcement-conent span{
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+.announcement-conent ul {
+    list-style: none;
+}
+
+.announcement-conent ul li{
+    margin-bottom: 10px;
+    font-family: Montserrat;
+}
+
+
+/* Registration */
+.reg-info-content {
+    background-image: url("/static/images/ballground-bg.jpg");
+    background-color: rgba(99, 99, 99, 0.408);
+    background-blend-mode: lighten;
+    background-position: center;
+    background-size: 100%;
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.reg-info-heading {
+    background-color: #000000;
+    padding: 10px;
+    max-width: 90%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.reg-info-heading h2{
+    color: #FFFFFF;
+}
+
+.reg-info-container {
+    background-color: #FFFFFF;
+    padding: 50px 20px;
+    margin-bottom: 20px;
+}
+
+.reg-info-container p {
+    font-size: 20px;
+}
+
+.reg-info-container p:nth-of-type(1) {
+    margin-bottom: 20px;
+}
+
+.reg-info-container p:nth-of-type(2) {
+    font-weight: 900;
 }
 
 /* Affiliations */
