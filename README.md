@@ -27,32 +27,34 @@ To create a website that acts as a central hub for WIOBL, making communication, 
 ### 1. Clone the Repository
 
 Run the following command in your terminal:
-`git clone https://github.com/582-41W-VA/lia-luvanier00.git`
+```
+git clone https://github.com/582-41W-VA/lia-luvanier00.git
+````
 Navigate to the project directory:
-`cd project-repository`
+```cd project-repository```
 
 ### 2. Install uv command to run script and manage python packages
 
 - **Windows**
-`scoop install uv`
+```scoop install uv```
 
 - **Mac**
-`brew install uv`
+```brew install uv```
 
 ###  3. Set Up Python and Django
 
 Ensure you have Python 3.8+ installed. Verify using:
-`python3 --version`
+```python3 --version```
 
 ### 4. Set up database
 
 Apply database migrations:
-`uv run manage.py migrate`
+```uv run manage.py migrate```
 
 
 ### 5. Run the Django Server
 Start the development server:
-`uv run manage.py runserver`
+```uv run manage.py runserver```
 Open your browser and navigate to http://127.0.0.1:8000/ to view the application.
 
 ## Usage
@@ -79,25 +81,25 @@ http://127.0.0.1:8000/admin
 To contribute:
 
 1. **Clone the repository:**
-`git clone <repository-url>`
-`cd <repository-name>`
+```git clone <repository-url>```
+```cd <repository-name>```
 
 2. **Create a feature branch:**
-`git checkout -b feature-branch-name`
+```git checkout -b feature-branch-name```
 
 3. **Make your changes**
 
 4. **Add your changes to the staging area:**
 *Stage all files*
-`git add .`
+```git add .```
 *Stage specific file*
-`git add <filename>`
+```git add <filename>```
 
 5. **Commit your changes:**
-`git commit -m "Add feature"`
+```git commit -m "Add feature"```
 
 6. **Push to the branch:**
-`git push origin feature-branch-name`
+```git push origin feature-branch-name```
 
 7. **Review and approval:**
 The repository manager will review your pull request, provide feedback if necessary, and approve it to be merged into the main branch.
