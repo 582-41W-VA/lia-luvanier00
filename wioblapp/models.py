@@ -20,7 +20,7 @@ class UserAccount(User):
 
 class Team(models.Model):
     name = models.CharField("Team Name", max_length=20, primary_key=True)
-    coaches = models.ManyToManyField(UserAccount, on_delete=models.RESTRICT, related_name="teams")
+    coaches = models.ManyToManyField(UserAccount, related_name="teams")
     place = models.IntegerField("Place", default=0)
 
     def __str__(self):
