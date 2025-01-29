@@ -25,7 +25,6 @@ h1 {
     text-decoration-skip-ink: none;
 }
 
-
 h2 {
     font-family: Montserrat;
     font-size: 40px;
@@ -140,7 +139,7 @@ h3 {
 .menu-list-js {
     display: block;
     position: absolute;
-    top: 50px;
+    top: 60px;
     right: 0;
     background-color: rgba(0, 0, 0, 0.8);
     padding: 20px;
@@ -172,12 +171,6 @@ h3 {
 }
 
 /* Footer */
-/* .footer-container {
-    overflow: hidden;
-    position: relative;
-    height: 400px; 
-} */
-
 footer {
     padding-top: 110px;
     padding-bottom: 20px;
@@ -254,6 +247,7 @@ footer i {
     letter-spacing: 50px;
     line-height: 1;
     color: rgba(255, 255, 255, 0.232);
+    margin-bottom: 10px;
 }
 
 .hero-content p {
@@ -266,8 +260,9 @@ footer i {
 .announcement-card {
     background-color: #e3e3e3;
     background: linear-gradient(to bottom, #d35400, #ffa230 100%);
+    width: 30%;
     border-radius: 20px;
-    padding: 50px;
+    padding: 20px;
     border: 4px solid #000000;
     transition: transform 0.3s ease-in-out;
 }
@@ -283,7 +278,6 @@ footer i {
 
 .announcement-img {
     height: 100px;
-    width: 200px;
     background-position: center;
     background-size: cover;
     margin-bottom: 20px;
@@ -291,8 +285,10 @@ footer i {
 
 .announcements-flex {
     display: flex;
-    gap: 40px;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    justify-content: space-evenly;
 }
 
 .announcement-conent span{
@@ -308,7 +304,6 @@ footer i {
     margin-bottom: 10px;
     font-family: Montserrat;
 }
-
 
 /* Registration */
 .reg-info-content {
@@ -358,18 +353,19 @@ footer i {
 /* Affiliations */
 
 .affiliations {
-    padding-bottom: 100px;
+    padding-top: 0;
+    padding-bottom: 50px;
 }
 
 .affiliations-bg {
     background-color: #D9D9D9;
-    padding: 30px;
+    padding: 30px 0;
 }
 
-.affiliations-flex{
-    display: flex;
-    gap: 150px;
-    align-items: center;
+.affiliations-grid{
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    gap: 20px;
     justify-content: space-between;
 }
 
@@ -378,14 +374,13 @@ footer i {
 }
 
 /* MEDIA QUERY */
-
 @media (max-width: 1100px) {
     /* GENERAL */
     h1 {
         font-size: 16px;
     }
 
-    /* NAV BAR */
+    /* Nav */
     .menu-list {
         flex-wrap: wrap;
         gap: 5px;
@@ -396,23 +391,170 @@ footer i {
 }
 
 @media (max-width: 992px) {
+    /* GENERAL */
+    section {
+        padding: 40px 0;
+    }
+    h2 {
+        font-size: 35px;
+    }
 
+    /* Footer */
+    footer {
+        padding-top: 80px;
+        padding-bottom: 10px;
+    }
+    .footer-flex {
+        gap: 130px;
+        justify-content: center;
+    }
+    .footer-list li {
+        margin-bottom: 20px;
+    }
+    .social-media-icons {
+        gap: 20px;
+    }
+
+    /* HOME */
+
+    /* Hero Baner */
+    .hero-content h3 {
+        font-size: 200px;
+    }
+
+    /* Registration */
+    .reg-info-container {
+        padding: 45px 25px;
+    }
+    .reg-info-container p {
+        font-size: 18px;
+    }
+
+    /* Affiliations */
+    .affiliations {
+        padding-bottom: 40px;
+    }
+    .affiliations-bg {
+        padding: 20px 0;
+    }
+    .affiliations img {
+        height: 45px;
+    }
 }
 
 @media (max-width: 768px) {
     /* GENERAL */
+    section {
+        padding: 30px 0;
+    }
     h1 {
         font-size: 14px;
     }
+    h2 {
+        font-size: 30px;
+    }
+
+    /* Footer */
+    footer {
+        padding-top: 70px;
+    }
+    .footer-flex {
+        gap: 100px;
+    }
+    .footer-list li {
+        margin-bottom: 10px;
+    }
+    .social-media-icons {
+        gap: 10px;
+    }
+
+    /* HOME */
+
+    /* Hero Banner */
+    .hero-content h3 {
+        font-size: 150px;
+    }
+
+    /* Announcements */
+    .announcement-card {
+        width: 40%;
+        padding: 15px;
+    }
+
+    /* Registration */
+    .reg-info-container {
+        padding: 35px 15px;
+    }
+    .reg-info-container p {
+        font-size: 16px;
+    }
+
+    /* Affiliations */
+    .affiliations {
+        padding-bottom: 30px;
+    }
+    .affiliations img {
+        height: 40px;
+    }
+    
 }
 
 @media (max-width: 576px) {
     /* GENERAL */
+    section {
+        padding: 25px 0;
+    }
     h1 {
        display: none;
     }
     .h1-acronym {
         display: block;
+    }
+    h2 {
+        font-size: 25px;
+    }
+    h3 {
+        font-size: 15px;
+    }
+
+    /* Footer */
+    footer {
+        padding-top: 45px;
+    }
+    .footer-flex {
+        gap: 40px;
+    }
+
+    /* HOME */
+
+    /* Hero Banner */
+    .hero-content h3 {
+        font-size: 80px;
+    }
+
+    /* Announcements */
+    .announcement-card {
+        width: 100%;
+        padding: 15px;
+    }
+
+    /* Registration */
+    .reg-info-container {
+        padding: 30px 20px;
+    }
+    .reg-info-container p {
+        font-size: 14px;
+    }
+
+    /* Affiliations */
+    .affiliations {
+        padding-bottom: 20px;
+    }
+    .affiliations-grid{
+        grid-template-columns: repeat(2, max-content);
+    }
+    .affiliations img {
+        height: 70px;
     }
 }
 
