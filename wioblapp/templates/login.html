@@ -7,6 +7,10 @@
         {% csrf_token %}
 
         {{ login_form.errors }}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+
         <fieldset>
             <legend>Login</legend>
             {{ login_form }}
