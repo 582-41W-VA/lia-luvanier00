@@ -37,3 +37,10 @@ def member_login(request):
     }
     return render(request, "login.html", context)
 # --------------------------------------------------------------
+
+# --------------------------------------------------------------
+@login_required(login_url="login")
+def member_logout(request):
+    logout(request)
+    return redirect("login")
+# --------------------------------------------------------------
