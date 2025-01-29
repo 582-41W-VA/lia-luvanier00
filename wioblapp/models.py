@@ -10,7 +10,7 @@ class Role(models.Model):
 
 class UserAccount(User):
     role = models.ForeignKey(Role, on_delete=models.RESTRICT, related_name="user_accounts")
-    bio = models.TextField("Bio")
+    bio = models.TextField("Bio", blank=True, null=True)
     # username = models.CharField("Username", max_length=100)
     # email = models.EmailField("Email Adress", max_length=254, unique=True)
     # password = models.CharField("Password", max_length=100)
