@@ -77,8 +77,8 @@ Open your browser and navigate to http://127.0.0.1:8000/ to view the application
 http://127.0.0.1:8000/admin
 
 2. Default admin credentials:
-- **Username** : Admin
-- **Password** : Thepassword
+- **Username** : admin
+- **Password** : adminpassword
 
 ## Technologies used 
 
