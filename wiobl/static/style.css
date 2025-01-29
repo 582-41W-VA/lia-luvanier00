@@ -11,7 +11,6 @@ body {
 
 section {
     padding: 50px 0;
-    border-radius: 10px;
 }
 
 h1 {
@@ -80,8 +79,6 @@ h3 {
     background-color: #000000;
     color: #ffffff;
     position: relative;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
 }
 
 .nav-container {
@@ -163,7 +160,7 @@ h3 {
 }
 
 .menu-list li:last-child a{
-    color: #ff7d4d;
+    color: #ffbaa1;
 }
 
 .menu a:hover {
@@ -225,6 +222,8 @@ footer i {
     align-items: end;
     overflow: hidden;
     padding: 40px 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .background-video {
