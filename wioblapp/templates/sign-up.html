@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block 'title' %} Sign-up {% endblock %}
+{% load static %}
+
+{% block content %}
+    <form action="{% url 'sign-up' %}" method="POST">
+        {% csrf_token %}
+
+        {{ signup_form.errors }}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+
+        <fieldset>
+            <legend>Sign Up</legend>
+            {% for field in signup_form %}
+                <div>
+                    {{ field.label }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button name="sign-up">sign-up</button>
+        </fieldset>
+    </form>
+{% endblock %}
