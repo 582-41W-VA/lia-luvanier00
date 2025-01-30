@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="login-section">
+    <div class="form-container">
+        <img src="{% static 'images/logo.png' %}" alt="">
+        <form action="/login" method="POST" class="login-form">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit" class="action-button button">Login</button>
+        </form>
+        <p>Or</p>
+        <a href="" class="black-button button">Create account</a>
+    </div>
+</section>
+{% endblock %}
+
+
