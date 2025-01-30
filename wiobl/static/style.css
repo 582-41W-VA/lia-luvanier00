@@ -14,28 +14,26 @@ h1 {
     text-transform: capitalize;
     font-family: Montserrat;
     font-size: 18px;
-    font-weight: 400;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
+    font-weight: 700;
 }
 
 h2 {
-    font-family: Montserrat;
-    font-size: 40px;
+    font-family: Raleway;
+    font-size: 30px;
     font-weight: 600;
     text-transform: uppercase;
 }
 
 h3 {
-    font-size: 16px;
-    font-weight: 600;
+    font-family: Roboto;
+    font-size: 28px;
+    font-weight: 400;
     text-transform: uppercase;
 }
 
 /* Re-usable styles */
 .default-body {
-    font-family: "Libre Baskerville", serif;
+    font-family: Roboto;
 }
 
 .container {
@@ -50,7 +48,7 @@ h3 {
     padding: 16px 24px;
     font-size: 16px;
     font-weight: 600;
-    font-family: Montserrat;
+    font-family: Raleway;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
@@ -169,7 +167,7 @@ h3 {
     transition: 0.5s;
 }
 
-.menu-list li:last-child a{
+.menu-list li:last-child a {
     color: #ffbaa1;
 }
 
@@ -464,9 +462,6 @@ footer i {
         flex-wrap: wrap;
         gap: 5px;
     }
-    .menu a {
-        font-size: 14px;
-    }
 }
 
 @media (max-width: 992px) {
@@ -475,7 +470,7 @@ footer i {
         padding: 40px 0;
     }
     h2 {
-        font-size: 35px;
+        font-size: 25px;
     }
     .logo img {
         height: 80px;    
@@ -533,7 +528,7 @@ footer i {
         font-size: 14px;
     }
     h2 {
-        font-size: 30px;
+        font-size: 20px;
     }
     .logo img {
         height: 70px;    
@@ -548,7 +543,7 @@ footer i {
         gap: 100px;
     }
     .footer-list li {
-        margin-bottom: 8px;
+        margin-bottom: 16px;
     }
     .social-media-icons {
         gap: 8px;
@@ -609,12 +604,6 @@ footer i {
     }
     .h1-acronym {
         display: block;
-    }
-    h2 {
-        font-size: 25px;
-    }
-    h3 {
-        font-size: 15px;
     }
     .logo img {
         height: 60px;    
