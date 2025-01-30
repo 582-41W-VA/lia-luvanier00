@@ -5,13 +5,20 @@
 <section class="login-section">
     <div class="form-container">
         <img src="{% static 'images/logo.png' %}" alt="">
-        <form action="/login" method="POST" class="login-form">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+        <form action="{% url 'login' %}" method="POST" class="login-form">
+            {% csrf_token %}
             
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-            
+            {{ login_form.errors }}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+
+            <label for="{{ login_form.email.id_for_label }}">Email</label>
+            <input type="email" id="{{ login_form.email.id_for_label }}" name="{{ login_form.email.name }}" value="{{ login_form.email.value|default:'' }}" required>
+
+            <label for="{{ login_form.password.id_for_label }}">Password</label>
+            <input type="password" id="{{ login_form.password.id_for_label }}" name="{{ login_form.password.name }}" required>
+
             <button type="submit" class="action-button button">Login</button>
         </form>
         <p>Or</p>
@@ -19,5 +26,3 @@
     </div>
 </section>
 {% endblock %}
-
-
