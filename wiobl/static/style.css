@@ -462,6 +462,9 @@ footer i {
     h2 {
         font-size: 35px;
     }
+    .logo img {
+        height: 80px;    
+    }
 
     /* Footer */
     footer {
@@ -517,6 +520,10 @@ footer i {
     h2 {
         font-size: 30px;
     }
+    .logo img {
+        height: 70px;    
+    }
+
 
     /* Footer */
     footer {
@@ -593,6 +600,9 @@ footer i {
     }
     h3 {
         font-size: 15px;
+    }
+    .logo img {
+        height: 60px;    
     }
 
     /* Footer */
