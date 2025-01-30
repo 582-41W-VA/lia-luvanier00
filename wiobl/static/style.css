@@ -255,52 +255,51 @@ footer i {
 }
 
 /* Announcements */
+.announcements-bg {
+    background-color: #7a9fbf61;
+    padding: 48px;
+}
+
 .announcement-card {
-    background-color: #e3e3e3;
-    background: linear-gradient(to bottom, #d35400, #ffa230 100%);
-    width: 30%;
-    border-radius: 20px;
-    padding: 20px;
-    border: 4px solid #000000;
     transition: transform 0.3s ease-in-out;
+    background-color: #ffffff;
 }
 
 .announcement-card:hover {
     transform: scale(1.1);
 }
 
-.announcement-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .announcement-img {
-    height: 100px;
+    height: 180px;
     background-position: center;
     background-size: cover;
-    margin-bottom: 20px;
 }
 
 .announcements-flex {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
     justify-content: space-evenly;
 }
 
-.announcement-conent span{
+.announcement-content {
+    padding: 24px;
+    text-align: center;
+}
+
+.announcement-content a {
+    text-decoration: none;
+    color: #000000;
     text-transform: uppercase;
-    font-weight: 800;
-}
-
-.announcement-conent ul {
-    list-style: none;
-}
-
-.announcement-conent ul li{
-    margin-bottom: 10px;
     font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+.announcement-content a:hover {
+    text-decoration: underline;
 }
 
 /* Registration */
@@ -474,9 +473,23 @@ footer i {
     }
 
     /* Announcements */
-    .announcement-card {
-        width: 40%;
-        padding: 15px;
+    .announcements-bg {
+        padding: 40px;
+    }
+    .announcement-card:hover {
+        transform: none;
+    }
+    .announcement-img {
+        height: 130px;
+    }
+    .announcements-flex {
+        gap: 32px;
+    }
+    .announcement-content {
+        padding: 16px;
+    }
+    .announcement-content a {
+        margin-bottom: 8px;
     }
 
     /* Registration */
@@ -531,9 +544,15 @@ footer i {
     }
 
     /* Announcements */
-    .announcement-card {
-        width: 100%;
-        padding: 15px;
+    .announcements-bg {
+        padding: 32px;
+    }
+    .announcement-img {
+        height: 100px;
+    }
+    .announcements-flex {
+        gap: 24px;
+        grid-template-columns: repeat(1, 1fr);
     }
 
     /* Registration */
