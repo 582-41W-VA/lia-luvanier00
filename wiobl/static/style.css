@@ -5,10 +5,6 @@
 }
 
 /* GENERAL STYLES */
-body {
-    font-family: "Libre Baskerville", serif;
-}
-
 section {
     padding: 48px 0;
 }
@@ -38,6 +34,10 @@ h3 {
 }
 
 /* Re-usable styles */
+.default-body {
+    font-family: "Libre Baskerville", serif;
+}
+
 .container {
     max-width: 1000px;
     width: 90%;
@@ -183,6 +183,8 @@ footer {
     background-image: url("/static/images/footer-ball.png");
     background-position: top;
     background-size: cover;
+    z-index: 10;
+    position: relative; 
 }
 
 .footer-flex {
@@ -384,9 +386,16 @@ footer i {
 /* LOGIN PAGE*/
 /* login section*/
 .login-section {
+    height: 650px;
+}
+
+.body-login {
     background-image: url("/static/images/sky-dunk.jpg");
-    background-position: right 35% bottom 45%;
+    background-position: right 100% bottom 28%;
     background-size: cover;
+}
+
+.login-section {
     padding: 0;
 }
 
@@ -395,7 +404,11 @@ footer i {
     padding: 48px 0;
     text-align: center;
     width: 40%;
-    margin-left: auto;
+    height: 100vh;
+    right: 0;
+    position: absolute;
+    z-index: -10;
+    height: 935px;
 }
 
 .login-form {
