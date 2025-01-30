@@ -10,8 +10,7 @@ body {
 }
 
 section {
-    padding: 50px 0;
-    border-radius: 10px;
+    padding: 48px 0;
 }
 
 h1 {
@@ -46,33 +45,32 @@ h3 {
     margin-left: auto;
 }
 
-.orange-button {
+.action-button {
     display: inline-block;
-    background-color: #D95829;
+    background-color: #8C0303;
     color: white;
-    padding: 12px 24px;
+    padding: 16px 24px;
     font-size: 16px;
     font-weight: 600;
     font-family: Montserrat;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
-    border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.orange-button:hover {
-    background-color: #bc4418;
+.action-button:hover {
+    background-color: #bf1616;
     transform: scale(1.05);
 }
 
-.orange-button:active {
+.action-button:active {
     transform: scale(1);
 }
 
 .section-heading {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
 /* Navbar */
@@ -80,8 +78,6 @@ h3 {
     background-color: #000000;
     color: #ffffff;
     position: relative;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
 }
 
 .nav-container {
@@ -142,7 +138,7 @@ h3 {
     top: 60px;
     right: 0;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
+    padding: 24px;
     border-radius: 5px;
     z-index: 10;
     flex-direction: column
@@ -157,13 +153,13 @@ h3 {
     color: white;
     font-size: 16px;
     display: block;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 3px;
     transition: 0.5s;
 }
 
 .menu-list li:last-child a{
-    color: #ff7d4d;
+    color: #ffbaa1;
 }
 
 .menu a:hover {
@@ -173,7 +169,7 @@ h3 {
 /* Footer */
 footer {
     padding-top: 110px;
-    padding-bottom: 20px;
+    padding-bottom: 24px;
     background-image: url("/static/images/footer-ball.png");
     background-position: top;
     background-size: cover;
@@ -191,7 +187,7 @@ footer ul {
 }
 
 .footer-list li {
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
 footer a {
@@ -206,7 +202,7 @@ footer a:hover {
 
 .social-media-icons {
     display: flex;
-    gap: 30px;
+    gap: 32px;
 }
 
 footer i {
@@ -225,6 +221,8 @@ footer i {
     align-items: end;
     overflow: hidden;
     padding: 40px 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .background-video {
@@ -247,62 +245,62 @@ footer i {
     letter-spacing: 50px;
     line-height: 1;
     color: rgba(255, 255, 255, 0.232);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .hero-content p {
     color: #ffffff;
-    margin-bottom: 50px;
+    margin-bottom: 48px;
     font-family: Montserrat;
 }
 
 /* Announcements */
+.announcements-bg {
+    background-color: #7a9fbf61;
+    padding: 48px;
+}
+
 .announcement-card {
-    background-color: #e3e3e3;
-    background: linear-gradient(to bottom, #d35400, #ffa230 100%);
-    width: 30%;
-    border-radius: 20px;
-    padding: 20px;
-    border: 4px solid #000000;
     transition: transform 0.3s ease-in-out;
+    background-color: #ffffff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .announcement-card:hover {
     transform: scale(1.1);
 }
 
-.announcement-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .announcement-img {
-    height: 100px;
+    height: 180px;
     background-position: center;
     background-size: cover;
-    margin-bottom: 20px;
 }
 
 .announcements-flex {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
     justify-content: space-evenly;
 }
 
-.announcement-conent span{
+.announcement-content {
+    padding: 24px;
+    text-align: center;
+}
+
+.announcement-content a {
+    text-decoration: none;
+    color: #000000;
     text-transform: uppercase;
-    font-weight: 800;
-}
-
-.announcement-conent ul {
-    list-style: none;
-}
-
-.announcement-conent ul li{
-    margin-bottom: 10px;
     font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+.announcement-content a:hover {
+    text-decoration: underline;
 }
 
 /* Registration */
@@ -319,7 +317,7 @@ footer i {
 
 .reg-info-heading {
     background-color: #000000;
-    padding: 10px;
+    padding: 8px;
     max-width: 90%;
     text-align: center;
     margin-left: auto;
@@ -334,8 +332,8 @@ footer i {
 
 .reg-info-container {
     background-color: #FFFFFF;
-    padding: 50px 20px;
-    margin-bottom: 20px;
+    padding: 48px 24px;
+    margin-bottom: 24px;
 }
 
 .reg-info-container p {
@@ -343,7 +341,7 @@ footer i {
 }
 
 .reg-info-container p:nth-of-type(1) {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .reg-info-container p:nth-of-type(2) {
@@ -354,12 +352,12 @@ footer i {
 
 .affiliations {
     padding-top: 0;
-    padding-bottom: 50px;
+    padding-bottom: 48px;
 }
 
 .affiliations-bg {
     background-color: #D9D9D9;
-    padding: 30px 0;
+    padding: 32px 0;
 }
 
 .affiliations-grid{
@@ -402,17 +400,17 @@ footer i {
     /* Footer */
     footer {
         padding-top: 80px;
-        padding-bottom: 10px;
+        padding-bottom: 8px;
     }
     .footer-flex {
         gap: 130px;
         justify-content: center;
     }
     .footer-list li {
-        margin-bottom: 20px;
+        margin-bottom: 24px;
     }
     .social-media-icons {
-        gap: 20px;
+        gap: 24px;
     }
 
     /* HOME */
@@ -424,7 +422,7 @@ footer i {
 
     /* Registration */
     .reg-info-container {
-        padding: 45px 25px;
+        padding: 40px 16x;
     }
     .reg-info-container p {
         font-size: 18px;
@@ -435,7 +433,7 @@ footer i {
         padding-bottom: 40px;
     }
     .affiliations-bg {
-        padding: 20px 0;
+        padding: 24px 0;
     }
     .affiliations img {
         height: 45px;
@@ -445,7 +443,7 @@ footer i {
 @media (max-width: 768px) {
     /* GENERAL */
     section {
-        padding: 30px 0;
+        padding: 32px 0;
     }
     h1 {
         font-size: 14px;
@@ -462,10 +460,10 @@ footer i {
         gap: 100px;
     }
     .footer-list li {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
     .social-media-icons {
-        gap: 10px;
+        gap: 8px;
     }
 
     /* HOME */
@@ -476,14 +474,28 @@ footer i {
     }
 
     /* Announcements */
-    .announcement-card {
-        width: 40%;
-        padding: 15px;
+    .announcements-bg {
+        padding: 40px;
+    }
+    .announcement-card:hover {
+        transform: none;
+    }
+    .announcement-img {
+        height: 130px;
+    }
+    .announcements-flex {
+        gap: 32px;
+    }
+    .announcement-content {
+        padding: 16px;
+    }
+    .announcement-content a {
+        margin-bottom: 8px;
     }
 
     /* Registration */
     .reg-info-container {
-        padding: 35px 15px;
+        padding: 32px 8px;
     }
     .reg-info-container p {
         font-size: 16px;
@@ -491,7 +503,7 @@ footer i {
 
     /* Affiliations */
     .affiliations {
-        padding-bottom: 30px;
+        padding-bottom: 32px;
     }
     .affiliations img {
         height: 40px;
@@ -502,7 +514,7 @@ footer i {
 @media (max-width: 576px) {
     /* GENERAL */
     section {
-        padding: 25px 0;
+        padding: 24px 0;
     }
     h1 {
        display: none;
@@ -519,7 +531,7 @@ footer i {
 
     /* Footer */
     footer {
-        padding-top: 45px;
+        padding-top: 48px;
     }
     .footer-flex {
         gap: 40px;
@@ -533,14 +545,20 @@ footer i {
     }
 
     /* Announcements */
-    .announcement-card {
-        width: 100%;
-        padding: 15px;
+    .announcements-bg {
+        padding: 32px;
+    }
+    .announcement-img {
+        height: 100px;
+    }
+    .announcements-flex {
+        gap: 24px;
+        grid-template-columns: repeat(1, 1fr);
     }
 
     /* Registration */
     .reg-info-container {
-        padding: 30px 20px;
+        padding: 24px 8px;
     }
     .reg-info-container p {
         font-size: 14px;
@@ -548,13 +566,12 @@ footer i {
 
     /* Affiliations */
     .affiliations {
-        padding-bottom: 20px;
+        padding-bottom: 24px;
     }
     .affiliations-grid{
         grid-template-columns: repeat(2, max-content);
-    }
-    .affiliations img {
-        height: 70px;
+        gap: 40px;
+        justify-content: center;
     }
 }
 
