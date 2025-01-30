@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>{% block 'title' %} Home {% endblock %}</title>
 
     <!-- CSS Style -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
@@ -41,7 +41,13 @@
                         <li><a href="#">Teams</a></li>
                         <li><a href="#">Registration</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><a href="#">Login</a></li>
+                        <li>
+                            {% if request.user.is_authenticated %}
+                                <a href="{% url 'logout' %}">Logout</a>
+                            {% else %}
+                                <a href="{% url 'login' %}">Login</a>
+                            {% endif %}
+                        </li>
                     </ul>
 
                     <!-- Burger menu -->

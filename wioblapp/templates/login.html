@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block 'title' %}Login{% endblock %}
 {% load static %}
 
 {% block content %}
@@ -19,7 +20,7 @@
             <label for="{{ login_form.password.id_for_label }}">Password</label>
             <input type="password" id="{{ login_form.password.id_for_label }}" name="{{ login_form.password.name }}" required>
 
-            <button type="submit" class="action-button button">Login</button>
+            <button name="login" type="submit" class="action-button button">Login</button>
         </form>
         <p>Or</p>
         <a href="" class="black-button button">Create account</a>
