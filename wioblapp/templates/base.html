@@ -26,7 +26,7 @@
             <div class="nav-flex">
                 <!-- Logo -->
                 <div class="logo">
-                    <a href="#">
+                    <a href="{% url 'index' %}">
                         <img src="{% static 'images/logo.png' %}" alt="">
                         <h1>West Island outdoor basketball league</h1>
                         <h1 class="h1-acronym">W.I.O.B.L.</h1>
@@ -68,7 +68,7 @@
     </div>
 
     <!-- Footer Start -->
-    <footer>
+    <footer class="{% block footer_class %}default-footer{% endblock %}">
         <div class="container">
             <div class="footer-flex">
                 <ul class="footer-list">

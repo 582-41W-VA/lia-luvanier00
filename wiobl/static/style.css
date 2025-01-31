@@ -182,8 +182,12 @@ footer {
     background-image: url("/static/images/footer-ball.png");
     background-position: top;
     background-size: cover;
-    z-index: 10;
-    position: relative; 
+    /* z-index: 10;
+    position: relative; */
+}
+
+.footer-login {
+    display: none;
 }
 
 .footer-flex {
@@ -362,6 +366,8 @@ footer i {
 
 /* Affiliations */
 
+/* Affiliations */
+
 .affiliations {
     padding-top: 0;
     padding-bottom: 48px;
@@ -386,17 +392,16 @@ footer i {
 /* LOGIN PAGE*/
 /* login section*/
 .login-section {
-    height: 650px;
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0;
 }
 
 .body-login {
     background-image: url("/static/images/sky-dunk.jpg");
-    background-position: right 100% bottom 28%;
+    background-position: right 100% top 50%;
     background-size: cover;
-}
-
-.login-section {
-    padding: 0;
+    position: center;
 }
 
 .form-container {
@@ -405,10 +410,7 @@ footer i {
     text-align: center;
     width: 40%;
     height: 100vh;
-    right: 0;
-    position: absolute;
     z-index: -10;
-    height: 948px;
 }
 
 .login-form {
@@ -493,7 +495,6 @@ footer i {
     }
 
     /* HOME */
-
     /* Hero Baner */
     .hero-content h3 {
         font-size: 200px;
@@ -516,6 +517,22 @@ footer i {
     }
     .affiliations img {
         height: 45px;
+    }
+
+    /* LOGIN PAGE*/
+    /* login section*/
+    .form-container {
+        width: 100%;
+        padding: 32px;
+    }
+    .login-form,
+    .login-form input:nth-of-type(2),
+    .form-container p,
+    .form-container img {
+        margin-bottom: 32px;
+    }
+    .form-container img {
+        height: 100px;
     }
 }
 
@@ -591,7 +608,22 @@ footer i {
     .affiliations img {
         height: 40px;
     }
-    
+
+   /* LOGIN PAGE*/
+    /* login section*/
+    .form-container {
+        width: 100%;
+        padding: 24px;
+    }
+    .login-form,
+    .login-form input:nth-of-type(2),
+    .form-container p,
+    .form-container img {
+        margin-bottom: 24px;
+    }
+    .form-container img {
+        height: 90px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -653,5 +685,9 @@ footer i {
         gap: 40px;
         justify-content: center;
     }
+
+    /* LOGIN PAGE*/
+    /* login section*/
+ 
 }
 
