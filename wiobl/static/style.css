@@ -365,9 +365,6 @@ footer i {
 }
 
 /* Affiliations */
-
-/* Affiliations */
-
 .affiliations {
     padding-top: 0;
     padding-bottom: 48px;
@@ -387,6 +384,63 @@ footer i {
 
 .affiliations img {
     height: 60px;
+}
+
+/* Courts */
+.courts{
+    text-align: center;
+}
+
+.court-card {
+    background-image: url("/static/images/bbcourt-bg.png");
+    background-size: cover;
+    background-position: center;
+    padding: 48px;
+}
+
+.court-card {
+    padding: 48px;
+}
+
+.courtcard-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 48px;
+}
+
+.court-info {
+    width: 50%;
+}
+
+.court-content {
+    background-color: #E4E1E8;
+    padding: 120px 24px;
+    width: 60%;
+    position: relative;
+    top: -70px;
+    left: 20%;
+}
+
+.court-content img {
+    height: 120px;
+}
+
+.court-content p {
+    font-size: 30px;
+}
+
+.court-content img,
+.court-content p:first-of-type {
+    margin-bottom: 32px;
+}
+
+.court-map {
+    width: 50%;
+}
+
+.court-map img {
+    height: 400px;
 }
 
 /* LOGIN PAGE*/
@@ -488,6 +542,13 @@ footer i {
         flex-wrap: wrap;
         gap: 5px;
     }
+
+    /* HOME */
+    /* Court */
+    .court-content img {
+        height: 100px;
+    }
+    
 }
 
 @media (max-width: 992px) {
@@ -530,6 +591,31 @@ footer i {
     }
     .reg-info-container p {
         font-size: 18px;
+    }
+
+    /* Courts */
+    .court-card {
+        padding: 32px;
+    }
+    .courtcard-flex {
+        gap: 32px;
+    }
+    .court-content {
+        width: 80%;
+        top: -50px;
+    }
+    .court-content img {
+        height: 80px;
+    }
+    .court-content p {
+        font-size: 20px;
+    }
+    .court-content img,
+    .court-content p:first-of-type {
+        margin-bottom: 24px;
+    }
+    .court-map img {
+        height: 250px;
     }
 
     /* Affiliations */
@@ -575,7 +661,6 @@ footer i {
     .logo img {
         height: 70px;    
     }
-
 
     /* Footer */
     footer {
@@ -632,6 +717,30 @@ footer i {
     }
     .affiliations img {
         height: 40px;
+    }
+
+    /* Courts */
+    .court-card {
+        padding: 16px;
+    }
+    .courtcard-flex {
+        gap: 16px;
+    }
+    .court-content {
+        top: -40px;
+    }
+    .court-content img {
+        height: 70px;
+    }
+    .court-content p {
+        font-size: 18px;
+    }
+    .court-content img,
+    .court-content p:first-of-type {
+        margin-bottom: 16px;
+    }
+    .court-map img {
+        height: 220px;
     }
 
    /* LOGIN PAGE*/
@@ -701,6 +810,31 @@ footer i {
     .reg-info-container p {
         font-size: 14px;
     }
+
+    /* Courts */
+    .courtcard-flex {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .court-content {
+        padding: 16px 16px;
+        width: 100%;
+        top: -35px;
+        left: 0;
+    }
+    .court-content img {
+        height: 60px;
+    }
+    .court-content p {
+        font-size: 16px;
+    }
+    .court-map {
+        width: 100%;
+    }
+    .court-map img {
+        height: 250px;
+    }
+
 
     /* Affiliations */
     .affiliations {
