@@ -5,10 +5,6 @@
 }
 
 /* GENERAL STYLES */
-body {
-    font-family: "Libre Baskerville", serif;
-}
-
 section {
     padding: 48px 0;
 }
@@ -18,26 +14,28 @@ h1 {
     text-transform: capitalize;
     font-family: Montserrat;
     font-size: 18px;
-    font-weight: 400;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
+    font-weight: 700;
 }
 
 h2 {
-    font-family: Montserrat;
-    font-size: 40px;
+    font-family: Raleway;
+    font-size: 30px;
     font-weight: 600;
     text-transform: uppercase;
 }
 
 h3 {
-    font-size: 16px;
-    font-weight: 600;
+    font-family: Roboto;
+    font-size: 28px;
+    font-weight: 400;
     text-transform: uppercase;
 }
 
 /* Re-usable styles */
+.default-body {
+    font-family: Roboto;
+}
+
 .container {
     max-width: 1000px;
     width: 90%;
@@ -45,27 +43,35 @@ h3 {
     margin-left: auto;
 }
 
-.action-button {
+.button {
     display: inline-block;
-    background-color: #8C0303;
-    color: white;
     padding: 16px 24px;
     font-size: 16px;
     font-weight: 600;
-    font-family: Montserrat;
+    font-family: Raleway;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    color: #FFFFFF;
+    transition: 0.5s;
 }
 
+.action-button {
+    background-color: #8C0303;
+}
 .action-button:hover {
     background-color: #bf1616;
     transform: scale(1.05);
 }
 
-.action-button:active {
-    transform: scale(1);
+.black-button {
+    background-color: #000000;
+}
+.black-button:hover {
+    background-color: #504444;
+    transform: scale(1.05);
 }
 
 .section-heading {
@@ -75,6 +81,7 @@ h3 {
 
 /* Navbar */
 .navbar {
+    padding: 16px 0;
     background-color: #000000;
     color: #ffffff;
     position: relative;
@@ -98,6 +105,8 @@ h3 {
 .logo a {
     display: flex;
     align-items: center;
+    gap: 16px;
+    font-size: 20px;
 }
 
 .logo img {
@@ -151,14 +160,14 @@ h3 {
 .menu a {
     text-decoration: none;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     display: block;
     padding: 4px 8px;
     border-radius: 3px;
     transition: 0.5s;
 }
 
-.menu-list li:last-child a{
+.menu-list li:last-child a {
     color: #ffbaa1;
 }
 
@@ -173,6 +182,12 @@ footer {
     background-image: url("/static/images/footer-ball.png");
     background-position: top;
     background-size: cover;
+    /* z-index: 10;
+    position: relative; */
+}
+
+.footer-login {
+    display: none;
 }
 
 .footer-flex {
@@ -194,6 +209,7 @@ footer a {
     color: #ffffff;
     text-decoration: none;
     text-transform: capitalize;
+    font-size: 20px;
 }
 
 footer a:hover {
@@ -350,6 +366,8 @@ footer i {
 
 /* Affiliations */
 
+/* Affiliations */
+
 .affiliations {
     padding-top: 0;
     padding-bottom: 48px;
@@ -371,6 +389,93 @@ footer i {
     height: 60px;
 }
 
+/* LOGIN PAGE*/
+/* login section*/
+.login-section {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0;
+}
+
+.body-login {
+    background-image: url("/static/images/sky-dunk.jpg");
+    background-position: right 100% top 50%;
+    background-size: cover;
+    position: center;
+}
+
+.form-container {
+    background-color: #ffffffca;
+    padding: 48px 0;
+    text-align: center;
+    width: 40%;
+    height: 100vh;
+}
+
+.login-form {
+    margin-bottom: 48px;
+}
+
+.error-message {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 48px;
+}
+
+.error-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.error-message i {
+    font-size: 16px;
+}
+
+.login-form label, input {
+    display: block;
+}
+
+.login-form label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.login-form input {
+    margin-bottom: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 30px;
+}
+
+.login-form input:nth-of-type(2){
+    margin-bottom: 48px;
+}
+
+.form-container img {
+    height: 140px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 48px;
+    display: block;
+}
+
+.form-container p {
+    text-transform: uppercase;
+}
+
+.choice {
+    margin-bottom: 48px;
+}
+
 /* MEDIA QUERY */
 @media (max-width: 1100px) {
     /* GENERAL */
@@ -383,9 +488,6 @@ footer i {
         flex-wrap: wrap;
         gap: 5px;
     }
-    .menu a {
-        font-size: 14px;
-    }
 }
 
 @media (max-width: 992px) {
@@ -394,7 +496,10 @@ footer i {
         padding: 40px 0;
     }
     h2 {
-        font-size: 35px;
+        font-size: 25px;
+    }
+    .logo img {
+        height: 80px;    
     }
 
     /* Footer */
@@ -414,7 +519,6 @@ footer i {
     }
 
     /* HOME */
-
     /* Hero Baner */
     .hero-content h3 {
         font-size: 200px;
@@ -438,6 +542,23 @@ footer i {
     .affiliations img {
         height: 45px;
     }
+
+    /* LOGIN PAGE*/
+    /* login section*/
+    .form-container {
+        width: 100%;
+        padding: 32px;
+    }
+    .login-form,
+    .login-form input:nth-of-type(2),
+    .form-container img,
+    .error-message,
+    .choice {
+        margin-bottom: 32px;
+    }
+    .form-container img {
+        height: 100px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -449,8 +570,12 @@ footer i {
         font-size: 14px;
     }
     h2 {
-        font-size: 30px;
+        font-size: 20px;
     }
+    .logo img {
+        height: 70px;    
+    }
+
 
     /* Footer */
     footer {
@@ -460,7 +585,7 @@ footer i {
         gap: 100px;
     }
     .footer-list li {
-        margin-bottom: 8px;
+        margin-bottom: 16px;
     }
     .social-media-icons {
         gap: 8px;
@@ -508,7 +633,23 @@ footer i {
     .affiliations img {
         height: 40px;
     }
-    
+
+   /* LOGIN PAGE*/
+    /* login section*/
+    .form-container {
+        width: 100%;
+        padding: 24px;
+    }
+    .login-form,
+    .login-form input:nth-of-type(2),
+    .form-container img,
+    .error-message,
+    .choice {
+        margin-bottom: 24px;
+    }
+    .form-container img {
+        height: 90px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -522,11 +663,8 @@ footer i {
     .h1-acronym {
         display: block;
     }
-    h2 {
-        font-size: 25px;
-    }
-    h3 {
-        font-size: 15px;
+    .logo img {
+        height: 60px;    
     }
 
     /* Footer */
@@ -572,6 +710,10 @@ footer i {
         grid-template-columns: repeat(2, max-content);
         gap: 40px;
         justify-content: center;
+    }
+    .affiliations-grid img {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 

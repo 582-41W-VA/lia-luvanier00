@@ -1,20 +1,38 @@
 {% extends 'base.html' %}
 {% block 'title' %}Login{% endblock %}
+{% block body_class %}body-login{% endblock %}
+{% block footer_class %}footer-login{% endblock %}
 {% load static %}
 
 {% block content %}
-    <form action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-
-        {{ login_form.errors }}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-
-        <fieldset>
-            <legend>Login</legend>
-            {{ login_form }}
-            <button name="login">Login</button>
-        </fieldset>
-    </form>
+<section class="login-section">
+    <div class="form-container">
+        <div class="container">
+            <img src="{% static 'images/logo.png' %}" alt="">
+            <form action="{% url 'login' %}" method="POST" class="login-form">
+                {% csrf_token %}
+                
+                {{ login_form.errors }}
+                {% for message in messages %}
+                    <div class="error-message">
+                        <div class="error-flex">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <p>{{ message }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+    
+                <label for="{{ login_form.username.id_for_label }}">Username</label>
+                <input type="text" id="{{ login_form.username.id_for_label }}" name="{{ login_form.username.name }}" value="{{ login_form.username.value|default:'' }}" required>
+    
+                <label for="{{ login_form.password.id_for_label }}">Password</label>
+                <input type="password" id="{{ login_form.password.id_for_label }}" name="{{ login_form.password.name }}" required>
+    
+                <button name="login" type="submit" class="action-button button">Login</button>
+            </form>
+            <p class="choice">Or</p>
+            <a href="" class="black-button button">Create account</a>
+        </div>
+    </div>
+</section>
 {% endblock %}
