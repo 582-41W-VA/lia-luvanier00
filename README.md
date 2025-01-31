@@ -8,6 +8,7 @@
 3. [Proposal](https://docs.google.com/document/d/1WLQ_GswqJwIRbnHFPSIlzlHetLjbXj94HI-ERWHspRI/edit?tab=t.9om3eiq4lxq)
 4. [Entity Relationship Diagram](https://lucid.app/lucidchart/335aa6e0-9dd2-446b-80c1-2c08e38ef9b2/edit?beaconFlowId=1D63F15EC9B78776&invitationId=inv_94cee053-f71d-4cc7-9816-eb9320e8e7a1&page=0_0#)
 5. [Figma Wireframes](https://www.figma.com/design/WLOc988dywSjxurEWN92fa/Wireframes?node-id=0-1&t=qbD3A2jEqaPXnfRB-1)
+6. [Figma Visual Guidelines](https://www.figma.com/design/v0doO6UoSR8i3qQoqDcydy/Design-Guidelines?node-id=0-1&t=h61pWLCkiptjpuMn-1)
 
 
 ## Goal 
@@ -77,8 +78,8 @@ Open your browser and navigate to http://127.0.0.1:8000/ to view the application
 http://127.0.0.1:8000/admin
 
 2. Default admin credentials:
-- **Username** : Admin
-- **Password** : Thepassword
+- **Username** : admin
+- **Password** : adminpassword
 
 ## Technologies used 
 
