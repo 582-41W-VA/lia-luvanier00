@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 # --------------------------------------------------------------
 def index(request):
-    announcements = Announcement.objects.order_by("-date")[:3]
+    announcements = Announcement.objects.order_by("-date")[:4]
 
     context = {
         "announcements": announcements,
