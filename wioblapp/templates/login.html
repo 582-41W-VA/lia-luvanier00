@@ -21,6 +21,8 @@
                         </div>
                     </div>
                 {% endfor %}
+
+                <a href="{% url 'login' %}">Parent</a> | <a href="{% url 'admin:index' %}">Coach</a>
     
                 <label for="{{ login_form.username.id_for_label }}">Username</label>
                 <input type="text" id="{{ login_form.username.id_for_label }}" name="{{ login_form.username.name }}" value="{{ login_form.username.value|default:'' }}" required>

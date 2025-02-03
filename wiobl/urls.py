@@ -16,8 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from wioblapp.admin import wiobl_site
 
 urlpatterns = [
     path("wioblapp/", include("wioblapp.urls")),
-    path('admin/', admin.site.urls),
+    path('admin/', wiobl_site.urls),
 ]
+
+wiobl_site.index_title = "West Island Outdoor Basketball League"
+wiobl_site.site_header = "W.I.O.B.L Admin"
+wiobl_site.site_title = "W.I.O.B.L"
