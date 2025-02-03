@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Role, UserAccount, Team, Player, RegistrationTypes, Registration, Park, Game, Comment, Announcement, Flag
 from .forms import SignUpForm
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 
 # --------------------------------------------------------------
 def index(request):
@@ -27,33 +27,27 @@ def sign_up(request):
 
         if signup_form.is_valid():
             username = signup_form.cleaned_data.get("username")
+            user_exist = UserAccount.objects.filter(username=username)
             email = signup_form.cleaned_data.get("email")
-            password = signup_form.cleaned_data.get("password1")
+            email_exist = UserAccount.objects.filter(email=email)
+            password = signup_form.cleaned_data.get("password")
             role = signup_form.cleaned_data.get("role")
             bio = signup_form.cleaned_data.get("bio")
 
-            if UserAccount.objects.filter(username=username).exists():
+            if user_exist:
                 messages.error(request, f"Username {username} is already exist!")
                 return render (request, "sign-up.html", {"signup_form": signup_form,})
             
-            if UserAccount.objects.filter(email=email).exists():
+            if email_exist:
                 messages.error(request, f"Email {email} is already exist")
                 return render (request, "sign-up.html", {"signup_form": signup_form,})
 
-            member = signup_form.save(commit=False)
 
-            if role == "Admin":
-                member.is_staff = True
-                member.is_superuser = True
-            elif role == "Coach":
-                member.is_staff = True
-
-            member.save()
+            signup_form.save()
             messages.success(request, "You signed-up successfully")
-            auth_member = authenticate(request, username=username, password=password)
-            if auth_member:
-                login(request, auth_member)
-                return redirect("index")
+            member = authenticate(request, username=username, password=password)
+            login(request, member)
+            return redirect("index")
 
     context = {
         "signup_form": signup_form,
@@ -63,24 +57,18 @@ def sign_up(request):
 
 # --------------------------------------------------------------
 def member_login(request):
-    if request.user.is_authenticated:
-        return redirect('index')
-
     login_form = AuthenticationForm()
-
+    
     if request.method == "POST":
-        login_form = AuthenticationForm(data=request.POST)
+        username = request.POST["username"]
+        password = request.POST["password"]
+        member = authenticate(request, username=username, password=password)
 
-        if login_form.is_valid():
-            username = request.POST["username"]
-            password = request.POST["password"]
-            member = authenticate(request, username=username, password=password)
-
-            if member is not None:
-                login(request, member)
-                return redirect("index")
-            else:
-                messages.error(request, "Username OR Password is incorrect!")
+        if member is not None:
+            login(request, member)
+            return redirect("index")
+        else:
+            messages.error(request, "Username OR Password is incorrect!")
 
     context = {
         "login_form": login_form,
