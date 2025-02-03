@@ -711,6 +711,179 @@ input {
     width: 100%;
 }
 
+/* ABOUT PAGE */
+/* about banner */
+.about-section {
+    background-image: url("/static/images/about/about-banner.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.about-section h2 {
+    font-family: Montserrat;
+    color: #ffffff;
+    text-align: right;
+    margin-top: 200px;
+    font-size: 50px;
+}
+
+/* about goals */
+.about-goals h2 {
+    text-align: left;
+}
+
+.goals-flex {
+    display: flex;
+    gap: 96px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.goals-info {
+    width: 50%;
+}
+
+.goal-flex {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+}
+
+.goals-flex p:first-of-type {
+    font-size: 36px;
+    font-family: Raleway;
+    font-weight: 600;
+}
+
+.goals-images {
+    width: 50%;
+    position: relative;
+}
+
+.goals-images img:first-of-type {
+    height: 300px;
+}
+
+.goals-images img:nth-of-type(2) {
+    height: 200px;
+    position: absolute;
+    top: 65%;
+    right: 0;
+}
+
+/* about - info */
+.info-flex {
+    display: flex;
+}
+
+.info-card {
+    padding: 32px;
+    width: 100%;
+}
+
+.info-flex .info-card:nth-of-type(1),
+.info-flex .info-card:nth-of-type(3) {
+    background: #3663BF;
+}
+
+.info-flex .info-card:nth-of-type(2) {
+    background: #7A9FBF;
+}
+
+.info-card p {
+    text-align: center;
+    color: #ffffff;
+}
+
+.info-card p:nth-of-type(1) {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.info-card p:nth-of-type(2) {
+    font-size: 18px;
+}
+
+/* about - coaches */
+.our-coaches {
+    text-align: center;
+}
+
+.coaches-flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.coach-card {
+    width: 25%;
+}
+
+.coach-card img {
+    width: 80%;
+    margin-bottom: 16px;
+}
+
+.coach-card p {
+    font-family: Montserrat;
+    font-weight: 600;
+}
+
+.about-description {
+    background: #7a9fbf45;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* about - volunteers */
+.volunteers-content {
+    background-image: url("/static/images/about/flags-bg.png");
+    padding: 48px;
+}
+
+.volunteers-info {
+    border-radius: 15px;
+    background-color: #ffffff;
+    width: 50%;
+    margin-left: auto;
+    padding: 48px;
+    text-align: center;
+}
+
+.volunteers-info h3,
+.volunteers-info p:first-of-type,
+.volunteers-info ul {
+    margin-bottom: 24px;
+}
+
+.volunteers-info h3 {
+    font-weight: 600;
+}
+
+.volunteers-info p:nth-of-type(1){
+    font-size: 20px;
+}
+
+.volunteers-info ul {
+    list-style: none;
+}
+
+.volunteers-info li {
+    font-weight: 600;
+    font-style: italic;
+}
+
+.volunteers-info p:nth-of-type(2){
+    font-weight: 600;
+}
+
+/* about - members */
+.members-vid {
+    width: 100%;
+}
+
 /* MEDIA QUERY */
 @media (max-width: 1100px) {
 
