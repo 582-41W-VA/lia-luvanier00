@@ -84,6 +84,7 @@ class Announcement(models.Model):
     user_account = models.ForeignKey(UserAccount, on_delete=models.RESTRICT, related_name="announcements")
     title = models.CharField("Title", max_length=100)
     content = models.TextField("Content")
+    img_url = models.URLField(blank=True, null=True)
     date = models.DateTimeField("Date", auto_now_add=True)
 
     def __str__(self):
