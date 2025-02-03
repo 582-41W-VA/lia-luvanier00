@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="about-section">
+        <div class="container">
+            <h2>About us</h2>
+        </div>
+    </section>
+
+    <section class="about-goals">
+        <div class="container">
+            <div class="goals-flex">
+                <div class="goals-info">
+                    <div class="section-heading">
+                        <h2>Our Goals</h2>
+                    </div>
+                    <div class="goal-flex">
+                        <p>#1</p>
+                        <p>To promote, organize, supervise, and stimulate interest and participation of summer basketball for boys and girls, men and women in an outdoor environment.</p>
+                    </div>
+                    <div class="goal-flex">
+                        <p>#2</p>
+                        <p>To encourage good sportmanship and 
+                            enjoyment of the basketball game.</p>
+                    </div>
+                    <div class="goal-flex">
+                        <p>#3</p>
+                        <p>To encourage everyone to play basketball. All skill levels from beginner to intercity are welcome!</p>
+                    </div>
+                    <div class="goal-flex">
+                        <p>#4</p>
+                        <p>To play an active role in our community and promote a healthy lifestyle through sports.</p>
+                    </div>                        
+                </div>
+                <div class="goals-images">
+                    <img src="/static/images/about/girlplaying.png" alt="">
+                    <img src="/static/images/about/childplaying.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-info">
+        <div class="info-flex">
+            <div class="info-card">
+                <p>April 10, 2010</p>
+                <p>Founded</p>
+            </div>
+            <div class="info-card">
+                <p>200</p>
+                <p>Members</p>
+            </div>
+            <div class="info-card">
+                <p>Steve Hall</p>
+                <p>President</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="our-coaches">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Our coaches</h2>
+            </div>
+            <div class="coaches-flex">
+                <div class="coach-card">
+                    <img src="/static/images/about/coach1.png" alt="">
+                    <p>Kim Marva</p>
+                </div>
+                <div class="coach-card">
+                    <img src="/static/images/about/coach2.png" alt="">
+                    <p>Tariq Hamond</p>
+                </div>
+                <div class="coach-card">
+                    <img src="/static/images/about/coach3.png" alt="">
+                    <p>Lorcan Bell</p>
+                </div>
+                <div class="coach-card">
+                    <img src="/static/images/about/coach4.png" alt="">
+                    <p>Jazmin Kent</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-description">
+        <div class="container">
+            <p>The basketball league coaches bring a mix of playing and coaching experience, from youth leagues to higher levels of competition. They teach both fundamental skills and advanced strategies, while fostering teamwork and discipline, making a significant impact on players' growth on and off the court.</p>
+        </div>
+    </section>
+
+    <section class="volunteers">
+        <div class="section-heading">
+            <div class="containers">
+                <h2>Our volunteers</h2>
+            </div>
+        </div>
+        <div class="volunteers-content">
+            <div class="container">
+                <div class="volunteers-info">
+                    <h3>Our volunteers are the core of everything that we do.</h3>
+                    <p>We are currently looking for volunteers for two positions:</p>
+                    <ul>
+                        <li>Scorekeeper</li>
+                        <li>Referee</li>
+                    </ul>
+                    <p>Contact: Coach Tariq at WIOBL@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-members">
+        <div class="section-heading">
+            <div class="containers">
+                <h2>Our members</h2>
+            </div>
+        </div>
+        <div class="members">
+            <video autoplay muted loop class="members-vid">
+                <source src="{% static 'videos/membersvid.mp4' %}" type="video/mp4">
+            </video>        
+        </div>
+    </section>
+{% endblock %}
+
+
