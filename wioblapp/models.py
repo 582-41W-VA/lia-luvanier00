@@ -49,7 +49,7 @@ class Registration(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="registrations")
     reg_type = models.ForeignKey(RegistrationType, on_delete=models.CASCADE, related_name="registrations")
     address = models.CharField("Address", max_length=200)
-    email = models.EmailField("Email Address", max_length=254, unique=True)
+    email = models.EmailField("Email Address", max_length=254)
     phone = models.CharField("Phone Number", max_length=15)
     uniform_size = models.CharField("Uniform Size", max_length=3)
     consent = models.BooleanField("Consent", default=False)
