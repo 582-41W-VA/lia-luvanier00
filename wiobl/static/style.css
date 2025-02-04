@@ -13,7 +13,7 @@ h1 {
     color: #ffffff;
     text-transform: capitalize;
     font-family: Montserrat;
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 700;
 }
 
@@ -37,7 +37,7 @@ h3 {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1150px;
     width: 90%;
     margin-right: auto;
     margin-left: auto;
@@ -61,6 +61,7 @@ h3 {
 .action-button {
     background-color: #8C0303;
 }
+
 .action-button:hover {
     background-color: #bf1616;
     transform: scale(1.05);
@@ -69,6 +70,7 @@ h3 {
 .black-button {
     background-color: #000000;
 }
+
 .black-button:hover {
     background-color: #504444;
     transform: scale(1.05);
@@ -81,7 +83,7 @@ h3 {
 
 /* Navbar */
 .navbar {
-    padding: 16px 0;
+    padding: 5px 0;
     background-color: #000000;
     color: #ffffff;
     position: relative;
@@ -89,7 +91,7 @@ h3 {
 
 .nav-container {
     max-width: 1500px;
-    width: 90%;
+    width: 96%;
     margin-right: auto;
     margin-left: auto;
 }
@@ -110,9 +112,9 @@ h3 {
 }
 
 .logo img {
-    height: 90px;    
+    height: 60px;
 }
-  
+
 .logo a {
     text-decoration: none;
     color: white;
@@ -192,8 +194,8 @@ footer {
 
 .footer-flex {
     display: flex;
-    gap: 230px;
-    align-items: center;
+    gap: 100px;
+    align-items: top;
     justify-content: start;
 }
 
@@ -202,7 +204,7 @@ footer ul {
 }
 
 .footer-list li {
-    margin-bottom: 32px;
+    margin-bottom: 10px;
 }
 
 footer a {
@@ -255,9 +257,9 @@ footer i {
 }
 
 .hero-content h3 {
-    font-size : 260px;
+    font-size: 260px;
     font-family: Montserrat;
-    font-weight: 400;
+    font-weight: 200;
     letter-spacing: 50px;
     line-height: 1;
     color: rgba(255, 255, 255, 0.232);
@@ -280,6 +282,7 @@ footer i {
     transition: transform 0.3s ease-in-out;
     background-color: #ffffff;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 .announcement-card:hover {
@@ -290,6 +293,8 @@ footer i {
     height: 180px;
     background-position: center;
     background-size: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .announcements-flex {
@@ -332,7 +337,7 @@ footer i {
 }
 
 .reg-info-heading {
-    background-color: #000000;
+    background-color: #3663BF;
     padding: 8px;
     max-width: 90%;
     text-align: center;
@@ -342,7 +347,7 @@ footer i {
     border-top-right-radius: 10px;
 }
 
-.reg-info-heading h2{
+.reg-info-heading h2 {
     color: #FFFFFF;
 }
 
@@ -375,7 +380,7 @@ footer i {
     padding: 32px 0;
 }
 
-.affiliations-grid{
+.affiliations-grid {
     display: grid;
     grid-template-columns: repeat(4, max-content);
     gap: 20px;
@@ -387,14 +392,15 @@ footer i {
 }
 
 /* Courts */
-.courts{
+.courts {
     text-align: center;
 }
 
 .court-card {
-    background-image: url("/static/images/bbcourt-bg.png");
+    background: url("/static/images/bbcourt-bg.png") rgba(255, 255, 255, 0.6);
     background-size: cover;
     background-position: center;
+    background-blend-mode: overlay;
     padding: 48px;
 }
 
@@ -453,7 +459,7 @@ footer i {
 
 .body-login {
     background-image: url("/static/images/sky-dunk.jpg");
-    background-position: right 100% top 50%;
+    background-position-y: -850px;
     background-size: cover;
     position: center;
 }
@@ -467,7 +473,7 @@ footer i {
 }
 
 .login-form {
-    margin-bottom: 48px;
+    margin-bottom: 25px;
 }
 
 .error-message {
@@ -492,7 +498,8 @@ footer i {
     font-size: 16px;
 }
 
-.login-form label, input {
+.login-form label,
+input {
     display: block;
 }
 
@@ -503,15 +510,15 @@ footer i {
 }
 
 .login-form input {
-    margin-bottom: 16px;
+    margin-bottom: 40px;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-    height: 30px;
+    height: 40px;
 }
 
-.login-form input:nth-of-type(2){
-    margin-bottom: 48px;
+.login-form input:nth-of-type(2) {
+    margin-bottom: 20px;
 }
 
 .form-container img {
@@ -527,11 +534,13 @@ footer i {
 }
 
 .choice {
-    margin-bottom: 48px;
+    margin-bottom: 25px;
+    font-weight: bolder;
 }
 
 /* MEDIA QUERY */
 @media (max-width: 1100px) {
+
     /* GENERAL */
     h1 {
         font-size: 16px;
@@ -548,19 +557,22 @@ footer i {
     .court-content img {
         height: 100px;
     }
-    
+
 }
 
 @media (max-width: 992px) {
+
     /* GENERAL */
     section {
         padding: 40px 0;
     }
+
     h2 {
         font-size: 25px;
     }
+
     .logo img {
-        height: 80px;    
+        height: 80px;
     }
 
     /* Footer */
@@ -568,13 +580,16 @@ footer i {
         padding-top: 80px;
         padding-bottom: 8px;
     }
+
     .footer-flex {
         gap: 130px;
         justify-content: center;
     }
+
     .footer-list li {
         margin-bottom: 24px;
     }
+
     .social-media-icons {
         gap: 24px;
     }
@@ -589,6 +604,7 @@ footer i {
     .reg-info-container {
         padding: 40px 16x;
     }
+
     .reg-info-container p {
         font-size: 18px;
     }
@@ -597,23 +613,29 @@ footer i {
     .court-card {
         padding: 32px;
     }
+
     .courtcard-flex {
         gap: 32px;
     }
+
     .court-content {
         width: 80%;
         top: -50px;
     }
+
     .court-content img {
         height: 80px;
     }
+
     .court-content p {
         font-size: 20px;
     }
+
     .court-content img,
     .court-content p:first-of-type {
         margin-bottom: 24px;
     }
+
     .court-map img {
         height: 250px;
     }
@@ -622,9 +644,11 @@ footer i {
     .affiliations {
         padding-bottom: 40px;
     }
+
     .affiliations-bg {
         padding: 24px 0;
     }
+
     .affiliations img {
         height: 45px;
     }
@@ -635,6 +659,7 @@ footer i {
         width: 100%;
         padding: 32px;
     }
+
     .login-form,
     .login-form input:nth-of-type(2),
     .form-container img,
@@ -642,36 +667,44 @@ footer i {
     .choice {
         margin-bottom: 32px;
     }
+
     .form-container img {
         height: 100px;
     }
 }
 
 @media (max-width: 768px) {
+
     /* GENERAL */
     section {
         padding: 32px 0;
     }
+
     h1 {
         font-size: 14px;
     }
+
     h2 {
         font-size: 20px;
     }
+
     .logo img {
-        height: 70px;    
+        height: 70px;
     }
 
     /* Footer */
     footer {
         padding-top: 70px;
     }
+
     .footer-flex {
         gap: 100px;
     }
+
     .footer-list li {
         margin-bottom: 16px;
     }
+
     .social-media-icons {
         gap: 8px;
     }
@@ -687,18 +720,23 @@ footer i {
     .announcements-bg {
         padding: 40px;
     }
+
     .announcement-card:hover {
         transform: none;
     }
+
     .announcement-img {
         height: 130px;
     }
+
     .announcements-flex {
         gap: 32px;
     }
+
     .announcement-content {
         padding: 16px;
     }
+
     .announcement-content a {
         margin-bottom: 8px;
     }
@@ -707,6 +745,7 @@ footer i {
     .reg-info-container {
         padding: 32px 8px;
     }
+
     .reg-info-container p {
         font-size: 16px;
     }
@@ -715,6 +754,7 @@ footer i {
     .affiliations {
         padding-bottom: 32px;
     }
+
     .affiliations img {
         height: 40px;
     }
@@ -723,32 +763,39 @@ footer i {
     .court-card {
         padding: 16px;
     }
+
     .courtcard-flex {
         gap: 16px;
     }
+
     .court-content {
         top: -40px;
     }
+
     .court-content img {
         height: 70px;
     }
+
     .court-content p {
         font-size: 18px;
     }
+
     .court-content img,
     .court-content p:first-of-type {
         margin-bottom: 16px;
     }
+
     .court-map img {
         height: 220px;
     }
 
-   /* LOGIN PAGE*/
+    /* LOGIN PAGE*/
     /* login section*/
     .form-container {
         width: 100%;
         padding: 24px;
     }
+
     .login-form,
     .login-form input:nth-of-type(2),
     .form-container img,
@@ -756,30 +803,36 @@ footer i {
     .choice {
         margin-bottom: 24px;
     }
+
     .form-container img {
         height: 90px;
     }
 }
 
 @media (max-width: 576px) {
+
     /* GENERAL */
     section {
         padding: 24px 0;
     }
+
     h1 {
-       display: none;
+        display: none;
     }
+
     .h1-acronym {
         display: block;
     }
+
     .logo img {
-        height: 60px;    
+        height: 60px;
     }
 
     /* Footer */
     footer {
         padding-top: 48px;
     }
+
     .footer-flex {
         gap: 40px;
     }
@@ -795,9 +848,11 @@ footer i {
     .announcements-bg {
         padding: 32px;
     }
+
     .announcement-img {
         height: 100px;
     }
+
     .announcements-flex {
         gap: 24px;
         grid-template-columns: repeat(1, 1fr);
@@ -807,6 +862,7 @@ footer i {
     .reg-info-container {
         padding: 24px 8px;
     }
+
     .reg-info-container p {
         font-size: 14px;
     }
@@ -816,21 +872,26 @@ footer i {
         flex-direction: column;
         gap: 8px;
     }
+
     .court-content {
         padding: 16px 16px;
         width: 100%;
         top: -35px;
         left: 0;
     }
+
     .court-content img {
         height: 60px;
     }
+
     .court-content p {
         font-size: 16px;
     }
+
     .court-map {
         width: 100%;
     }
+
     .court-map img {
         height: 250px;
     }
@@ -840,14 +901,15 @@ footer i {
     .affiliations {
         padding-bottom: 24px;
     }
-    .affiliations-grid{
+
+    .affiliations-grid {
         grid-template-columns: repeat(2, max-content);
         gap: 40px;
         justify-content: center;
     }
+
     .affiliations-grid img {
         margin-left: auto;
         margin-right: auto;
     }
 }
-
