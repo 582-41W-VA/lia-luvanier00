@@ -21,15 +21,42 @@ class RegistrationForm(forms.Form):
         ("Male", "Male"),
         ("Female", "Female"),
         ("Other", "Other")]
+    
+    UNIFORM_SIZES = [
+        ("XS", "Extra Small"),
+        ("S", "Small"),
+        ("M", "Medium"),
+        ("L", "Large"),
+        ("XL", "Extra Large"),
+        ("XXL", "Double Extra Large"),
+    ]
+
+    VOLUNTEER_CHOICES = [
+        ("True", "Yes"),
+        ("False", "No")]
+
     firstname = forms.CharField(label="First Name", max_length=20)
     lastname = forms.CharField(label="Last Name", max_length=20)
-    dob = forms.DateField(label="Date of Birth",widget=forms.DateInput(attrs={"type": "date"}))
+    dob = forms.DateField(label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"}))
     gender = forms.ChoiceField(choices=GENDER_CHOICES, 
-                                     required=True, 
-                                     widget=forms.RadioSelect)
+                               required=True, 
+                               widget=forms.RadioSelect)
     group = forms.ModelChoiceField(label="Group Selection", queryset=RegistrationType.objects.all(), 
                                      required=True, 
                                      widget=forms.RadioSelect)
+    street_line1 = forms.CharField(label="Street Address", max_length=20)
+    app_line2 = forms.CharField(label="Street Address Line 2", max_length=20, required=False)
+    city = forms.CharField(label="City", max_length=20)
+    province = forms.CharField(label="Province", max_length=20)
+    postal_code = forms.CharField(label="Postal Code", max_length=20)
+    country = forms.CharField(label="Country", max_length=20)
     email = forms.EmailField(label="Email")
     phone = forms.CharField(label="Phone Number")
+    uniform_size = forms.ChoiceField(label="Uniform Size", choices=UNIFORM_SIZES, 
+                                     required=True, 
+                                     widget=forms.Select())
+    consent = forms.BooleanField(label="Consent")
+    volunteer = forms.ChoiceField(choices=VOLUNTEER_CHOICES, 
+                               required=True, 
+                               widget=forms.RadioSelect)
     message = forms.CharField(label="Special Requests", widget=forms.Textarea(), required=False)  

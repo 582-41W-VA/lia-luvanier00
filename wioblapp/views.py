@@ -116,8 +116,17 @@ def register_player(request):
             dob = register_form.cleaned_data["dob"]
             gender = register_form.cleaned_data["gender"]
             group = register_form.cleaned_data["group"]
+            street_line1 = register_form.cleaned_data["street_line1"]
+            app_line2 = register_form.cleaned_data["app_line2"]
+            city = register_form.cleaned_data["city"]
+            province = register_form.cleaned_data["province"]
+            postal_code = register_form.cleaned_data["postal_code"]
+            country = register_form.cleaned_data["country"]
             email = register_form.cleaned_data["email"]
             phone = register_form.cleaned_data["phone"]
+            uniform_size = register_form.cleaned_data["uniform_size"]
+            consent = register_form.cleaned_data["consent"]
+            volunteer = register_form.cleaned_data["volunteer"]
             message = register_form.cleaned_data["message"]
 
             member = UserAccount.objects.get(email=request.user.email)
@@ -132,9 +141,13 @@ def register_player(request):
             registration = Registration.objects.create(
                 player=player,
                 reg_type=group,
+                address=f"{street_line1}, {app_line2}, {city}, {province}, {postal_code}, {country}",
                 email=email,
                 phone=phone,
-                message=message,
+                uniform_size=uniform_size,
+                consent=consent,
+                volunteer=volunteer,
+                message=message
             )
 
             messages.success(request, "Registration submitted successfully")
