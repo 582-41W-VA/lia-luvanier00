@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block 'title' %} {{request.user.username}}'s Account {% endblock %}
+{% load static %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <div>Welcome, {{ user.username }}</div>
+        <div>Firstname: {{ user.first_name }}</div>
+        <div>Lastname: {{ user.last_name }}</div>
+        <div>email: {{ user.email }}</div>
+        <div>Role: {{ role.name }}</div>
+    {% endif %}
+{% endblock %}

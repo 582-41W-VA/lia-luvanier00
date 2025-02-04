@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 class Role(models.Model):
     name = models.CharField("Role", max_length=100, primary_key=True)
@@ -8,8 +8,8 @@ class Role(models.Model):
     def __str__(self):
         return self.name
 
-class UserAccount(User):
-    role = models.ForeignKey(Role, on_delete=models.RESTRICT, related_name="user_accounts")
+class UserAccount(AbstractUser):
+    role = models.ForeignKey(Role, on_delete=models.RESTRICT, related_name="user_accounts", null=True, blank=True)
     bio = models.TextField("Bio", blank=True, null=True)
 
     # username = models.CharField("Username", max_length=100)
@@ -48,13 +48,19 @@ class RegistrationType(models.Model):
 class Registration(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="registrations")
     reg_type = models.ForeignKey(RegistrationType, on_delete=models.CASCADE, related_name="registrations")
+    address = models.CharField("Address", max_length=200)
+    email = models.EmailField("Email Address", max_length=254, unique=True)
+    phone = models.CharField("Phone Number", max_length=15)
+    uniform_size = models.CharField("Uniform Size", max_length=3)
+    consent = models.BooleanField("Consent", default=False)
+    volunteer = models.BooleanField("Volunteer", default=False)
     email = models.EmailField("Email Adress", max_length=254, unique=True, blank=True, null=True)
-    phone = models.CharField("Phone Number", max_length=15, blank=True, null=True)
+    phone = models.CharField("Phone Number", max_length=15)
     date_time = models.DateTimeField("Date", auto_now_add=True)
     message = models.TextField("Special Requests", blank=True, null=True)
 
     def __str__(self):
-        return str(self.reg_type)
+        return f"{self.player} - {self.reg_type}"
 
 class Park(models.Model):
     name = models.CharField("Park Name", max_length=100)
