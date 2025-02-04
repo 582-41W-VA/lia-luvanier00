@@ -5,17 +5,16 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class SignUpForm(UserCreationForm):
-    # firstname = forms.CharField(label="First Name", max_length=20)
-    # lastname = forms.CharField(label="Last Name", max_length=20)
+    firstname = forms.CharField(label="First Name", max_length=50)
+    lastname = forms.CharField(label="Last Name", max_length=50)
     role = forms.ModelChoiceField(queryset=Role.objects.all(), 
                                      required=True, 
                                      widget=forms.RadioSelect)
-
-    bio = forms.CharField(max_length=500, widget=forms.Textarea, required=False)
+    bio = forms.CharField(max_length=500, widget=forms.Textarea(), required=False)
 
     class Meta:
         model = UserAccount
-        fields = ["username", "email", "password1", "password2", "role", "bio"]
+        fields = ["firstname", "lastname", "email", "password1", "password2", "role", "bio"]
 
 class RegistrationForm(forms.Form):
     GENDER_CHOICES = [
