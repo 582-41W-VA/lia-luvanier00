@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .models import Role, UserAccount, Team, Player, RegistrationTypes, Registration, Park, Game, Comment, Announcement, Flag
-from .forms import SignUpForm
+from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag
+from .forms import SignUpForm, RegistrationForm
 # from django.contrib.auth.models import User
 
 # --------------------------------------------------------------
@@ -26,6 +26,9 @@ def sign_up(request):
         signup_form = SignUpForm(request.POST)
 
         if signup_form.is_valid():
+            # firstname = signup_form.cleaned_data.get("firstname").strip()
+            # lastname = signup_form.cleaned_data.get("lastname").strip()
+            # username = f"{firstname}{lastname}"
             username = signup_form.cleaned_data.get("username")
             email = signup_form.cleaned_data.get("email")
             password = signup_form.cleaned_data.get("password1")
@@ -42,11 +45,9 @@ def sign_up(request):
 
             member = signup_form.save(commit=False)
 
-            if role == "Admin":
+            if role == "Admin" or role == "Coach":
                 member.is_staff = True
                 member.is_superuser = True
-            elif role == "Coach":
-                member.is_staff = True
 
             member.save()
             messages.success(request, "You signed-up successfully")
@@ -87,6 +88,49 @@ def member_login(request):
     }
     return render(request, "login.html", context)
 # --------------------------------------------------------------
+
+@login_required(login_url="login")
+def register_player(request):
+    register_form = RegistrationForm()
+
+    if request.method == "POST":
+        register_form = RegistrationForm(request.POST)
+
+        if register_form.is_valid():
+            firstname = register_form.cleaned_data["firstname"]
+            lastname = register_form.cleaned_data["lastname"]
+            playername = f"{firstname} {lastname}"
+            dob = register_form.cleaned_data["dob"]
+            gender = register_form.cleaned_data["gender"]
+            group = register_form.cleaned_data["group"]
+            email = register_form.cleaned_data["email"]
+            phone = register_form.cleaned_data["phone"]
+            message = register_form.cleaned_data["message"]
+
+            member = UserAccount.objects.get(email=request.user.email)
+
+            player, created = Player.objects.get_or_create(
+                related_account=member,
+                name=playername,
+                dob=dob,
+                gender=gender
+            )
+
+            registration = Registration.objects.create(
+                player=player,
+                reg_type=group,
+                email=email,
+                phone=phone,
+                message=message,
+            )
+
+            messages.success(request, "Registration submitted successfully")
+            return redirect('index') 
+
+    context = {
+        "register_form": register_form,
+    }
+    return render(request, "registration.html", context)
 
 # --------------------------------------------------------------
 @login_required(login_url="login")
