@@ -45,7 +45,7 @@
                     <ul class="menu-list" id="menu-list">
                         <li><a href="{% url 'about' %}">About</a></li>
                         <li><a href="#">Teams</a></li>
-                        <li><a href="#">Registration</a></li>
+                        <li><a href="{% url 'registration' %}">Registration</a></li>
                         <li><a href="#">Contact</a></li>
                         <li>
                             {% if request.user.is_authenticated %}
@@ -84,6 +84,7 @@
                     <li><a href="#">Teams</a></li>
                 </ul>
                 <ul class="footer-list">
+                    <li><a href="{% url 'registration' %}">Registration</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="{% url 'login' %}">Login</a></li>
                     <ul class="social-media-icons">
