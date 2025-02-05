@@ -7,9 +7,6 @@
         {% csrf_token %}
 
         {{ register_form.errors }}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
 
         <fieldset>
             <legend>Summer 2025 Registration</legend>
