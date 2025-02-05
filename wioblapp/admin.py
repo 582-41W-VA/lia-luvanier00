@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.utils.translation import gettext_lazy as _
 
-from .models import Role, UserAccount, Team, Player, RegistrationTypes, Registration, Park, Game, Comment, Announcement, Flag
+from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag
 
 class WioblAdminArea(admin.AdminSite):
     site_header = 'WIOBL Admin'
@@ -14,7 +14,7 @@ wiobl_site.register(Role)
 wiobl_site.register(UserAccount)
 wiobl_site.register(Team)
 wiobl_site.register(Player)
-wiobl_site.register(RegistrationTypes)
+wiobl_site.register(RegistrationType)
 wiobl_site.register(Registration)
 wiobl_site.register(Park)
 wiobl_site.register(Game)

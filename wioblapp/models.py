@@ -29,28 +29,32 @@ class Team(models.Model):
 
 class Player(models.Model):
     related_account = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="players")
-    team_name = models.ForeignKey(Team, on_delete=models.RESTRICT, related_name="players")
+    team_name = models.ForeignKey(Team, on_delete=models.RESTRICT, related_name="players", blank=True, null=True)
     name = models.CharField("Name", max_length=50)
     dob = models.DateField("Date Of Birth")
+    gender = models.CharField("Gender", max_length=20, blank=True, null=True)
 
     def __str__(self):
         return self.name
 
-class RegistrationTypes(models.Model):
+class RegistrationType(models.Model):
     reg_type = models.CharField("Registration Type", max_length=50, primary_key=True)
     description = models.CharField("Description", max_length=300)
     cost = models.IntegerField("Cost")
 
     def __str__(self):
-        return self.reg_type
+        return str(self.reg_type)
 
 class Registration(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="registrations")
-    reg_type = models.ForeignKey(RegistrationTypes, on_delete=models.CASCADE, related_name="registrations")
+    reg_type = models.ForeignKey(RegistrationType, on_delete=models.CASCADE, related_name="registrations")
+    email = models.EmailField("Email Adress", max_length=254, unique=True, blank=True, null=True)
+    phone = models.CharField("Phone Number", max_length=15, blank=True, null=True)
     date_time = models.DateTimeField("Date", auto_now_add=True)
+    message = models.TextField("Special Requests", blank=True, null=True)
 
     def __str__(self):
-        return self.reg_type
+        return str(self.reg_type)
 
 class Park(models.Model):
     name = models.CharField("Park Name", max_length=100)

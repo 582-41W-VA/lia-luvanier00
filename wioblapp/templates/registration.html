@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block 'title' %} Registeration {% endblock %}
+{% load static %}
+
+{% block content %}
+    <form action="{% url 'registration' %}" method="POST">
+        {% csrf_token %}
+
+        {{ register_form.errors }}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+
+        <fieldset>
+            <legend>Summer 2025 Registration</legend>
+            {% for field in register_form %}
+                <div>
+                    {{ field.label }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button name="sign-up">Submit</button>
+        </fieldset>
+    </form>
+{% endblock %}
