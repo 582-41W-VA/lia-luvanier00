@@ -5,8 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag
-from .forms import SignUpForm, RegistrationForm
-# from django.contrib.auth.models import User
+from .forms import SignUpForm, RegistrationForm, ModifyAccountForm
 
 # --------------------------------------------------------------
 def index(request):
@@ -102,6 +101,54 @@ def member_login(request):
     return render(request, "login.html", context)
 # --------------------------------------------------------------
 
+# --------------------------------------------------------------
+@login_required(login_url="login")
+def member_account(request, account_id):
+    member = get_object_or_404(UserAccount, pk=account_id)
+    password = member.password
+
+    try:
+        player = Player.objects.filter(related_account=account_id).first()
+    except Player.DoesNotExist:
+        pass
+
+    try:
+        registration = Registration.objects.get(player=player)
+        phone = registration.phone
+    except Registration.DoesNotExist:
+        phone = ""
+
+    if request.method == "GET":
+        account_form = ModifyAccountForm(instance=member, initial={"phone": phone})
+    elif request.method == "POST":
+        account_form = ModifyAccountForm(request.POST, instance=member)
+        if account_form.is_valid():
+            member.username = account_form.cleaned_data["username"]
+            member.first_name = account_form.cleaned_data["first_name"]
+            member.last_name = account_form.cleaned_data["last_name"]
+            member.email = account_form.cleaned_data["email"]
+            member.role = account_form.cleaned_data["role"]
+            new_password = account_form.cleaned_data.get("password")
+            member.set_password(new_password)
+            member.save()
+            registration.phone = account_form.cleaned_data["phone"]
+            registration.save()
+            messages.success(request, "Your account updated successfully")
+
+            auth_member = authenticate(request, username=member.username, password=password)
+            if auth_member:
+                login(request, auth_member)
+                return redirect("member_account", account_id=request.user.id)
+            else:
+                 messages.error(request, "error logging in")
+
+    context = {
+        "account_form": account_form,
+    }
+    return render(request, "member_account.html", context)
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
 @login_required(login_url="login")
 def register_player(request):
     register_form = RegistrationForm()
@@ -157,6 +204,7 @@ def register_player(request):
         "register_form": register_form,
     }
     return render(request, "registration.html", context)
+# --------------------------------------------------------------
 
 # --------------------------------------------------------------
 @login_required(login_url="login")
