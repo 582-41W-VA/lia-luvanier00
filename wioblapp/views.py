@@ -26,14 +26,17 @@ def sign_up(request):
         signup_form = SignUpForm(request.POST)
 
         if signup_form.is_valid():
-            # firstname = signup_form.cleaned_data.get("firstname").strip()
-            # lastname = signup_form.cleaned_data.get("lastname").strip()
-            # username = f"{firstname}{lastname}"
-            username = signup_form.cleaned_data.get("username")
+            firstname = signup_form.cleaned_data.get("firstname").strip()
+            lastname = signup_form.cleaned_data.get("lastname").strip()
+            username = f"{firstname} {lastname}"
             email = signup_form.cleaned_data.get("email")
             password = signup_form.cleaned_data.get("password1")
             role = signup_form.cleaned_data.get("role")
             bio = signup_form.cleaned_data.get("bio")
+
+            if UserAccount.objects.filter(first_name=firstname).exists():
+                messages.error(request, f"Firstname {firstname} is already exist!")
+                return render (request, "sign-up.html", {"signup_form": signup_form,})
 
             if UserAccount.objects.filter(username=username).exists():
                 messages.error(request, f"Username {username} is already exist!")
@@ -43,18 +46,28 @@ def sign_up(request):
                 messages.error(request, f"Email {email} is already exist")
                 return render (request, "sign-up.html", {"signup_form": signup_form,})
 
-            member = signup_form.save(commit=False)
+            member = UserAccount.objects.create_user(
+                first_name=firstname,
+                last_name=lastname,
+                username=username,
+                email=email,
+                password=password,
+                role=Role.objects.get(name=role),
+                bio=bio
+            )
 
-            if role == "Admin" or role == "Coach":
+            if role.name in ["Admin", "Coach"]:
                 member.is_staff = True
                 member.is_superuser = True
+                member.save()
 
-            member.save()
             messages.success(request, "You signed-up successfully")
             auth_member = authenticate(request, username=username, password=password)
             if auth_member:
                 login(request, auth_member)
                 return redirect("index")
+            else:
+                 messages.error(request, "error logging in")
 
     context = {
         "signup_form": signup_form,
