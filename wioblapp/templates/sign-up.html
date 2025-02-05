@@ -7,9 +7,6 @@
         {% csrf_token %}
 
         {{ signup_form.errors }}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
 
         <fieldset>
             <legend>Sign Up</legend>
