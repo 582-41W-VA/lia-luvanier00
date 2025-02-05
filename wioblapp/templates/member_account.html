@@ -8,6 +8,26 @@
         <div>Firstname: {{ user.first_name }}</div>
         <div>Lastname: {{ user.last_name }}</div>
         <div>email: {{ user.email }}</div>
-        <div>Role: {{ role.name }}</div>
+        <!-- <div>Role: {{ role.name }}</div> -->
+
+        <form action="{% url 'member_account' request.user.id %}" method="POST">
+            {% csrf_token %}
+
+            {{ account_form.errors }}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+
+            <fieldset>
+                <legend>Account Information</legend>
+                {% for field in account_form %}
+                    <div>
+                        {{ field.label }}
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <button name="account_edit">Edit</button>
+            </fieldset>
+        </form>
     {% endif %}
 {% endblock %}
