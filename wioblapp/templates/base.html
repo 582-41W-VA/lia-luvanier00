@@ -43,7 +43,7 @@
                 <div class="menu">
                     <!-- Login Link -->
                     <ul class="menu-list" id="menu-list">
-                        <li><a href="#">About</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
                         <li><a href="#">Teams</a></li>
                         <li><a href="{% url 'registration' %}">Registration</a></li>
                         <li><a href="#">Contact</a></li>
@@ -79,8 +79,8 @@
             <div class="footer-flex">
                 <ul class="footer-list">
                     <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="#">About</a></li>
                     <li><a href="#">Registration</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="#">Teams</a></li>
                 </ul>
                 <ul class="footer-list">
