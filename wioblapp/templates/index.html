@@ -2,13 +2,6 @@
 {% load static %}
 
 {% block content %}
-{% for announce in announcements %}
-    <div>
-        {{ announce.title }}
-        {{ announce.content }}
-        <img src="{{ announce.img_url }}" alt="">
-    </div>
-{% endfor %}
 <section class="hero-banner">
     <video autoplay muted loop class="background-video">
         <source src="{% static 'videos/bannervid.mp4' %}" type="video/mp4">
@@ -16,7 +9,7 @@
     <div class="hero-content">
         <div class="container">
             <h3>2025</h3>
-            <a href="#" class="action-button button">Register now</a>
+            <a href="{% url 'registration' %}" class="action-button button">Register now</a>
         </div>
     </div>
 </section>
@@ -30,34 +23,15 @@
     <div class="announcements-bg">
         <div class="container">
             <div class="announcements-flex">
+                {% for announce in announcements %}
                 <div class="announcement-card">
-                    <div class="announcement-img" style="background-image: url('/static/images/teamwork.jpg');"></div>
+                    <div class="announcement-img" style="background-image: url('{{ announce.img_url }}');"></div>
                     <div class="announcement-content">
-                        <a href="">General assembly meeting</a>
-                        <p>January 3, 2025</p>
+                        <a href="">{{ announce.title }}</a>
+                        <p>{{ announce.content }}</p>
                     </div>
                 </div>
-                <div class="announcement-card">
-                    <div class="announcement-img" style="background-image: url('/static/images/scoreboard.png');"></div>
-                    <div class="announcement-content">
-                        <a href="">Looking for a summer job?</a>
-                        <p>We are looking for scorekeepers and referees.</p>
-                    </div>
-                </div>
-                <div class="announcement-card">
-                    <div class="announcement-img" style="background-image: url('/static/images/eventcal.jpg');"></div>
-                    <div class="announcement-content">
-                        <a href="">Game/event cancalled</a>
-                        <p>January 3, 2025</p>
-                    </div>
-                </div>
-                <div class="announcement-card">
-                    <div class="announcement-img" style="background-image: url('/static/images/cameraman.jpg');"></div>
-                    <div class="announcement-content">
-                        <a href="">Team picture day</a>
-                        <p>February 23, 2025</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -74,7 +48,7 @@
                 <p>Please complete the application and submit with your payment.</p>
             </div>
             <div>
-                <a href="#" class="action-button button">Register now</a>
+                <a href="{% url 'registration' %}" class="action-button button">Register now</a>
             </div>
         </div>
     </div>
