@@ -105,6 +105,8 @@ def member_login(request):
 @login_required(login_url="login")
 def member_account(request, account_id):
     member = get_object_or_404(UserAccount, pk=account_id)
+    players = Player.objects.filter(related_account=account_id)
+    registrations = Registration.objects.filter(player__in=players)
     password = member.password
 
     try:
@@ -140,10 +142,13 @@ def member_account(request, account_id):
                 login(request, auth_member)
                 return redirect("member_account", account_id=request.user.id)
             else:
-                 messages.error(request, "error logging in")
+                messages.error(request, "error logging in")
 
     context = {
         "account_form": account_form,
+        "member": member,
+        "players": players,
+        "registrations": registrations,
     }
     return render(request, "member_account.html", context)
 # --------------------------------------------------------------
@@ -212,8 +217,8 @@ def member_logout(request):
     logout(request)
     return redirect("login")
 # --------------------------------------------------------------
+
+# --------------------------------------------------------------
 def about(request):
     return render(request, "about.html")
 # --------------------------------------------------------------
-def registration(request):
-    return render(request, "registration.html")

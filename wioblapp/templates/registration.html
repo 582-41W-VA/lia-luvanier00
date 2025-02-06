@@ -46,11 +46,11 @@
                     <div class="register-flex margin-left">
                         <div class="label-input">
                             <label class="small-txt" for="firstname">First Name</label>
-                            <input type="text" id="firstname" name="firstname" value="{{ form.firstname.value }}" required>
+                            {{ register_form.firstname }}
                         </div>
                         <div class="label-input">
                             <label class="small-txt" for="lastname">Last Name</label>
-                            <input type="text" id="lastname" name="lastname" value="{{ form.lastname.value }}" required>
+                            {{ register_form.lastname }}
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
                                 <label class="form-label" for="dob">Player Date of Birth</label>
                             </div>
                             <div class="margin-left">
-                                <input type="date" id="dob" name="dob" value="{{ form.dob.value }}" required>
+                                {{ register_form.dob }}
                             </div>
                         </div>
                         <div class="label-input">
@@ -71,16 +71,9 @@
                             </div>
                             <div class="margin-left radio-flex">
                                 <div class="radio-flex">
-                                    <input type="radio" id="female" name="gender" value="Female">
-                                    <label for="female">Female</label>
-                                </div>
-                                <div class="radio-flex">
-                                    <input type="radio" id="male" name="gender" value="Male">
-                                    <label for="male">Male</label>
-                                </div>
-                                <div class="radio-flex">
-                                    <input type="radio" id="other" name="gender" value="Other">
-                                    <label for="other">Other</label>
+                                    {% for field in register_form.gender %}
+                                        {{ field.tag }} {{ field.choice_label }}
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -93,42 +86,11 @@
                         <legend class="form-label">Group Selection</legend>
                     </div>
                     <div class="radio-group margin-left">
+                        {% for field in register_form.group %}
                         <div class="radio-option">
-                            <input type="radio" id="novice" name="group" value="novice" required>
-                            <label class="small-txt" for="novice">Novice (7-8 Yrs)</label>
+                            {{ field.tag }} {{ field.choice_label }}
                         </div>
-                        <div class="radio-option">
-                            <input type="radio" id="junior" name="group" value="junior" required>
-                            <label class="small-txt" for="junior">Senior (Boys) 15-17</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="senior" name="group" value="senior" required>
-                            <label class="small-txt" for="senior">Adults 18+ Div 1</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="adult" name="group" value="adult" required>
-                            <label class="small-txt" for="adult">Junior (Boys) 10-12</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="junior-girls" name="group" value="junior-girls" required>
-                            <label class="small-txt" for="junior-girls">Junior (Girls) 7-11</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="adult-div2" name="group" value="adult-div2" required>
-                            <label class="small-txt" for="adult-div2">Adults 18+ Div 2</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="midget-boys" name="group" value="midget-boys" required>
-                            <label class="small-txt" for="midget-boys">Midget (Boys) 13-14</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="senior-girls" name="group" value="senior-girls" required>
-                            <label class="small-txt" for="senior-girls">Senior (Girls) 12-16</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="women" name="group" value="women" required>
-                            <label class="small-txt" for="women">Women 17+</label>
-                        </div>
+                        {% endfor %}
                     </div>
                 </fieldset>
 
@@ -141,31 +103,31 @@
                     <div class="margin-left">
                         <div class="label-input-full">
                             <label class="small-txt" for="street_line1">Street Address</label>
-                            <input type="text" id="street_line1" name="street_line1" value="{{ form.street_line1.value }}" required>
+                            {{ register_form.street_line1 }}
                         </div>
     
                         <div class="label-input-full">
                             <label class="small-txt" for="app_line2">Street Address 2</label>
-                            <input type="text" id="app_line2" name="app_line2" value="{{ form.app_line2.value }}">
+                            {{ register_form.app_line2 }}
                         </div>
                         <div class="register-flex">
                             <div  class="label-input">
                                 <label class="small-txt" for="city">City</label>
-                                <input type="text" id="city" name="city" value="{{ form.city.value }}" required>
+                                {{ register_form.city }}
                             </div>
                             <div  class="label-input">
                                 <label class="small-txt" for="province">Province</label>
-                                <input type="text" id="province" name="province" value="{{ form.province.value }}" required>
+                                {{ register_form.province }}
                             </div>
                         </div>
                         <div class="register-flex">
                             <div  class="label-input">
                                 <label class="small-txt" for="postal_code">Postal Code</label>
-                                <input type="text" id="postal_code" name="postal_code" value="{{ form.postal_code.value }}" required>
+                                {{ register_form.postal_code }}
                             </div>
                             <div  class="label-input">
                                 <label class="small-txt" for="country">Country</label>
-                                <input type="text" id="country" name="country" value="{{ form.country.value }}" required>
+                                {{ register_form.country }}
                             </div>
                         </div>
                     </div>
@@ -179,7 +141,7 @@
                                 <label class="form-label" for="phone">Phone Number</label>
                             </div>
                             <div class="margin-left">
-                                <input type="tel" id="phone" name="phone" value="{{ form.phone.value }}" required>
+                                {{ register_form.phone }}
                             </div>
                         </div>
         
@@ -189,7 +151,7 @@
                                 <label class="form-label" for="email">Email</label>
                             </div>
                             <div class="margin-left">
-                                <input type="email" id="email" name="email" value="{{ form.email.value }}" required>
+                                {{ register_form.email }}
                             </div>
                         </div>
                     </div>
@@ -200,15 +162,7 @@
                             <label for="uniform_size">Uniform Size</label>
                         </div>
                         <div class="margin-left">
-                            <select id="uniform_size" name="uniform_size" required>
-                                <option value="" disabled selected>Select a size</option>
-                                <option value="XS">Extra Small</option>
-                                <option value="S">Small</option>
-                                <option value="M">Medium</option>
-                                <option value="L">Large</option>
-                                <option value="XL">Extra Large</option>
-                                <option value="XXL">Double Extra Large</option>
-                            </select>                            
+                            {{ register_form.uniform_size }}                           
                         </div>
                     </div>
                 </fieldset>
@@ -221,7 +175,7 @@
                         </div>
                         <div class="checkbox-flex margin-left">
                             <div class="checkbox-input">
-                                <input class="input-box" type="checkbox" id="consent" name="consent">  
+                                {{ register_form.consent }}  
                             </div>
                             <div class="checkbox-info">
                                 <p>I, the undersigned player mentioned above, hereby consent to participate in all activities of the West Island Basketball League (WIOBL). I agree not to hold the organizers, directors, or any volunteer responsible for any future claim related to any loss, damage, or bodily injury arising directly or indirectly from my participation in said activity. I will also comply with all laws and rules of WIOBL. Additionally, I agree to possibly be transferred to another team if necessary to balance the teams.</p>
@@ -235,14 +189,11 @@
                         </div>
                         <div class="checkbox-flex margin-left">
                             <p>Would you like to be a volunteer for the league?</p>
+                            {% for field in register_form.volunteer %}
                             <div class="radio-flex">
-                                <input type="radio" id="volunteer_yes" name="volunteer" value="True">
-                                <label for="volunteer_yes">Yes</label>
+                                {{ field.tag }} {{ field.choice_label }}
                             </div>
-                            <div class="radio-flex">
-                                <input type="radio" id="volunteer_no" name="volunteer" value="False">
-                                <label for="volunteer_no">No</label>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </fieldset>                
@@ -254,7 +205,7 @@
                             <label class="form-label" for="requests">Special Requests</label>
                         </div>
                         <div class="margin-left">
-                            <textarea id="requests" name="requests"></textarea>
+                            {{ register_form.message }}
                         </div>
                     </div>
                 </fieldset>

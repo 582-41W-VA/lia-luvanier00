@@ -17,15 +17,16 @@ class SignUpForm(UserCreationForm):
         model = UserAccount
         fields = ["firstname", "lastname", "email", "password1", "password2", "role", "bio"]
 # --------------------------------------------------------------
-
+ 
 # --------------------------------------------------------------
-class RegistrationForm(forms.Form):
+class RegistrationForm(forms.ModelForm):
     GENDER_CHOICES = [
         ("Male", "Male"),
         ("Female", "Female"),
         ("Other", "Other")]
     
     UNIFORM_SIZES = [
+        ("", "Select a size"),
         ("XS", "Extra Small"),
         ("S", "Small"),
         ("M", "Medium"),
@@ -47,22 +48,25 @@ class RegistrationForm(forms.Form):
     group = forms.ModelChoiceField(label="Group Selection", queryset=RegistrationType.objects.all(), 
                                      required=True, 
                                      widget=forms.RadioSelect)
+
     street_line1 = forms.CharField(label="Street Address", max_length=20)
     app_line2 = forms.CharField(label="Street Address Line 2", max_length=20, required=False)
     city = forms.CharField(label="City", max_length=20)
     province = forms.CharField(label="Province", max_length=20)
     postal_code = forms.CharField(label="Postal Code", max_length=20)
     country = forms.CharField(label="Country", max_length=20)
-    email = forms.EmailField(label="Email")
-    phone = forms.CharField(label="Phone Number")
+
     uniform_size = forms.ChoiceField(label="Uniform Size", choices=UNIFORM_SIZES, 
                                      required=True, 
                                      widget=forms.Select())
-    consent = forms.BooleanField(label="Consent")
+    consent = forms.BooleanField(label="Consent", required=True)
     volunteer = forms.ChoiceField(choices=VOLUNTEER_CHOICES, 
                                required=True, 
                                widget=forms.RadioSelect)
-    message = forms.CharField(label="Special Requests", widget=forms.Textarea(), required=False)  
+
+    class Meta:
+        model = Registration
+        fields = ["firstname", "lastname", "dob", "gender", "group", "street_line1", "app_line2", "city", "province", "postal_code", "country", "email", "phone", "uniform_size", "consent", "volunteer", "message"]
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
