@@ -4,6 +4,7 @@ from .models import Role, UserAccount, Team, Player, RegistrationType, Registrat
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+# --------------------------------------------------------------
 class SignUpForm(UserCreationForm):
     firstname = forms.CharField(label="First Name", max_length=50)
     lastname = forms.CharField(label="Last Name", max_length=50)
@@ -15,7 +16,9 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = UserAccount
         fields = ["firstname", "lastname", "email", "password1", "password2", "role", "bio"]
+# --------------------------------------------------------------
 
+# --------------------------------------------------------------
 class RegistrationForm(forms.Form):
     GENDER_CHOICES = [
         ("Male", "Male"),
@@ -60,3 +63,14 @@ class RegistrationForm(forms.Form):
                                required=True, 
                                widget=forms.RadioSelect)
     message = forms.CharField(label="Special Requests", widget=forms.Textarea(), required=False)  
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
+class ModifyAccountForm(forms.ModelForm):
+    password = forms.CharField(label="Password", max_length=20, widget=forms.PasswordInput, required=False)
+    phone = forms.CharField(label="Phone Number", required=False)
+
+    class Meta:
+        model = UserAccount
+        fields = ["username", "first_name", "last_name", "password", "email", "phone", "role"]
+# --------------------------------------------------------------
