@@ -12,14 +12,15 @@
             <form action="{% url 'login' %}" method="POST" class="login-form">
                 {% csrf_token %}
                 
-                {{ login_form.errors }}
-                {% for message in messages %}
-                    <div class="error-message">
-                        <div class="error-flex">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                            <p>{{ message }}</p>
+                {% for field, errors in login_form.errors.items %}
+                    {% for error in errors %}
+                        <div class="error-message">
+                            <div class="error-flex">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <p>{{ error }}</p>
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 {% endfor %}
 
                 <a href="{% url 'login' %}">Parent</a> | <a href="{% url 'admin:index' %}">Coach</a>
