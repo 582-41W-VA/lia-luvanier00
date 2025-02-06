@@ -8,7 +8,6 @@
         <div>Firstname: {{ user.first_name }}</div>
         <div>Lastname: {{ user.last_name }}</div>
         <div>email: {{ user.email }}</div>
-        <!-- <div>Role: {{ role.name }}</div> -->
 
         <form action="{% url 'member_account' request.user.id %}" method="POST">
             {% csrf_token %}
@@ -26,5 +25,16 @@
                 <button name="account_edit">Edit</button>
             </fieldset>
         </form>
+
+        <h5>Registrations</h5>
+        {% if registrations %}
+            <ul>
+            {% for registration in registrations %}
+                <li>{{ registration }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>You don't have any registrations</p>
+        {% endif %}
     {% endif %}
 {% endblock %}
