@@ -17,7 +17,7 @@ h1 {
     color: #ffffff;
     text-transform: capitalize;
     font-family: Montserrat;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
 }
 
@@ -36,7 +36,7 @@ h3 {
 
 /* Re-usable styles */
 .container {
-    max-width: 1150px;
+    max-width: 1000px;
     width: 90%;
     margin-right: auto;
     margin-left: auto;
@@ -60,7 +60,6 @@ h3 {
 .action-button {
     background-color: #8C0303;
 }
-
 .action-button:hover {
     background-color: #bf1616;
     transform: scale(1.05);
@@ -69,7 +68,6 @@ h3 {
 .black-button {
     background-color: #000000;
 }
-
 .black-button:hover {
     background-color: #504444;
     transform: scale(1.05);
@@ -82,7 +80,7 @@ h3 {
 
 /* Navbar */
 .navbar {
-    padding: 5px 0;
+    padding: 16px 0;
     background-color: #000000;
     color: #ffffff;
     position: relative;
@@ -90,7 +88,7 @@ h3 {
 
 .nav-container {
     max-width: 1500px;
-    width: 96%;
+    width: 90%;
     margin-right: auto;
     margin-left: auto;
 }
@@ -111,9 +109,9 @@ h3 {
 }
 
 .logo img {
-    height: 60px;
+    height: 90px;    
 }
-
+  
 .logo a {
     text-decoration: none;
     color: white;
@@ -193,8 +191,8 @@ footer {
 
 .footer-flex {
     display: flex;
-    gap: 100px;
-    align-items: top;
+    gap: 230px;
+    align-items: center;
     justify-content: start;
 }
 
@@ -203,7 +201,7 @@ footer ul {
 }
 
 .footer-list li {
-    margin-bottom: 10px;
+    margin-bottom: 32px;
 }
 
 footer a {
@@ -256,9 +254,9 @@ footer i {
 }
 
 .hero-content h3 {
-    font-size: 260px;
+    font-size : 260px;
     font-family: Montserrat;
-    font-weight: 200;
+    font-weight: 400;
     letter-spacing: 50px;
     line-height: 1;
     color: rgba(255, 255, 255, 0.232);
@@ -281,7 +279,6 @@ footer i {
     transition: transform 0.3s ease-in-out;
     background-color: #ffffff;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
 }
 
 .announcement-card:hover {
@@ -292,8 +289,6 @@ footer i {
     height: 180px;
     background-position: center;
     background-size: cover;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
 }
 
 .announcements-flex {
@@ -336,7 +331,7 @@ footer i {
 }
 
 .reg-info-heading {
-    background-color: #3663BF;
+    background-color: #000000;
     padding: 8px;
     max-width: 90%;
     text-align: center;
@@ -346,7 +341,7 @@ footer i {
     border-top-right-radius: 10px;
 }
 
-.reg-info-heading h2 {
+.reg-info-heading h2{
     color: #FFFFFF;
 }
 
@@ -379,7 +374,7 @@ footer i {
     padding: 32px 0;
 }
 
-.affiliations-grid {
+.affiliations-grid{
     display: grid;
     grid-template-columns: repeat(4, max-content);
     gap: 20px;
@@ -391,15 +386,14 @@ footer i {
 }
 
 /* Courts */
-.courts {
+.courts{
     text-align: center;
 }
 
 .court-card {
-    background: url("/static/images/bbcourt-bg.png") rgba(255, 255, 255, 0.6);
+    background-image: url("/static/images/bbcourt-bg.png");
     background-size: cover;
     background-position: center;
-    background-blend-mode: overlay;
     padding: 48px;
 }
 
@@ -458,7 +452,7 @@ footer i {
 
 .body-login {
     background-image: url("/static/images/sky-dunk.jpg");
-    background-position-y: -850px;
+    background-position: right 100% top 50%;
     background-size: cover;
     position: center;
 }
@@ -472,7 +466,7 @@ footer i {
 }
 
 .login-form {
-    margin-bottom: 25px;
+    margin-bottom: 48px;
 }
 
 .error-message {
@@ -497,8 +491,7 @@ footer i {
     font-size: 16px;
 }
 
-.login-form label,
-input {
+.login-form label, input {
     display: block;
 }
 
@@ -508,15 +501,15 @@ input {
 }
 
 .login-form input {
-    margin-bottom: 40px;
+    margin-bottom: 16px;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-    height: 40px;
+    height: 30px;
 }
 
-.login-form input:nth-of-type(2) {
-    margin-bottom: 20px;
+.login-form input:nth-of-type(2){
+    margin-bottom: 48px;
 }
 
 .form-container img {
@@ -532,181 +525,7 @@ input {
 }
 
 .choice {
-    margin-bottom: 25px;
-    font-weight: bolder;
-}
-
-/* ABOUT PAGE */
-/* about banner */
-.about-section {
-    background-image: url("/static/images/about/about-banner.png");
-    background-position: center;
-    background-size: cover;
-}
-
-.about-section h2 {
-    font-family: Montserrat;
-    color: #ffffff;
-    text-align: right;
-    margin-top: 200px;
-    font-size: 50px;
-}
-
-/* about goals */
-.about-goals h2 {
-    text-align: left;
-}
-
-.goals-flex {
-    display: flex;
-    gap: 96px;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.goals-info {
-    width: 50%;
-}
-
-.goal-flex {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 36px;
-}
-
-.goals-flex p:first-of-type {
-    font-size: 36px;
-    font-family: Raleway;
-    font-weight: 600;
-}
-
-.goals-images {
-    width: 50%;
-    position: relative;
-}
-
-.goals-images img:first-of-type {
-    height: 300px;
-}
-
-.goals-images img:nth-of-type(2) {
-    height: 200px;
-    position: absolute;
-    top: 65%;
-    right: 0;
-}
-
-/* about - info */
-.info-flex {
-    display: flex;
-}
-
-.info-card {
-    padding: 32px;
-    width: 100%;
-}
-
-.info-flex .info-card:nth-of-type(1),
-.info-flex .info-card:nth-of-type(3) {
-    background: #3663BF;
-}
-
-.info-flex .info-card:nth-of-type(2) {
-    background: #7A9FBF;
-}
-
-.info-card p {
-    text-align: center;
-    color: #ffffff;
-}
-
-.info-card p:nth-of-type(1) {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 16px;
-}
-
-.info-card p:nth-of-type(2) {
-    font-size: 18px;
-}
-
-/* about - coaches */
-.our-coaches {
-    text-align: center;
-}
-
-.coaches-flex {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-}
-
-.coach-card {
-    width: 25%;
-}
-
-.coach-card img {
-    width: 80%;
-    margin-bottom: 16px;
-}
-
-.coach-card p {
-    font-family: Montserrat;
-    font-weight: 600;
-}
-
-.about-description {
-    background: #7a9fbf45;
-    text-align: center;
-    line-height: 1.5;
-}
-
-/* about - volunteers */
-.volunteers-content {
-    background-image: url("/static/images/about/flags-bg.png");
-    padding: 48px;
-}
-
-.volunteers-info {
-    border-radius: 15px;
-    background-color: #ffffff;
-    width: 50%;
-    margin-left: auto;
-    padding: 48px;
-    text-align: center;
-}
-
-.volunteers-info h3,
-.volunteers-info p:first-of-type,
-.volunteers-info ul {
-    margin-bottom: 24px;
-}
-
-.volunteers-info h3 {
-    font-weight: 600;
-}
-
-.volunteers-info p:nth-of-type(1){
-    font-size: 20px;
-}
-
-.volunteers-info ul {
-    list-style: none;
-}
-
-.volunteers-info li {
-    font-weight: 600;
-    font-style: italic;
-}
-
-.volunteers-info p:nth-of-type(2){
-    font-weight: 600;
-}
-
-/* about - members */
-.members-vid {
-    width: 100%;
+    margin-bottom: 48px;
 }
 
 /* ABOUT PAGE */
@@ -1048,7 +867,6 @@ input {
 
 /* MEDIA QUERY */
 @media (max-width: 1100px) {
-
     /* GENERAL */
     h1 {
         font-size: 16px;
@@ -1065,16 +883,14 @@ input {
     .court-content img {
         height: 100px;
     }
-
+    
 }
 
 @media (max-width: 992px) {
-
     /* GENERAL */
     section {
         padding: 40px 0;
     }
-
     h2 {
         font-size: 25px;
     }
@@ -1082,7 +898,7 @@ input {
         font-size: 22px;
     }
     .logo img {
-        height: 80px;
+        height: 80px;    
     }
 
     /* Footer */
@@ -1090,16 +906,13 @@ input {
         padding-top: 80px;
         padding-bottom: 8px;
     }
-
     .footer-flex {
         gap: 130px;
         justify-content: center;
     }
-
     .footer-list li {
         margin-bottom: 24px;
     }
-
     .social-media-icons {
         gap: 24px;
     }
@@ -1114,7 +927,6 @@ input {
     .reg-info-container {
         padding: 40px 16x;
     }
-
     .reg-info-container p {
         font-size: 18px;
     }
@@ -1123,29 +935,23 @@ input {
     .court-card {
         padding: 32px;
     }
-
     .courtcard-flex {
         gap: 32px;
     }
-
     .court-content {
         width: 80%;
         top: -50px;
     }
-
     .court-content img {
         height: 80px;
     }
-
     .court-content p {
         font-size: 20px;
     }
-
     .court-content img,
     .court-content p:first-of-type {
         margin-bottom: 24px;
     }
-
     .court-map img {
         height: 250px;
     }
@@ -1154,11 +960,9 @@ input {
     .affiliations {
         padding-bottom: 40px;
     }
-
     .affiliations-bg {
         padding: 24px 0;
     }
-
     .affiliations img {
         height: 45px;
     }
@@ -1169,7 +973,6 @@ input {
         width: 100%;
         padding: 32px;
     }
-
     .login-form,
     .login-form input:nth-of-type(2),
     .form-container img,
@@ -1177,7 +980,6 @@ input {
     .choice {
         margin-bottom: 32px;
     }
-
     .form-container img {
         height: 100px;
     }
@@ -1243,37 +1045,30 @@ input {
 }
 
 @media (max-width: 768px) {
-
     /* GENERAL */
     section {
         padding: 32px 0;
     }
-
     h1 {
         font-size: 14px;
     }
-
     h2 {
         font-size: 20px;
     }
-
     .logo img {
-        height: 70px;
+        height: 70px;    
     }
 
     /* Footer */
     footer {
         padding-top: 70px;
     }
-
     .footer-flex {
         gap: 100px;
     }
-
     .footer-list li {
         margin-bottom: 16px;
     }
-
     .social-media-icons {
         gap: 8px;
     }
@@ -1289,23 +1084,18 @@ input {
     .announcements-bg {
         padding: 40px;
     }
-
     .announcement-card:hover {
         transform: none;
     }
-
     .announcement-img {
         height: 130px;
     }
-
     .announcements-flex {
         gap: 32px;
     }
-
     .announcement-content {
         padding: 16px;
     }
-
     .announcement-content a {
         margin-bottom: 8px;
     }
@@ -1314,7 +1104,6 @@ input {
     .reg-info-container {
         padding: 32px 8px;
     }
-
     .reg-info-container p {
         font-size: 16px;
     }
@@ -1323,7 +1112,6 @@ input {
     .affiliations {
         padding-bottom: 32px;
     }
-
     .affiliations img {
         height: 40px;
     }
@@ -1332,39 +1120,32 @@ input {
     .court-card {
         padding: 16px;
     }
-
     .courtcard-flex {
         gap: 16px;
     }
-
     .court-content {
         top: -40px;
     }
-
     .court-content img {
         height: 70px;
     }
-
     .court-content p {
         font-size: 18px;
     }
-
     .court-content img,
     .court-content p:first-of-type {
         margin-bottom: 16px;
     }
-
     .court-map img {
         height: 220px;
     }
 
-    /* LOGIN PAGE*/
+   /* LOGIN PAGE*/
     /* login section*/
     .form-container {
         width: 100%;
         padding: 24px;
     }
-
     .login-form,
     .login-form input:nth-of-type(2),
     .form-container img,
@@ -1372,7 +1153,6 @@ input {
     .choice {
         margin-bottom: 24px;
     }
-
     .form-container img {
         height: 90px;
     }
@@ -1475,29 +1255,24 @@ input {
 }
 
 @media (max-width: 576px) {
-
     /* GENERAL */
     section {
         padding: 24px 0;
     }
-
     h1 {
-        display: none;
+       display: none;
     }
-
     .h1-acronym {
         display: block;
     }
-
     .logo img {
-        height: 60px;
+        height: 60px;    
     }
 
     /* Footer */
     footer {
         padding-top: 48px;
     }
-
     .footer-flex {
         gap: 40px;
     }
@@ -1513,11 +1288,9 @@ input {
     .announcements-bg {
         padding: 32px;
     }
-
     .announcement-img {
         height: 100px;
     }
-
     .announcements-flex {
         gap: 24px;
         grid-template-columns: repeat(1, 1fr);
@@ -1527,7 +1300,6 @@ input {
     .reg-info-container {
         padding: 24px 8px;
     }
-
     .reg-info-container p {
         font-size: 14px;
     }
@@ -1537,26 +1309,21 @@ input {
         flex-direction: column;
         gap: 8px;
     }
-
     .court-content {
         padding: 16px 16px;
         width: 100%;
         top: -35px;
         left: 0;
     }
-
     .court-content img {
         height: 60px;
     }
-
     .court-content p {
         font-size: 16px;
     }
-
     .court-map {
         width: 100%;
     }
-
     .court-map img {
         height: 250px;
     }
@@ -1565,13 +1332,11 @@ input {
     .affiliations {
         padding-bottom: 24px;
     }
-
-    .affiliations-grid {
+    .affiliations-grid{
         grid-template-columns: repeat(2, max-content);
         gap: 40px;
         justify-content: center;
     }
-
     .affiliations-grid img {
         margin-left: auto;
         margin-right: auto;
