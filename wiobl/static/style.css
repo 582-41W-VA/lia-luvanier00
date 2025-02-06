@@ -396,7 +396,8 @@ footer i {
 }
 
 .court-card {
-    background: url("/static/images/bbcourt-bg.png") rgba(255, 255, 255, 0.6);
+    background: url("/static/images/bbcourt-bg.png");
+    background-color: rgba(148, 148, 148, 0.684);
     background-size: cover;
     background-position: center;
     background-blend-mode: overlay;
@@ -444,7 +445,7 @@ footer i {
     width: 50%;
 }
 
-.court-map img {
+.map { 
     height: 400px;
 }
 
@@ -810,7 +811,7 @@ input {
         margin-bottom: 24px;
     }
 
-    .court-map img {
+    .map {
         height: 250px;
     }
 
@@ -1018,7 +1019,7 @@ input {
         margin-bottom: 16px;
     }
 
-    .court-map img {
+    .map {
         height: 220px;
     }
 
@@ -1173,7 +1174,7 @@ input {
         width: 100%;
     }
 
-    .court-map img {
+    .map {
         height: 250px;
     }
 

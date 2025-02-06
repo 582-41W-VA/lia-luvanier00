@@ -31,3 +31,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Run `toggleBurger` whenever the window is resized
 window.addEventListener("resize", toggleBurger);
+
+
+// map api
+document.addEventListener('DOMContentLoaded', function () {
+    const coordinates = [45.46120974762705, -73.80929962254508];
+    const locationName = 'Lakeside Heights, Pointe-Claire, QC';
+
+    const map = L.map('map', {
+        layers: [
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                'attribution': 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+            })
+        ],
+        center: coordinates,
+        zoom: 15
+    });
+
+    const marker = L.marker(coordinates)
+    .addTo(map)
+    .bindPopup(locationName)
+    .openPopup();
+});
