@@ -470,7 +470,7 @@ footer i {
     margin-bottom: 48px;
 }
 
-.error-message {
+.errorlist {
     padding: 10px 15px;
     border-radius: 5px;
     background-color: #ffebee;
@@ -796,7 +796,9 @@ footer i {
     margin-bottom: 24px;
 }
 
-.registration input[type="text"], .registration select {
+.registration input[type="text"],
+.registration input[type="tel"],
+.registration input[type="email"] {
     width: 100%;
     padding: 8px;
     border-bottom: 1px solid #ccc;

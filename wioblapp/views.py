@@ -151,45 +151,54 @@ def member_account(request, account_id):
 # --------------------------------------------------------------
 @login_required(login_url="login")
 def register_player(request):
+    register_form = RegistrationForm()
+
     if request.method == "POST":
-        # Instantiate the form with POST data
         register_form = RegistrationForm(request.POST)
 
-        # Check if the form is valid
         if register_form.is_valid():
-            # Create a new player or whatever model you're saving the form data to
-            player = Player(
-                firstname=register_form.cleaned_data['firstname'],
-                lastname=register_form.cleaned_data['lastname'],
-                dob=register_form.cleaned_data['dob'],
-                gender=register_form.cleaned_data['gender'],
-                group=register_form.cleaned_data['group'],
-                street_line1=register_form.cleaned_data['street_line1'],
-                app_line2=register_form.cleaned_data.get('app_line2', ''),
-                city=register_form.cleaned_data['city'],
-                province=register_form.cleaned_data['province'],
-                postal_code=register_form.cleaned_data['postal_code'],
-                country=register_form.cleaned_data['country'],
-                email=register_form.cleaned_data['email'],
-                phone=register_form.cleaned_data['phone'],
-                uniform_size=register_form.cleaned_data['uniform_size'],
-                consent=register_form.cleaned_data['consent'],
-                volunteer=register_form.cleaned_data['volunteer'],
-                message=register_form.cleaned_data.get('message', '')
+            firstname = register_form.cleaned_data["firstname"]
+            lastname = register_form.cleaned_data["lastname"]
+            playername = f"{firstname} {lastname}"
+            dob = register_form.cleaned_data["dob"]
+            gender = register_form.cleaned_data["gender"]
+            group = register_form.cleaned_data["group"]
+            street_line1 = register_form.cleaned_data["street_line1"]
+            app_line2 = register_form.cleaned_data["app_line2"]
+            city = register_form.cleaned_data["city"]
+            province = register_form.cleaned_data["province"]
+            postal_code = register_form.cleaned_data["postal_code"]
+            country = register_form.cleaned_data["country"]
+            email = register_form.cleaned_data["email"]
+            phone = register_form.cleaned_data["phone"]
+            uniform_size = register_form.cleaned_data["uniform_size"]
+            consent = register_form.cleaned_data["consent"]
+            volunteer = register_form.cleaned_data["volunteer"]
+            message = register_form.cleaned_data["message"]
+
+            member = UserAccount.objects.get(email=request.user.email)
+
+            player, created = Player.objects.get_or_create(
+                related_account=member,
+                name=playername,
+                dob=dob,
+                gender=gender
             )
-            player.save()  # Save the player to the database
 
-            # Redirect to a success page or confirmation page
-            return redirect('registration_success')  # Replace 'registration_success' with your URL name
+            registration = Registration.objects.create(
+                player=player,
+                reg_type=group,
+                address=f"{street_line1}, {app_line2}, {city}, {province}, {postal_code}, {country}",
+                email=email,
+                phone=phone,
+                uniform_size=uniform_size,
+                consent=consent,
+                volunteer=volunteer,
+                message=message
+            )
 
-        else:
-            # If form is not valid, re-render the form with error messages
-            return render(request, 'registration.html', {'register_form': register_form})
-    
-    else:
-        # If GET request, just display the form
-        register_form = RegistrationForm()
-        return render(request, 'registration.html', {'register_form': register_form})
+            messages.success(request, "Registration submitted successfully")
+            return redirect('index') 
 
     context = {
         "register_form": register_form,
