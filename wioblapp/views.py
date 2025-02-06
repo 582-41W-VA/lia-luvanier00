@@ -156,7 +156,7 @@ def member_account(request, account_id):
 # --------------------------------------------------------------
 @login_required(login_url="login")
 def register_player(request):
-    register_form = RegistrationForm(instance=member)
+    register_form = RegistrationForm()
 
     if request.method == "POST":
         register_form = RegistrationForm(request.POST)

@@ -52,7 +52,7 @@ class Registration(models.Model):
     email = models.EmailField("Email Adress", max_length=254, blank=True, null=True)
     phone = models.CharField("Phone Number", max_length=15)
     uniform_size = models.CharField("Uniform Size", max_length=3)
-    consent = models.BooleanField("Consent", default=False)
+    consent = models.BooleanField("Consent", default=False, null=False)
     volunteer = models.BooleanField("Volunteer", default=False)
     phone = models.CharField("Phone Number", max_length=15)
     date_time = models.DateTimeField("Date", auto_now_add=True)

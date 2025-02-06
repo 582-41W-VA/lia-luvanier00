@@ -26,6 +26,7 @@ class RegistrationForm(forms.ModelForm):
         ("Other", "Other")]
     
     UNIFORM_SIZES = [
+        ("", "Select a size"),
         ("XS", "Extra Small"),
         ("S", "Small"),
         ("M", "Medium"),
@@ -58,7 +59,7 @@ class RegistrationForm(forms.ModelForm):
     uniform_size = forms.ChoiceField(label="Uniform Size", choices=UNIFORM_SIZES, 
                                      required=True, 
                                      widget=forms.Select())
-    
+    consent = forms.BooleanField(label="Consent", required=True)
     volunteer = forms.ChoiceField(choices=VOLUNTEER_CHOICES, 
                                required=True, 
                                widget=forms.RadioSelect)
