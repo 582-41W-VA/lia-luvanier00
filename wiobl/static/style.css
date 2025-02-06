@@ -796,7 +796,7 @@ footer i {
     margin-bottom: 24px;
 }
 
-.registration input, select {
+.registration input[type="text"], .registration select {
     width: 100%;
     padding: 8px;
     border-bottom: 1px solid #ccc;
