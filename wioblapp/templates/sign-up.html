@@ -6,30 +6,19 @@
 
 {% block content %}
 
-<section class="login-section">
+<section class="form-section">
     <div class="form-container">
         <div class="container">
             <img src="{% static 'images/logo.png' %}" alt="">
             <form class="login-form" action="{% url 'sign-up' %}" method="POST">
                 {% csrf_token %}
 
-            <div class="error">
-                {{ signup_form.errors }}
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}       
-            </div>
-        
-                <!-- <fieldset>
-                    <legend>Sign Up</legend>
-                    {% for field in signup_form %}
-                        <div>
-                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                            {{ field }}
-                        </div>
-                    {% endfor %}
-                    <button name="sign-up" class="action-button button">sign-up</button>
-                </fieldset> -->
+                <div class="error">
+                    {{ signup_form.errors }}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}       
+                </div>
 
                 <fieldset>
                     <legend class="main-legend">Sign Up</legend>
@@ -60,7 +49,7 @@
                 </fieldset>
 
                 <div class="form-bio">
-                    <label for="bio">Bio</label>
+                    <label for="bio">Biography</label>
                     {{ signup_form.bio }}
                 </div>
 

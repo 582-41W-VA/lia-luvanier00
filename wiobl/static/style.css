@@ -148,8 +148,6 @@ h3 {
 .radio-flex {
     display: flex;
     gap: 8px;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Navbar */
@@ -524,12 +522,12 @@ footer i {
     height: 400px;
 }
 
-/* LOGIN PAGE*/
-/* login section*/
-.login-section {
+/* LOGIN and SIGN UP PAGE*/
+.form-section {
     display: flex;
     flex-direction: row-reverse;
     padding: 0;
+    height: 100%;
 }
 
 .body-login {
@@ -566,6 +564,7 @@ footer i {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 8px;
+    text-transform: capitalize;
 }
 
 .login-form input[type="text"],
@@ -576,6 +575,10 @@ footer i {
     margin-right: auto;
     width: 50%;
     height: 30px;
+}
+
+.login-form textarea {
+    width: 100%;
 }
 
 .form-container img {
@@ -607,6 +610,10 @@ footer i {
     text-align: start;
 }
 
+.role .radio-flex {
+    align-items: center;
+    justify-content: center;
+}
 
 /* ABOUT PAGE */
 /* about banner */
@@ -897,6 +904,7 @@ footer i {
 
 .registration .radio-option {
     display: flex;
+    gap: 8px;
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
@@ -1045,14 +1053,15 @@ footer i {
         height: 45px;
     }
 
-    /* LOGIN PAGE*/
-    /* login section*/
+    /* LOGIN and SIGN UP PAGE*/
     .form-container {
         width: 100%;
         padding: 32px;
+        height: 100%;
+    }
+    .login-section .form-container {
         height: 100vh;
     }
-    .login-form input,
     .form-container img,
     .error-message,
     .choice {
@@ -1216,14 +1225,12 @@ footer i {
         height: 220px;
     }
 
-   /* LOGIN PAGE*/
-    /* login section*/
+    /* LOGIN and SIGN UP PAGE*/
     .form-container {
         width: 100%;
         padding: 24px;
-        height: 100vh;
+        height: 100%;
     }
-    .login-form input,
     .form-container img,
     .error-message,
     .choice {
