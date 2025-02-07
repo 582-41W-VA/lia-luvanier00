@@ -1,22 +1,75 @@
 {% extends 'base.html' %}
 {% block 'title' %} Sign-up {% endblock %}
+{% block body_class %}body-login{% endblock %}
+{% block footer_class %}footer-login{% endblock %}
 {% load static %}
 
 {% block content %}
-    <form action="{% url 'sign-up' %}" method="POST">
-        {% csrf_token %}
 
-        {{ signup_form.errors }}
+<section class="login-section">
+    <div class="form-container">
+        <div class="container">
+            <img src="{% static 'images/logo.png' %}" alt="">
+            <form class="login-form" action="{% url 'sign-up' %}" method="POST">
+                {% csrf_token %}
 
-        <fieldset>
-            <legend>Sign Up</legend>
-            {% for field in signup_form %}
-                <div>
-                    {{ field.label }}
-                    {{ field }}
+            <div class="error">
+                {{ signup_form.errors }}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}       
+            </div>
+        
+                <!-- <fieldset>
+                    <legend>Sign Up</legend>
+                    {% for field in signup_form %}
+                        <div>
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <button name="sign-up" class="action-button button">sign-up</button>
+                </fieldset> -->
+
+                <fieldset>
+                    <legend class="main-legend">Sign Up</legend>
+                    <label for="firstname">First Name</label>
+                    {{ signup_form.firstname }}
+                    
+                    <label for="lastname">Last Name</label>
+                    {{ signup_form.lastname }}
+                    
+                    <label for="email">Email</label>
+                    {{ signup_form.email }}
+                    
+                    <label for="password1">Password</label>
+                    {{ signup_form.password1 }}
+
+                    <label for="password2">Password Confirmation</label>
+                    {{ signup_form.password2 }}
+                </fieldset>
+
+                <fieldset class="role">
+                    <legend>Role</legend>
+                    {% for field in signup_form.role %}
+                        <div class="radio-flex">
+                            {{ field.tag }}
+                            {{ field.choice_label }}
+                        </div>
+                    {% endfor %}
+                </fieldset>
+
+                <div class="form-bio">
+                    <label for="bio">Bio</label>
+                    {{ signup_form.bio }}
                 </div>
-            {% endfor %}
-            <button name="sign-up">sign-up</button>
-        </fieldset>
-    </form>
+
+                <div>
+                    <button name="sign-up" class="action-button button">sign-up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
