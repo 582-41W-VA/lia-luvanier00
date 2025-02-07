@@ -1,11 +1,11 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag
-from .forms import SignUpForm, RegistrationForm, ModifyAccountForm
+from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm
 
 # --------------------------------------------------------------
 def index(request):
@@ -79,21 +79,27 @@ def member_login(request):
     if request.user.is_authenticated:
         return redirect('index')
 
-    login_form = AuthenticationForm()
+    login_form = LoginForm()
 
     if request.method == "POST":
-        login_form = AuthenticationForm(data=request.POST)
+        login_form = LoginForm(data=request.POST)
 
         if login_form.is_valid():
-            username = request.POST["username"]
+            email = request.POST["email"]
             password = request.POST["password"]
-            member = authenticate(request, username=username, password=password)
 
-            if member is not None:
-                login(request, member)
-                return redirect("index")
-            else:
-                messages.error(request, "Username OR Password is incorrect!")
+            try:
+                user = UserAccount.objects.get(email=email)
+                username = user.username
+                member = authenticate(request, username=username, password=password)
+
+                if member is not None:
+                    login(request, member)
+                    return redirect("index")
+                else:
+                    messages.error(request, "Email OR Password is incorrect!")
+            except UserAccount.DoesNotExist:
+                    messages.error(request, "Email OR Password is incorrect!")
 
     context = {
         "login_form": login_form,
