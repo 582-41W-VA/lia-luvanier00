@@ -5,6 +5,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 # --------------------------------------------------------------
+class LoginForm(forms.Form):
+    email = forms.EmailField(label="Email", widget=forms.EmailInput())
+    password = forms.CharField(label="Password", widget=forms.PasswordInput())
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
 class SignUpForm(UserCreationForm):
     firstname = forms.CharField(label="First Name", max_length=50)
     lastname = forms.CharField(label="Last Name", max_length=50)
