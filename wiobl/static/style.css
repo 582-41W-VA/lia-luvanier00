@@ -73,9 +73,83 @@ h3 {
     transform: scale(1.05);
 }
 
+.toggle-buttons {
+    display: inline-flex;
+    border-radius: 999px;
+    border: 2px solid #3663BF;
+    margin-bottom: 32px;
+  }
+  
+.toggle-buttons a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border: none;
+    color: #3663BF;
+    background: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+    display: inline-block;
+}
+
+.toggle-buttons a:first-child {
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+}
+
+.toggle-buttons a:last-child {
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
+}
+
+.toggle-buttons a.active {
+    background: #3663BF;
+    color: white;
+}
+
 .section-heading {
     text-align: center;
     margin-bottom: 32px;
+}
+
+.error > .errorlist,
+.error-message {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #ffebee;
+    color: #c62828;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 24px;
+}
+
+.error-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.error-message i {
+    font-size: 16px;
+}
+
+.errorlist li {
+    margin-left: 16px;
+}
+
+.base-message {
+    background-color: #d0f599;
+    padding: 24px;
+    text-align: center;
+    border: 4px solid #71ab1a;
+}
+
+.radio-flex {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Navbar */
@@ -105,18 +179,14 @@ h3 {
     display: flex;
     align-items: center;
     gap: 16px;
-    font-size: 20px;
-}
-
-.logo img {
-    height: 90px;    
-}
-  
-.logo a {
     text-decoration: none;
     color: white;
     font-size: 24px;
     font-weight: bold;
+}
+
+.logo img {
+    height: 60px;    
 }
 
 .h1-acronym {
@@ -138,6 +208,8 @@ h3 {
     list-style: none;
     display: flex;
     gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-list-js {
@@ -164,14 +236,23 @@ h3 {
     padding: 4px 8px;
     border-radius: 3px;
     transition: 0.5s;
-}
-
-.menu-list li:last-child a {
-    color: #ffbaa1;
+    text-transform: capitalize;
+    text-align: center;
 }
 
 .menu a:hover {
     background-color: #555;
+}
+
+.menu-list .orange-url {
+    color: #ffbaa1;
+}
+
+.menu-list .account-url {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Footer */
@@ -463,61 +544,45 @@ footer i {
     padding: 48px 0;
     text-align: center;
     width: 40%;
-    height: 100vh;
+    height: 100%;
 }
 
-.login-form {
-    margin-bottom: 48px;
+.login-form fieldset {
+    border: none;
 }
 
-.errorlist {
-    padding: 10px 15px;
-    border-radius: 5px;
-    background-color: #ffebee;
-    color: #c62828;
-    border: 1px solid #ef9a9a;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 48px;
-}
-
-.error-flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.error-message i {
-    font-size: 16px;
+.login-form .main-legend {
+    font-size: 24px;
+    margin-bottom: 16px;
+    font-weight: bold;
 }
 
 .login-form label, input {
     display: block;
 }
 
+.login-form .role legend,
 .login-form label {
     font-size: 16px;
     font-weight: 600;
+    margin-bottom: 8px;
 }
 
-.login-form input {
-    margin-bottom: 16px;
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form input[type="email"] {
+    margin-bottom: 32px;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
     height: 30px;
 }
 
-.login-form input:nth-of-type(2){
-    margin-bottom: 48px;
-}
-
 .form-container img {
     height: 140px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
     display: block;
 }
 
@@ -525,9 +590,23 @@ footer i {
     text-transform: uppercase;
 }
 
-.choice {
-    margin-bottom: 48px;
+.login-form .action-button {
+    margin-bottom: 32px;
 }
+
+.choice {
+    margin-bottom: 36px;
+}
+
+.login-form .role,
+.login-form .form-bio {
+    margin-bottom: 24px;
+}
+
+.login-form .error {
+    text-align: start;
+}
+
 
 /* ABOUT PAGE */
 /* about banner */
@@ -863,11 +942,6 @@ footer i {
     text-align: center;
 }
 
-.registration .radio-flex {
-    display: flex;
-    gap: 8px;
-}
-
 /* MEDIA QUERY */
 @media (max-width: 1100px) {
     /* GENERAL */
@@ -901,7 +975,7 @@ footer i {
         font-size: 22px;
     }
     .logo img {
-        height: 80px;    
+        height: 50px;    
     }
 
     /* Footer */
@@ -976,9 +1050,9 @@ footer i {
     .form-container {
         width: 100%;
         padding: 32px;
+        height: 100vh;
     }
-    .login-form,
-    .login-form input:nth-of-type(2),
+    .login-form input,
     .form-container img,
     .error-message,
     .choice {
@@ -1058,9 +1132,6 @@ footer i {
     }
     h2 {
         font-size: 20px;
-    }
-    .logo img {
-        height: 70px;    
     }
 
     /* Footer */
@@ -1150,9 +1221,9 @@ footer i {
     .form-container {
         width: 100%;
         padding: 24px;
+        height: 100vh;
     }
-    .login-form,
-    .login-form input:nth-of-type(2),
+    .login-form input,
     .form-container img,
     .error-message,
     .choice {
@@ -1269,9 +1340,6 @@ footer i {
     }
     .h1-acronym {
         display: block;
-    }
-    .logo img {
-        height: 60px;    
     }
 
     /* Footer */
