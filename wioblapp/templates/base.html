@@ -48,17 +48,21 @@
                 <div class="menu">
                     <!-- Login Link -->
                     <ul class="menu-list" id="menu-list">
-                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'about' %}">About us</a></li>
                         <li><a href="#">Teams</a></li>
                         <li><a href="{% url 'registration' %}">Registration</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li>
-                            {% if request.user.is_authenticated %}
-                            Hello, <a href="{% url 'member_account' request.user.id %}">{{ request.user }}</a><a href="{% url 'logout' %}">Logout</a>
-                            {% else %}
-                            <a href="{% url 'login' %}">Login</a>
-                            {% endif %}
-                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li>
+                                <a class="orange-url account-url" href="{% url 'member_account' request.user.id %}">
+                                    <i class="fa-regular fa-user"></i> Account
+                                </a>
+                            </li>
+                            <li><a class="orange-url" href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a class="orange-url" href="{% url 'sign-up' %}">Sign-up</a></li>
+                            <li><a class="orange-url" href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
                     </ul>
 
                     <!-- Burger menu -->
@@ -75,7 +79,9 @@
     <!-- Main Content Start -->
     <div>
         {% for message in messages %}
-            <p>{{ message }}</p>
+            <div class="base-message">
+                {{ message }}
+            </div>
         {% endfor %}
         
         {% block content %}
@@ -88,7 +94,7 @@
             <div class="footer-flex">
                 <ul class="footer-list">
                     <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'about' %}">About us</a></li>
                     <li><a href="#">Teams</a></li>
                 </ul>
                 <ul class="footer-list">
