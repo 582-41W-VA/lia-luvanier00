@@ -527,7 +527,14 @@ footer i {
     display: flex;
     flex-direction: row-reverse;
     padding: 0;
+}
+
+.signup-section {
     height: 100%;
+}
+
+.login-section {
+    height: 100vh;
 }
 
 .body-login {
