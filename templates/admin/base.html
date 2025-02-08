@@ -21,6 +21,8 @@
     {% if LANGUAGE_BIDI %}<link rel="stylesheet" href="{% static "admin/css/responsive_rtl.css" %}">{% endif %}
 {% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
 </head>
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
@@ -29,46 +31,20 @@
 <!-- Container -->
 <div id="container">
 
-    {% if not is_popup %}
-    <!-- Header -->
+  {% if not is_popup %}
     {% block header %}
       <header id="header">
         <div id="branding">
-        {% block branding %}{% endblock %}
+          <a href="{% url 'admin:index' %}" class="custom-branding">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+            <span class="brand-name">West Island Outdoor Basketball League</span>
+          </a>
         </div>
-        {% block usertools %}
-        {% if has_permission %}
-        <div id="user-tools">
-            {% block welcome-msg %}
-                {% translate 'Welcome,' %}
-                <strong>{% firstof user.get_short_name user.get_username %}</strong>.
-            {% endblock %}
-            {% block userlinks %}
-                {% if site_url %}
-                    <a href="{{ site_url }}">{% translate 'View site' %}</a> /
-                {% endif %}
-                {% if user.is_active and user.is_staff %}
-                    {% url 'django-admindocs-docroot' as docsroot %}
-                    {% if docsroot %}
-                        <a href="{{ docsroot }}">{% translate 'Documentation' %}</a> /
-                    {% endif %}
-                {% endif %}
-                {% if user.has_usable_password %}
-                <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
-                {% endif %}
-                <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
-                    {% csrf_token %}
-                    <button type="submit">{% translate 'Log out' %}</button>
-                </form>
-                {% include "admin/color_theme_toggle.html" %}
-            {% endblock %}
-        </div>
-        {% endif %}
-        {% endblock %}
-        {% block nav-global %}{% endblock %}
+        {% include "admin/navbar.html" %}
       </header>
     {% endblock %}
-    <!-- END Header -->
+  
+  
     {% block nav-breadcrumbs %}
       <nav aria-label="{% translate 'Breadcrumbs' %}">
         {% block breadcrumbs %}
