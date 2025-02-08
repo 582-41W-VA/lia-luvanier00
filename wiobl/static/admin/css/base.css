@@ -6,7 +6,7 @@
 html[data-theme="light"],
 :root {
     --primary: #79aec8;
-    --secondary: #D95829;
+    --secondary: #000000;
     --accent: #f5dd5d;
     --primary-fg: #fff;
     
@@ -1198,24 +1198,26 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .custom-branding img {
-  height: 40px;
+  height: 50px;
   margin-right: 10px;
 }
 
 .custom-branding .brand-name {
-  font-weight: bold;
-  font-size: 24px;
+  font-size: 16px;
+  font-weight: 700;
 }
-
 
 /* Styling the Navbar */
 #navbar {
+  padding: 24px 0px;
+}
 
-  padding: 20px 30px;
+#main {
+    background-color: #fff;
 }
 
 .navbar-list {
