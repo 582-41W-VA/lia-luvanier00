@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag
-from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm
+from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm
 
 # --------------------------------------------------------------
 def index(request):
@@ -222,6 +222,30 @@ def register_player(request):
 def member_logout(request):
     logout(request)
     return redirect("login")
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
+def teams(request):
+    teams_form = FilterTeamsForm()
+    comment_form = CreateCommentForm()
+    teams = Team.objects.all()
+
+    if request.method == "POST":
+        teams_form = FilterTeamsForm(request.POST)
+
+        if teams_form.is_valid():
+            season = teams_form.cleaned_data['season']
+            group = teams_form.cleaned_data['group']
+
+            teams = Team.objects.filter(group=group)
+
+    context = {
+        "teams_form": teams_form,
+        "comment_form": comment_form,
+        "teams": teams,
+    }
+
+    return render(request, "teams.html", context)
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------

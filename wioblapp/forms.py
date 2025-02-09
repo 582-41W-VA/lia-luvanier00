@@ -84,3 +84,37 @@ class ModifyAccountForm(forms.ModelForm):
         model = UserAccount
         fields = ["username", "first_name", "last_name", "password", "email", "phone", "role"]
 # --------------------------------------------------------------
+
+# --------------------------------------------------------------
+class FilterTeamsForm(forms.ModelForm):
+    SEASON_CHOICES = [
+        ("2025", "2025"),
+        ("2024", "2024"),
+        ("2023", "2023")]
+
+    season = forms.ChoiceField(label="Season",
+                               choices=SEASON_CHOICES,
+                               required=True,
+                               widget=forms.Select())
+
+    group = forms.ModelChoiceField(label="Group",
+                              queryset=RegistrationType.objects.all(),
+                              required=True,
+                              widget=forms.Select())
+
+    # team = forms.ModelChoiceField(label="Team", 
+    #                               queryset=Team.objects.all(),
+    #                               required=True,
+    #                               widget=forms.Select())
+
+    class Meta:
+        model = Team
+        fields = ["season", "group"]
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
+class CreateCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+# --------------------------------------------------------------

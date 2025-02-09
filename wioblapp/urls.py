@@ -10,4 +10,5 @@ urlpatterns = [
     path("sign-up/", views.sign_up, name="sign-up"),
     path("account/<int:account_id>/", views.member_account, name="member_account"),
     path("registration/", views.register_player, name="registration"),
+    path("teams/", views.teams, name="teams"),
 ]
