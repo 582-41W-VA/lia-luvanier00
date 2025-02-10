@@ -27,7 +27,7 @@ def sign_up(request):
         if signup_form.is_valid():
             firstname = signup_form.cleaned_data.get("firstname").strip()
             lastname = signup_form.cleaned_data.get("lastname").strip()
-            username = f"{firstname} {lastname}"
+            username = f"{firstname}{lastname}"
             email = signup_form.cleaned_data.get("email")
             password = signup_form.cleaned_data.get("password1")
             role = signup_form.cleaned_data.get("role")
@@ -122,12 +122,11 @@ def member_account(request, account_id):
 
     try:
         registration = Registration.objects.get(player=player)
-        phone = registration.phone
     except Registration.DoesNotExist:
-        phone = ""
+        pass
 
     if request.method == "GET":
-        account_form = ModifyAccountForm(instance=member, initial={"phone": phone})
+        account_form = ModifyAccountForm(instance=member)
     elif request.method == "POST":
         account_form = ModifyAccountForm(request.POST, instance=member)
         if account_form.is_valid():
@@ -138,13 +137,12 @@ def member_account(request, account_id):
             member.role = account_form.cleaned_data["role"]
             new_password = account_form.cleaned_data.get("password")
             member.set_password(new_password)
+            member.phone = account_form.cleaned_data["phone"]
             member.save()
-            registration.phone = account_form.cleaned_data["phone"]
-            registration.save()
             messages.success(request, "Your account updated successfully")
 
-            auth_member = authenticate(request, username=member.username, password=password)
-            if auth_member:
+            auth_member = authenticate(request, username=member.username, password=new_password)
+            if auth_member is not None:
                 login(request, auth_member)
                 return redirect("member_account", account_id=request.user.id)
             else:

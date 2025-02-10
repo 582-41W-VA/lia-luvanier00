@@ -11,6 +11,7 @@ class Role(models.Model):
 class UserAccount(AbstractUser):
     role = models.ForeignKey(Role, on_delete=models.RESTRICT, related_name="user_accounts", null=True, blank=True)
     bio = models.TextField("Bio", blank=True, null=True)
+    phone = models.CharField("Phone Number", max_length=15,  blank=True, null=True)
 
     def __str__(self):
         return self.username
@@ -51,7 +52,6 @@ class Registration(models.Model):
     uniform_size = models.CharField("Uniform Size", max_length=3)
     consent = models.BooleanField("Consent", default=False, null=False)
     volunteer = models.BooleanField("Volunteer", default=False)
-    phone = models.CharField("Phone Number", max_length=15)
     date_time = models.DateTimeField("Date", auto_now_add=True)
     message = models.TextField("Special Requests", blank=True, null=True)
 
