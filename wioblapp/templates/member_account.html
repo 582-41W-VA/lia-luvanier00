@@ -4,37 +4,86 @@
 
 {% block content %}
     {% if request.user.is_authenticated %}
-        <div>Welcome, {{ user.username }}</div>
-        <div>Firstname: {{ user.first_name }}</div>
-        <div>Lastname: {{ user.last_name }}</div>
-        <div>email: {{ user.email }}</div>
 
-        <form action="{% url 'member_account' request.user.id %}" method="POST">
-            {% csrf_token %}
+        <section class="account-info">
+            <div class="container">
 
-            {{ account_form.errors }}
-
-            <fieldset>
-                <legend>Account Information</legend>
-                {% for field in account_form %}
-                    <div>
-                        {{ field.label }}
-                        {{ field }}
+                <div class="account-flex">
+                    <div class="account-left">
+                        <h3>Personal Information</h3>
                     </div>
-                {% endfor %}
-                <button name="account_edit">Edit</button>
-            </fieldset>
-        </form>
+                    <div class="account-right">
+                        <div class="account-content">
+                            <form action="{% url 'member_account' request.user.id %}" method="POST">
+                                <div class="form">
+                                    {% csrf_token %}
 
-        <h5>Registrations</h5>
-        {% if registrations %}
-            <ul>
-            {% for registration in registrations %}
-                <li>{{ registration }}</li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>You don't have any registrations</p>
-        {% endif %}
+                                    {% for field, errors in account_form.errors.items %}
+                                    {% for error in errors %}
+                                        <div class="error-message">
+                                            <div class="error-flex">
+                                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                                <p>{{ error }}</p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    {% endfor %}
+
+                                    {% for field in account_form %}
+                                        <div class="input-edit">
+                                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                            {{ field }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="button-container">
+                                    <button name="account_edit" class="action-button button" >Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-flex">
+                    <div class="account-left">
+                        <h3>Registration(s)</h3>
+                    </div>
+                    <div class="account-right">
+                        <div class=" account-content account-reg">
+                            <div>
+                                {% if registrations %}
+                                <ul>
+                                {% for registration in registrations %}
+                                    <li>{{ registration }}</li>
+                                {% endfor %}
+                                </ul>
+                                {% else %}
+                                    <p>You don't have any registrations</p>
+                                {% endif %}
+                            </div>
+                            <div class="button-container">
+                                <a href="{% url 'registration' %}" class="action-button button">Register</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-flex">
+                    <div class="account-left">
+                        <h3>Payment information</h3>
+                    </div>
+                    <div class="account-right">
+                        <div class="account-content">
+                            <ul>
+                                <li><span>Card on file #1</span> Master Card: **** **** **** 8765</li>
+                                <li><span>Card on file #2</span> Visa Card: **** **** **** 1342</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     {% endif %}
 {% endblock %}
