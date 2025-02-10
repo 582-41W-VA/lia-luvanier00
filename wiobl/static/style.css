@@ -465,11 +465,11 @@ footer i {
 }
 
 /* Courts */
-.courts{
+.courts {
     text-align: center;
 }
 
-.court-card {
+.court-bg {
     background: url("/static/images/bbcourt-bg.png");
     background-color: rgba(148, 148, 148, 0.684);
     background-size: cover;
@@ -494,8 +494,8 @@ footer i {
 
 .court-content {
     background-color: #E4E1E8;
-    padding: 120px 24px;
-    width: 60%;
+    padding: 140px 24px;
+    width: 80%;
     position: relative;
     top: -70px;
     left: 20%;
@@ -519,7 +519,7 @@ footer i {
 }
 
 .map { 
-    height: 400px;
+    height: 350px;
 }
 
 /* LOGIN and SIGN UP PAGE*/
@@ -1284,13 +1284,17 @@ footer i {
 
     /* Courts */
     .court-card {
-        padding: 16px;
+        gap: 8px;
     }
     .courtcard-flex {
+        flex-direction: column;
         gap: 16px;
     }
     .court-content {
-        top: -40px;
+        padding: 32px 16px;
+        width: 100%;
+        top: -35px;
+        left: 0;
     }
     .court-content img {
         height: 70px;
@@ -1302,9 +1306,11 @@ footer i {
     .court-content p:first-of-type {
         margin-bottom: 16px;
     }
-
+    .court-map {
+        width: 100%;
+    }
     .map {
-        height: 220px;
+        height: 250px;
     }
 
     /* LOGIN and SIGN UP PAGE*/
@@ -1479,28 +1485,15 @@ footer i {
     }
 
     /* Courts */
-    .courtcard-flex {
-        flex-direction: column;
-        gap: 8px;
-    }
-    .court-content {
-        padding: 16px 16px;
-        width: 100%;
-        top: -35px;
-        left: 0;
-    }
     .court-content img {
-        height: 60px;
+        height: 50px;
     }
     .court-content p {
         font-size: 16px;
     }
-    .court-map {
-        width: 100%;
-    }
-
-    .map {
-        height: 250px;
+    .court-content img,
+    .court-content p:first-of-type {
+        margin-bottom: 8px;
     }
 
     /* Affiliations */
