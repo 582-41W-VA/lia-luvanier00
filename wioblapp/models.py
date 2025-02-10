@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 class Role(models.Model):
     name = models.CharField("Role", max_length=100, primary_key=True)
     description = models.TextField("Role Description")
+    phone = models.CharField("Phone Number", max_length=15,  blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -51,7 +52,6 @@ class Registration(models.Model):
     uniform_size = models.CharField("Uniform Size", max_length=3)
     consent = models.BooleanField("Consent", default=False, null=False)
     volunteer = models.BooleanField("Volunteer", default=False)
-    phone = models.CharField("Phone Number", max_length=15)
     date_time = models.DateTimeField("Date", auto_now_add=True)
     message = models.TextField("Special Requests", blank=True, null=True)
 

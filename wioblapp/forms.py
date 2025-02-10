@@ -77,7 +77,7 @@ class RegistrationForm(forms.ModelForm):
 
 # --------------------------------------------------------------
 class ModifyAccountForm(forms.ModelForm):
-    password = forms.CharField(label="Password", max_length=20, widget=forms.PasswordInput, required=False)
+    password = forms.CharField(label="Password", max_length=20, widget=forms.PasswordInput, required=True)
     phone = forms.CharField(label="Phone Number", required=False)
 
     class Meta:
