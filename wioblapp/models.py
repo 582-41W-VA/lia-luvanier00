@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser
 class Role(models.Model):
     name = models.CharField("Role", max_length=100, primary_key=True)
     description = models.TextField("Role Description")
-    phone = models.CharField("Phone Number", max_length=15,  blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -12,6 +11,7 @@ class Role(models.Model):
 class UserAccount(AbstractUser):
     role = models.ForeignKey(Role, on_delete=models.RESTRICT, related_name="user_accounts", null=True, blank=True)
     bio = models.TextField("Bio", blank=True, null=True)
+    phone = models.CharField("Phone Number", max_length=15,  blank=True, null=True)
 
     def __str__(self):
         return self.username

@@ -122,12 +122,11 @@ def member_account(request, account_id):
 
     try:
         registration = Registration.objects.get(player=player)
-        phone = registration.phone
     except Registration.DoesNotExist:
-        phone = ""
+        pass
 
     if request.method == "GET":
-        account_form = ModifyAccountForm(instance=member, initial={"phone": phone})
+        account_form = ModifyAccountForm(instance=member)
     elif request.method == "POST":
         account_form = ModifyAccountForm(request.POST, instance=member)
         if account_form.is_valid():
