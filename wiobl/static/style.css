@@ -139,10 +139,10 @@ h3 {
 }
 
 .base-message {
-    background-color: #d0f599;
+    background-color: #4D6CC0;
     padding: 24px;
     text-align: center;
-    border: 4px solid #71ab1a;
+    color: #ffffff;
 }
 
 .radio-flex {
@@ -465,11 +465,11 @@ footer i {
 }
 
 /* Courts */
-.courts{
+.courts {
     text-align: center;
 }
 
-.court-card {
+.court-bg {
     background: url("/static/images/bbcourt-bg.png");
     background-color: rgba(148, 148, 148, 0.684);
     background-size: cover;
@@ -494,8 +494,8 @@ footer i {
 
 .court-content {
     background-color: #E4E1E8;
-    padding: 120px 24px;
-    width: 60%;
+    padding: 140px 24px;
+    width: 80%;
     position: relative;
     top: -70px;
     left: 20%;
@@ -519,7 +519,7 @@ footer i {
 }
 
 .map { 
-    height: 400px;
+    height: 350px;
 }
 
 /* LOGIN and SIGN UP PAGE*/
@@ -797,6 +797,7 @@ footer i {
 
 /* REGISTRATION */
 /* registration info */
+
 .registration-information {
     background-color: #4D6CC0;
 }
@@ -955,6 +956,96 @@ footer i {
 
 .registration .form-submission {
     text-align: center;
+}
+
+/* ACCOUNT */
+.account-info .profile-info {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.account-info .profile-info img {
+    height: 180px;
+    margin-bottom: 16px;
+}
+
+.account-info .profile-info p {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.account-info .account-flex {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 48px;
+}
+
+.account-info .account-left {
+    width: 33%;
+    background-color: #DDE1EF;
+    border-radius: 10px;
+    padding: 24px;
+}
+
+.account-info .account-right {
+    width: 67%;
+}
+
+.account-info .account-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-info .account-content {
+    border-radius: 10px;
+    border: 2px solid #bebebe;
+    padding: 24px;
+}
+
+.account-info .form {
+    margin-bottom: 32px;
+}
+
+.account-info h3 {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.account-info .input-edit {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.account-info label {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.account-info input {
+    color: #4c4c4c;
+    font-size: 18px;
+}
+
+.account-info li {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #bebebe;
+}
+
+.account-info ul {
+    margin-bottom: 24px;
+    list-style: none;
+}
+
+.account-info span {
+    font-weight: 800;
+}
+
+.account-info .account-reg p {
+    margin-bottom: 24px;
 }
 
 /* MEDIA QUERY */
@@ -1209,13 +1300,17 @@ footer i {
 
     /* Courts */
     .court-card {
-        padding: 16px;
+        gap: 8px;
     }
     .courtcard-flex {
+        flex-direction: column;
         gap: 16px;
     }
     .court-content {
-        top: -40px;
+        padding: 32px 16px;
+        width: 100%;
+        top: -35px;
+        left: 0;
     }
     .court-content img {
         height: 70px;
@@ -1227,9 +1322,11 @@ footer i {
     .court-content p:first-of-type {
         margin-bottom: 16px;
     }
-
+    .court-map {
+        width: 100%;
+    }
     .map {
-        height: 220px;
+        height: 250px;
     }
 
     /* LOGIN and SIGN UP PAGE*/
@@ -1342,6 +1439,28 @@ footer i {
     .registration i {
         font-size: 26px;
     }
+
+    /* ACCOUNT */
+    .account-info .profile-info {
+        margin-bottom: 24px;
+    }
+    .account-info .profile-info img {
+        height: 130px;
+        margin-bottom: 8px;
+    }
+    .account-info .profile-info p {
+        font-size: 18px;
+    }
+    .account-info .account-flex {
+        gap: 32px;
+    }
+    .account-info .input-edit {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .button-container {
+        text-align: center;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1392,28 +1511,15 @@ footer i {
     }
 
     /* Courts */
-    .courtcard-flex {
-        flex-direction: column;
-        gap: 8px;
-    }
-    .court-content {
-        padding: 16px 16px;
-        width: 100%;
-        top: -35px;
-        left: 0;
-    }
     .court-content img {
-        height: 60px;
+        height: 50px;
     }
     .court-content p {
         font-size: 16px;
     }
-    .court-map {
-        width: 100%;
-    }
-
-    .map {
-        height: 250px;
+    .court-content img,
+    .court-content p:first-of-type {
+        margin-bottom: 8px;
     }
 
     /* Affiliations */
@@ -1510,5 +1616,20 @@ footer i {
     .registration i {
         font-size: 22px;
     }
+
+    /* ACCOUNT */
+    .account-info .profile-info img {
+        height: 100px;
+    }
+    .account-info .account-flex {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    .account-info .account-left,
+    .account-info .account-right {
+        width: 100%;
+    }
+    
 }
 

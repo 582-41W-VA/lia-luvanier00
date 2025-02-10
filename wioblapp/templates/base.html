@@ -49,7 +49,7 @@
                     <!-- Login Link -->
                     <ul class="menu-list" id="menu-list">
                         <li><a href="{% url 'about' %}">About us</a></li>
-                        <li><a href="#">Teams</a></li>
+                        <li><a href="{% url 'teams' %}">Teams</a></li>
                         <li><a href="{% url 'registration' %}">Registration</a></li>
                         <li><a href="#">Contact</a></li>
                         {% if request.user.is_authenticated %}
@@ -95,7 +95,7 @@
                 <ul class="footer-list">
                     <li><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">About us</a></li>
-                    <li><a href="#">Teams</a></li>
+                    <li><a href="{% url 'teams' %}">Teams</a></li>
                 </ul>
                 <ul class="footer-list">
                     <li><a href="{% url 'registration' %}">Registration</a></li>

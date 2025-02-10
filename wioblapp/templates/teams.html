@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block 'title' %} Teams {% endblock %}
+{% load static %}
+
+{% block content %}
+    <form action="{% url 'teams' %}" method="POST">
+        {% csrf_token %}
+
+        {% for field in teams_form %}
+            
+            <label for="">{{ field.label }}</label>
+            {{ field }}
+
+        {% endfor %}
+        <button name="search">Search</button>
+    </form>
+
+
+    {% if teams_form.group.value %}
+    <h5>Teams Table:</h5>
+        {% if teams %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Coaches</th>
+                    <th>Place</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+            {% for team in teams %}
+                <tr>
+                    <td>{{ team }}</td>
+                    <td>
+                        {% if team.coaches.all %}
+                        <ul>
+                            {% for coach in team.coaches.all %}
+                                <li>{{ coach }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                            <p>Not assigned coaches yet</p>
+                        {% endif %}
+                    </td>
+                    <td>{{ team.place }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    {% endif %}
+    <!-- <form action="{% url 'teams' %}" method="POST">
+        {% csrf_token %}
+
+        {% for field in cpmment_form %}
+            
+            {{ field.label }}
+            {{ field }}
+
+        {% endfor %}
+        <button name="post">Post Comment</button>
+    </form> -->
+{% endblock %}
