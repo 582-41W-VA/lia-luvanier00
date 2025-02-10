@@ -797,6 +797,7 @@ footer i {
 
 /* REGISTRATION */
 /* registration info */
+
 .registration-information {
     background-color: #4D6CC0;
 }
@@ -958,6 +959,21 @@ footer i {
 }
 
 /* ACCOUNT */
+.account-info .profile-info {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.account-info .profile-info img {
+    height: 180px;
+    margin-bottom: 16px;
+}
+
+.account-info .profile-info p {
+    font-size: 24px;
+    font-weight: 800;
+}
+
 .account-info .account-flex {
     display: flex;
     gap: 32px;
@@ -1425,6 +1441,16 @@ footer i {
     }
 
     /* ACCOUNT */
+    .account-info .profile-info {
+        margin-bottom: 24px;
+    }
+    .account-info .profile-info img {
+        height: 130px;
+        margin-bottom: 8px;
+    }
+    .account-info .profile-info p {
+        font-size: 18px;
+    }
     .account-info .account-flex {
         gap: 32px;
     }
@@ -1592,6 +1618,9 @@ footer i {
     }
 
     /* ACCOUNT */
+    .account-info .profile-info img {
+        height: 100px;
+    }
     .account-info .account-flex {
         flex-direction: column;
         gap: 8px;
