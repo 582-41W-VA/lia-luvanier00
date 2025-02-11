@@ -1,14 +1,45 @@
+from django.urls import reverse
 from django.contrib import admin
 from django.contrib.admin import AdminSite
-from django.utils.translation import gettext_lazy as _
-
-from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag
+from django.template.response import TemplateResponse
+from datetime import datetime, timedelta
+from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Announcement, Flag
 
 class WioblAdminArea(admin.AdminSite):
     site_header = 'WIOBL Admin'
-    site_url = "/wioblapp/" 
+    site_url = "/wioblapp/"
+
+    def get_urls(self):
+        urls = super().get_urls()
+        return urls
+
+    def each_context(self, request):
+
+        context = super().each_context(request)
+
+        if request.path == reverse('admin:index'):
+            total_users = UserAccount.objects.count()
+            total_games = Game.objects.count()
+            new_games = Game.objects.filter(date_time__gt=datetime.now() - timedelta(days=7)).count()
+            new_users = UserAccount.objects.filter(date_joined__gt=datetime.now() - timedelta(days=7)).count()
+
+            context['total_users'] = total_users
+            context['total_games'] = total_games
+            context['new_games'] = new_games
+            context['new_users'] = new_users
+
+        return context
 
 wiobl_site = WioblAdminArea(name='WioblAdmin')
+
+class AnnouncementAdmin(admin.ModelAdmin):
+    list_display = ("title", "date", "user_account") 
+    exclude = ("user_account",)
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:  
+            obj.user_account = request.user
+        super().save_model(request, obj, form, change)
 
 wiobl_site.register(Role)
 wiobl_site.register(UserAccount)
@@ -18,6 +49,5 @@ wiobl_site.register(RegistrationType)
 wiobl_site.register(Registration)
 wiobl_site.register(Park)
 wiobl_site.register(Game)
-wiobl_site.register(Comment)
-wiobl_site.register(Announcement)
+wiobl_site.register(Announcement, AnnouncementAdmin)
 wiobl_site.register(Flag)
