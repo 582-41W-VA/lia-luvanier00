@@ -256,6 +256,15 @@ def teams(request):
     return render(request, "teams.html", context)
 # --------------------------------------------------------------
 
+def team_schedule(request, team_name):
+    schedule_form = TeamScheduleForm()
+    team = team_name
+    context = {
+        "schedule_form": schedule_form,
+        "team": team,
+    }
+    return render(request, "team_schedule.html", context)
+
 # --------------------------------------------------------------
 def team_schedule(request, team_name):
     schedule_form = TeamScheduleForm()
