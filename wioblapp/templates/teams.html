@@ -6,9 +6,9 @@
     <form action="{% url 'teams' %}" method="POST">
         {% csrf_token %}
 
-        {% for field in teams_form %}
+        {% for field in filter_teams_form %}
             
-            <label for="">{{ field.label }}</label>
+            {{ field.label }}
             {{ field }}
 
         {% endfor %}
@@ -16,14 +16,15 @@
     </form>
 
 
-    {% if teams_form.group.value %}
-    <h5>Teams Table:</h5>
+    {% if filter_teams_form.group.value %}
+    <h5>Team {{ filter_teams_form.group.value }}'s Table:</h5>
         {% if teams %}
         <table>
             <thead>
                 <tr>
                     <th>Team</th>
                     <th>Coaches</th>
+                    <th>Players</th>
                     <th>Place</th>
                 </tr>
             </thead>
@@ -43,22 +44,66 @@
                             <p>Not assigned coaches yet</p>
                         {% endif %}
                     </td>
-                    <td>{{ team.place }}</td>
+                    <td>
+                        {% if players.all %}
+                        <ul>
+                            {% for player in players.all %}
+                                {% if player.team_name == team %}
+                                    <li>{{ player }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                            <p>Not assigned players yet</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if team.place == 0 %}
+                            <p>N/A</p>
+                        {% else %}
+                            {{ team.place }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+
+
+                            <button type="submit">Schedule</button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+        {% else %}
+            <p>No Teams Found</p>
         {% endif %}
-    {% endif %}
-    <!-- <form action="{% url 'teams' %}" method="POST">
-        {% csrf_token %}
-
-        {% for field in cpmment_form %}
-            
-            {{ field.label }}
-            {{ field }}
-
+    {% else %}
+    <table>
+        <thead>
+            <tr>
+                <th>Group</th>
+                <th>Team</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group }}</td>
+                <td>
+                    <ul>
+                    {% for team in teams %}
+                        {% if team.group == group %}
+                            <li>{{ team }}</li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
         {% endfor %}
-        <button name="post">Post Comment</button>
-    </form> -->
+        </tbody>
+    </table>
+    {% endif %}
 {% endblock %}

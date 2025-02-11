@@ -224,23 +224,25 @@ def member_logout(request):
 
 # --------------------------------------------------------------
 def teams(request):
-    teams_form = FilterTeamsForm()
-    comment_form = CreateCommentForm()
+    filter_teams_form = FilterTeamsForm()
     teams = Team.objects.all()
+    groups = RegistrationType.objects.all()
+    players = Player.objects.all()
 
     if request.method == "POST":
-        teams_form = FilterTeamsForm(request.POST)
+        filter_teams_form = FilterTeamsForm(request.POST)
 
-        if teams_form.is_valid():
-            season = teams_form.cleaned_data['season']
-            group = teams_form.cleaned_data['group']
+        if filter_teams_form.is_valid():
+            group = filter_teams_form.cleaned_data.get('group')
 
-            teams = Team.objects.filter(group=group)
-
+            if group: 
+                teams = Team.objects.filter(group=group)
+    
     context = {
-        "teams_form": teams_form,
-        "comment_form": comment_form,
+        "filter_teams_form": filter_teams_form,
+        "groups": groups,
         "teams": teams,
+        "players": players,
     }
 
     return render(request, "teams.html", context)

@@ -86,30 +86,21 @@ class ModifyAccountForm(forms.ModelForm):
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-class FilterTeamsForm(forms.ModelForm):
-    SEASON_CHOICES = [
-        ("2025", "2025"),
-        ("2024", "2024"),
-        ("2023", "2023")]
-
-    season = forms.ChoiceField(label="Season",
-                               choices=SEASON_CHOICES,
-                               required=True,
-                               widget=forms.Select())
-
+class FilterTeamsForm(forms.Form):
     group = forms.ModelChoiceField(label="Group",
-                              queryset=RegistrationType.objects.all(),
-                              required=True,
-                              widget=forms.Select())
+                                   queryset=RegistrationType.objects.all(),
+                                   required=True,
+                                   widget=forms.Select())
 
-    # team = forms.ModelChoiceField(label="Team", 
-    #                               queryset=Team.objects.all(),
-    #                               required=True,
-    #                               widget=forms.Select())
+    # team = forms.ModelChoiceField(label="Team",
+    #                          queryset=Team.objects.all(),
+    #                          required=False,
+    #                          widget=forms.Select())
 
-    class Meta:
-        model = Team
-        fields = ["season", "group"]
+    # player = forms.ModelChoiceField(label="Player",
+    #                          queryset=Player.objects.all(),
+    #                          required=False,
+    #                          widget=forms.Select())
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
