@@ -141,6 +141,26 @@ class TeamScheduleForm(forms.Form):
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
+class TeamScheduleForm(forms.ModelForm):
+    MONTH_CHOICES = [
+        ("June", "June"),
+        ("July", "July"),
+        ("August", "August")
+    ]
+
+    month = forms.ChoiceField(label="Month", 
+                              choices=MONTH_CHOICES,
+                              required=False,
+                              widget=forms.Select())
+
+    date_time = forms.DateField(label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"}))
+
+    class Meta:
+        model = Game
+        fields = ["month", "date_time", "winner"]
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
 class CreateCommentForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea(attrs={'rows':5, 'cols':85}))
     class Meta:
