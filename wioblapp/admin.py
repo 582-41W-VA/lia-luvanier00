@@ -14,21 +14,15 @@ class WioblAdminArea(admin.AdminSite):
         return urls
 
     def each_context(self, request):
-        """
-        Override each_context to inject stats into the admin panel template
-        only on the home page.
-        """
+
         context = super().each_context(request)
 
-        # Check if we are on the home page
         if request.path == reverse('admin:index'):
-            # Fetch dynamic statistics for the stats box
             total_users = UserAccount.objects.count()
             total_games = Game.objects.count()
-            new_games = Game.objects.filter(date_time__gt=datetime.now() - timedelta(days=30)).count()
-            new_users = UserAccount.objects.filter(date_joined__gt=datetime.now() - timedelta(days=30)).count()
+            new_games = Game.objects.filter(date_time__gt=datetime.now() - timedelta(days=7)).count()
+            new_users = UserAccount.objects.filter(date_joined__gt=datetime.now() - timedelta(days=7)).count()
 
-            # Add the statistics to the context for the home page only
             context['total_users'] = total_users
             context['total_games'] = total_games
             context['new_games'] = new_games
@@ -47,7 +41,6 @@ class AnnouncementAdmin(admin.ModelAdmin):
             obj.user_account = request.user
         super().save_model(request, obj, form, change)
 
-# Register your models with the custom admin site
 wiobl_site.register(Role)
 wiobl_site.register(UserAccount)
 wiobl_site.register(Team)
