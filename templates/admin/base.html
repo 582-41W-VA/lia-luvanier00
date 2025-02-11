@@ -22,7 +22,7 @@
 {% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    
+<link rel="stylesheet" href="{% static 'admin/css/custom_admin.css' %}">
 </head>
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
@@ -74,7 +74,7 @@
         <!-- Content -->
         <div id="content" class="{% block coltype %}colM{% endblock %}">
           {% block pretitle %}{% endblock %}
-          {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+          {% block content_title %}{% if title %}<h1>WIOBL Admin Panel</h1>{% endif %}{% endblock %}
           {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}
           {% block content %}
             {% block object-tools %}{% endblock %}

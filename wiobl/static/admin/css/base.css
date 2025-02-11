@@ -6,12 +6,11 @@
 html[data-theme="light"],
 :root {
     --primary: #79aec8;
-    --secondary: rgb(255, 140, 0);
+    --secondary: #417690;
     --accent: #f5dd5d;
     --primary-fg: #fff;
-    
 
-    --body-fg: #ada5a5;
+    --body-fg: #333;
     --body-bg: #fff;
     --body-quiet-color: #666;
     --body-medium-color: #444;
@@ -24,7 +23,7 @@ html[data-theme="light"],
 
     --breadcrumbs-fg: #c4dce8;
     --breadcrumbs-link-fg: var(--body-bg);
-    --breadcrumbs-bg: #8C0303;
+    --breadcrumbs-bg: #264b5d;
 
     --link-fg: #417893;
     --link-hover-color: #036;
@@ -185,6 +184,10 @@ h5 {
     letter-spacing: 1px;
 }
 
+ul > li {
+    list-style-type: square;
+    padding: 1px 0;
+}
 
 li ul {
     margin-bottom: 0;
@@ -1173,78 +1176,4 @@ a.deletelink:focus, a.deletelink:hover {
     border: 0;
     color: var(--body-fg);
     background-color: var(--body-bg);
-}
-
-
-
-
-
-/* Override Admin Branding Styles */
-
-#header {
-    background-color: black;
-}
-
-#main {
-    background-color: #fff;
-}
-
-#branding {
-  padding: 0;
-  margin: 0;
-}
-
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
-}
-.brand-name {
-    font-family: 'Montserrat', sans-serif;
-}
-
-.custom-branding {
-  display: flex;
-  align-items: center;
-  color: #fff;
-  font-size: 16px;
-}
-
-.custom-branding img {
-  height: 50px;
-  margin-right: 10px;
-}
-
-.custom-branding .brand-name {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-/* Styling the Navbar */
-#navbar {
-  padding: 24px 0px;
-}
-
-.navbar-list {
-    list-style-type: none; 
-    list-style: none;
-    display: flex;
-    justify-content: flex-start;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-  }
-
-.navbar-item {
-  font-size: 16px;
-}
-
-.navbar-item a {
-  color: white;
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-}
-
-.navbar-item a:hover {
-  background-color: #555;
 }
