@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag
-from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm
+from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm, TeamScheduleForm
 
 # --------------------------------------------------------------
 def index(request):
@@ -247,6 +247,15 @@ def teams(request):
 
     return render(request, "teams.html", context)
 # --------------------------------------------------------------
+
+def team_schedule(request, team_name):
+    schedule_form = TeamScheduleForm()
+    team = team_name
+    context = {
+        "schedule_form": schedule_form,
+        "team": team,
+    }
+    return render(request, "team_schedule.html", context)
 
 # --------------------------------------------------------------
 def about(request):
