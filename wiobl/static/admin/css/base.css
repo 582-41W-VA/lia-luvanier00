@@ -6,7 +6,7 @@
 html[data-theme="light"],
 :root {
     --primary: #79aec8;
-    --secondary: #000000;
+    --secondary: rgb(255, 140, 0);
     --accent: #f5dd5d;
     --primary-fg: #fff;
     
@@ -1180,6 +1180,15 @@ a.deletelink:focus, a.deletelink:hover {
 
 
 /* Override Admin Branding Styles */
+
+#header {
+    background-color: black;
+}
+
+#main {
+    background-color: #fff;
+}
+
 #branding {
   padding: 0;
   margin: 0;
@@ -1192,7 +1201,6 @@ h1, h2, h3, h4, h5, h6 {
 .brand-name {
     font-family: 'Montserrat', sans-serif;
 }
-
 
 .custom-branding {
   display: flex;
@@ -1214,10 +1222,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Styling the Navbar */
 #navbar {
   padding: 24px 0px;
-}
-
-#main {
-    background-color: #fff;
 }
 
 .navbar-list {
