@@ -64,6 +64,7 @@
                     </td>
                     <td>
                         <form action="{% url 'team_schedule' team %}" method="POST">
+                            {% csrf_token %}
 
                             <button type="submit" name="schedule">Schedule</button>
                         </form>
