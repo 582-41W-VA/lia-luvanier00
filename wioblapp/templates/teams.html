@@ -56,7 +56,14 @@
                         {% endif %}
                     </td>
                     <td>
-                        <form action="{% url 'team_schedule' team %}" method="GET">
+                        {% if team.place == 0 %}
+                            <p>N/A</p>
+                        {% else %}
+                            {{ team.place }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form action="{% url 'team_schedule' team %}" method="POST">
                             {% csrf_token %}
 
                             <button type="submit" name="schedule">Schedule</button>
