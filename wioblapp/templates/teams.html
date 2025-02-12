@@ -4,6 +4,7 @@
 
 {% block content %}
     <form action="{% url 'teams' %}" method="GET">
+    <form action="{% url 'teams' %}" method="GET">
         {% csrf_token %}
 
         {% for field in filter_teams_form %}
@@ -12,6 +13,7 @@
             {{ field }}
 
         {% endfor %}
+        <button type="submit" name="search_btn">Search</button>
         <button type="submit" name="search_btn">Search</button>
     </form>
 
