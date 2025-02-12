@@ -3,10 +3,16 @@
 {% load static %}
 
 {% block content %}
+<<<<<<< HEAD
+=======
+    <form action="{% url 'teams' %}" method="GET">
+        {% csrf_token %}
+>>>>>>> 7473c67 (Complete Teams page Back-end)
 
     <section class="teams-search">
         <div class="container">
 
+<<<<<<< HEAD
             <div class="section-heading">
                 <h2>Teams</h2>
             </div>
@@ -14,6 +20,80 @@
             <form class="search-form" action="{% url 'teams' %}" method="GET">
                 <div class="form-info">
                     <p>Use the search bar below to search for:</p>
+=======
+        {% endfor %}
+        <button type="submit" name="search_btn">Search</button>
+    </form>
+
+    {% if filter_teams_form.group.value %}
+    <h5>Team {{ filter_teams_form.group.value }}'s Table:</h5>
+        {% if teams %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Coaches</th>
+                    <th>Players</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+            {% for team in teams %}
+                <tr>
+                    <td>{{ team }}</td>
+                    <td>
+                        {% if team.coaches.all %}
+                        <ul>
+                            {% for coach in team.coaches.all %}
+                                <li>{{ coach }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                            <p>Not assigned coaches yet</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if players.all %}
+                        <ul>
+                            {% for player in players.all %}
+                                {% if player.team_name == team %}
+                                    <li>{{ player }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                            <p>Not assigned players yet</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form action="{% url 'team_schedule' team %}" method="GET">
+                            {% csrf_token %}
+
+                            <button type="submit" name="schedule">Schedule</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>No Teams or Players Found</p>
+        {% endif %}
+    {% else %}
+    <table>
+        <thead>
+            <tr>
+                <th>Group</th>
+                <th>Team</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group }}</td>
+                <td>
+>>>>>>> 7473c67 (Complete Teams page Back-end)
                     <ul>
                         <li>Player last name</li>
                         <li>Team name (e.g. Wolfpack)</li>
