@@ -19,54 +19,16 @@
     {% if games %}
     <h3>Games</h3>
 
-        {% for game in games %}
-            {{ game.date_time }} at {{ game.park }}
+    {% for game in games %}
+        {{ game.date_time }} at {{ game.park }}
 
-            {% if game.team1_score and game.team2_score %}
-                {{ game.team_1.color }} {{ game.team_1 }}: {{ game.team1_score }} --- VS --- {{ game.team_2.color }} {{ game.team_2 }}: {{ game.team2_score }}
-            {% else %}
-                {{ game.team_1 }} --- VS --- {{ game.team_2 }}
-            {% endif %}
-            <br>
-
-            <form action="{% url 'create_comment' team %}" method="POST">
-                {% csrf_token %}
-
-                {% for field in comment_form %}
-                    {{ field }}
-                {% endfor %}
-
-                <button type="submit" name="post" value="{{ game.id }}"><i class="fa-solid fa-paper-plane"></i></button>
-            </form>
-
-            <h6>Comments</h6>
-            {% if comments %}
-                {% for comment in comments %} 
-                    {% if comment.game == game  %}                
-                        {{ comment.content }} {{ comment.date }}
-                        <form action="{% url 'like_comment' team %}" method="POST">
-                            {% csrf_token %}
-
-                            <p>{{ comment.likes }}</p>
-                            <button type="submit" name="like" value="{{ comment.id }}"><i class="fa-solid fa-heart"></i></button>
-                        </form>
-                        <form action="{% url 'flag_comment' team %}" method="POST">
-                            {% csrf_token %}
-
-                            <button type="submit" name="flag" value="{{ comment.id }}"><i class="fa-solid fa-flag"></i></button>
-                        </form>
-                        <form action="">
-                            {% if comment.user_account == request.user %}
-                                <button type="submit" name="edit">Edit</button>
-                                <button type="submit" name="delete"><i class="fa-solid fa-trash"></i></button>
-                            {% endif %}
-                        </form>
-                    {% endif %}
-                {% endfor %}
-            {% else %}
-                <p>No comments related to this game</p>
-            {% endif %}
-        {% endfor %}
+        {% if game.team1_score and game.team2_score %}
+            {{ game.team_1.color }} {{ game.team_1 }}: {{ game.team1_score }} --- VS --- {{ game.team_2.color }} {{ game.team_2 }}: {{ game.team2_score }}
+        {% else %}
+            {{ game.team_1 }} --- VS --- {{ game.team_2 }}
+        {% endif %}
+        <br>
+    {% endfor %}
     {% else %}
         <p>No Games</p>
     {% endif %}
