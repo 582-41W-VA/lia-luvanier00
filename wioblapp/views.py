@@ -224,12 +224,10 @@ def member_logout(request):
 
 # --------------------------------------------------------------
 def teams(request):
-    filter_teams_form = FilterTeamsForm()
+    filter_teams_form = FilterTeamsForm(request.GET)
     groups = RegistrationType.objects.all()
     teams = Team.objects.all()
     players = Player.objects.all()
-
-    filter_teams_form = FilterTeamsForm(request.GET)
 
     if filter_teams_form.is_valid():
         group = filter_teams_form.cleaned_data.get('group')
@@ -259,11 +257,37 @@ def teams(request):
 # --------------------------------------------------------------
 
 def team_schedule(request, team_name):
-    schedule_form = TeamScheduleForm()
+    schedule_form = TeamScheduleForm(request.GET)
     team = team_name
+    games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
+
+    if schedule_form.is_valid():
+        month = schedule_form.cleaned_data.get('month')
+        date = schedule_form.cleaned_data.get('date')
+        result = schedule_form.cleaned_data.get('result')
+
+        if month:
+            if month == "All":
+                games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
+            else:
+                games = games.filter(date_time__month=int(month))
+
+        if date:
+            if date == "Ascending":
+                games = games.order_by("-date_time")
+            elif date == "Descending":
+                games = games.order_by("date_time")
+
+        if result:
+            if result == "Win":
+                games = games.filter(winner=team)
+            elif result == "Lose":
+                games = games.exclude(winner=team)
+
     context = {
         "schedule_form": schedule_form,
         "team": team,
+        "games": games,
     }
     return render(request, "team_schedule.html", context)
 
