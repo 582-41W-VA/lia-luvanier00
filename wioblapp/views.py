@@ -225,19 +225,29 @@ def member_logout(request):
 # --------------------------------------------------------------
 def teams(request):
     filter_teams_form = FilterTeamsForm()
-    teams = Team.objects.all()
     groups = RegistrationType.objects.all()
+    teams = Team.objects.all()
     players = Player.objects.all()
 
-    if request.method == "POST":
-        filter_teams_form = FilterTeamsForm(request.POST)
+    filter_teams_form = FilterTeamsForm(request.GET)
 
-        if filter_teams_form.is_valid():
-            group = filter_teams_form.cleaned_data.get('group')
+    if filter_teams_form.is_valid():
+        group = filter_teams_form.cleaned_data.get('group')
+        coach = filter_teams_form.cleaned_data.get('coach')
+        keyword = filter_teams_form.cleaned_data.get('search')
 
-            if group: 
-                teams = Team.objects.filter(group=group)
-    
+        if group: 
+            teams = teams.filter(group=group)
+
+        if keyword:
+            teams = teams.filter(name__icontains=keyword)
+            players = players.filter(name__icontains=keyword)
+
+        if coach:
+            teams = teams.filter(coaches=coach)
+        
+        players = players.filter(team_name__in=teams)
+
     context = {
         "filter_teams_form": filter_teams_form,
         "groups": groups,
