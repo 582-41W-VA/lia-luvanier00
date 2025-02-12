@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag
-from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm
+from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm, TeamScheduleForm
 
 # --------------------------------------------------------------
 def index(request):
@@ -225,19 +225,29 @@ def member_logout(request):
 # --------------------------------------------------------------
 def teams(request):
     filter_teams_form = FilterTeamsForm()
-    teams = Team.objects.all()
     groups = RegistrationType.objects.all()
+    teams = Team.objects.all()
     players = Player.objects.all()
 
-    if request.method == "POST":
-        filter_teams_form = FilterTeamsForm(request.POST)
+    filter_teams_form = FilterTeamsForm(request.GET)
 
-        if filter_teams_form.is_valid():
-            group = filter_teams_form.cleaned_data.get('group')
+    if filter_teams_form.is_valid():
+        group = filter_teams_form.cleaned_data.get('group')
+        coach = filter_teams_form.cleaned_data.get('coach')
+        keyword = filter_teams_form.cleaned_data.get('search')
 
-            if group: 
-                teams = Team.objects.filter(group=group)
-    
+        if group: 
+            teams = teams.filter(group=group)
+
+        if keyword:
+            teams = teams.filter(name__icontains=keyword)
+            players = players.filter(name__icontains=keyword)
+
+        if coach:
+            teams = teams.filter(coaches=coach)
+        
+        players = players.filter(team_name__in=teams)
+
     context = {
         "filter_teams_form": filter_teams_form,
         "groups": groups,
@@ -247,6 +257,15 @@ def teams(request):
 
     return render(request, "teams.html", context)
 # --------------------------------------------------------------
+
+def team_schedule(request, team_name):
+    schedule_form = TeamScheduleForm()
+    team = team_name
+    context = {
+        "schedule_form": schedule_form,
+        "team": team,
+    }
+    return render(request, "team_schedule.html", context)
 
 # --------------------------------------------------------------
 def about(request):

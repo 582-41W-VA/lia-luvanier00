@@ -87,20 +87,39 @@ class ModifyAccountForm(forms.ModelForm):
 
 # --------------------------------------------------------------
 class FilterTeamsForm(forms.Form):
+    search = forms.CharField(max_length=100, 
+                              required=False,
+                              widget=forms.TextInput(attrs={'placeholder': 'Search team or player'}))
+
     group = forms.ModelChoiceField(label="Group",
                                    queryset=RegistrationType.objects.all(),
                                    required=True,
                                    widget=forms.Select())
 
-    # team = forms.ModelChoiceField(label="Team",
-    #                          queryset=Team.objects.all(),
-    #                          required=False,
-    #                          widget=forms.Select())
+    coach = forms.ModelChoiceField(label="Coach",
+                             queryset=UserAccount.objects.filter(role="Coach"),
+                             required=False,
+                             widget=forms.Select())
+# --------------------------------------------------------------
 
-    # player = forms.ModelChoiceField(label="Player",
-    #                          queryset=Player.objects.all(),
-    #                          required=False,
-    #                          widget=forms.Select())
+# --------------------------------------------------------------
+class TeamScheduleForm(forms.ModelForm):
+    MONTH_CHOICES = [
+        ("June", "June"),
+        ("July", "July"),
+        ("August", "August")
+    ]
+
+    month = forms.ChoiceField(label="Month", 
+                              choices=MONTH_CHOICES,
+                              required=False,
+                              widget=forms.Select())
+
+    date_time = forms.DateField(label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"}))
+
+    class Meta:
+        model = Game
+        fields = ["month", "date_time", "winner"]
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------

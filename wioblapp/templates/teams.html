@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-    <form action="{% url 'teams' %}" method="POST">
+    <form action="{% url 'teams' %}" method="GET">
         {% csrf_token %}
 
         {% for field in filter_teams_form %}
@@ -12,9 +12,8 @@
             {{ field }}
 
         {% endfor %}
-        <button name="search">Search</button>
+        <button type="submit" name="search_btn">Search</button>
     </form>
-
 
     {% if filter_teams_form.group.value %}
     <h5>Team {{ filter_teams_form.group.value }}'s Table:</h5>
@@ -25,7 +24,6 @@
                     <th>Team</th>
                     <th>Coaches</th>
                     <th>Players</th>
-                    <th>Place</th>
                 </tr>
             </thead>
             
@@ -58,18 +56,10 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if team.place == 0 %}
-                            <p>N/A</p>
-                        {% else %}
-                            {{ team.place }}
-                        {% endif %}
-                    </td>
-                    <td>
-                        <form action="" method="POST">
+                        <form action="{% url 'team_schedule' team %}" method="GET">
                             {% csrf_token %}
 
-
-                            <button type="submit">Schedule</button>
+                            <button type="submit" name="schedule">Schedule</button>
                         </form>
                     </td>
                 </tr>
@@ -77,7 +67,7 @@
             </tbody>
         </table>
         {% else %}
-            <p>No Teams Found</p>
+            <p>No Teams or Players Found</p>
         {% endif %}
     {% else %}
     <table>

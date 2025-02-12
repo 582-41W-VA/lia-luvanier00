@@ -26,13 +26,13 @@ class RegistrationType(models.Model):
 
 class Team(models.Model):
     name = models.CharField("Team Name", max_length=20, primary_key=True)
-    coaches = models.ManyToManyField(UserAccount, related_name="teams", blank=True, null=True)
+    coaches = models.ManyToManyField(UserAccount, related_name="teams", blank=True)
     place = models.IntegerField("Place", default=0)
     group = models.ForeignKey(RegistrationType, on_delete=models.CASCADE, related_name="teams", blank=True, null=True)
     color = models.CharField("Team Color", max_length=7, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.name} - {self.color}"
+        return f"{self.name}"
 
 class Player(models.Model):
     related_account = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="players")

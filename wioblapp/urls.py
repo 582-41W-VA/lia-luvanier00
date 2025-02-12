@@ -11,4 +11,5 @@ urlpatterns = [
     path("account/<int:account_id>/", views.member_account, name="member_account"),
     path("registration/", views.register_player, name="registration"),
     path("teams/", views.teams, name="teams"),
+    path("team_schedule/<str:team_name>/", views.team_schedule, name="team_schedule"),
 ]
