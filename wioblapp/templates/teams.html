@@ -65,11 +65,10 @@
                         {% endif %}
                     </td>
                     <td>
-                        <form action="" method="POST">
+                        <form action="{% url 'team_schedule' team %}" method="POST">
                             {% csrf_token %}
 
-
-                            <button type="submit">Schedule</button>
+                            <button type="submit" name="schedule">Schedule</button>
                         </form>
                     </td>
                 </tr>
