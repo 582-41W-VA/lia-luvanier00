@@ -229,8 +229,6 @@ def teams(request):
     teams = Team.objects.all()
     players = Player.objects.all()
 
-    filter_teams_form = FilterTeamsForm(request.GET)
-
     if filter_teams_form.is_valid():
         group = filter_teams_form.cleaned_data.get('group')
         coach = filter_teams_form.cleaned_data.get('coach')
