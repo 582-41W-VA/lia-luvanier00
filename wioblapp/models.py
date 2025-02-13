@@ -46,6 +46,7 @@ class Player(models.Model):
 
 class Registration(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="registrations")
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True, related_name="registrations")  # Add this line
     reg_type = models.ForeignKey(RegistrationType, on_delete=models.CASCADE, related_name="registrations")
     address = models.CharField("Address", max_length=200)
     email = models.EmailField("Email Adress", max_length=254, blank=True, null=True)

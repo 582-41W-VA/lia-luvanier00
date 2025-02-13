@@ -1,10 +1,27 @@
-<!-- templates/admin/stats_box.html -->
 <div class="stats-box">
-    <h3>Admin Statistics</h3>
-    <ul>
-        <li><strong>Total Users:</strong> {{ total_users }}</li>
-        <li><strong>Total Games:</strong> {{ total_games }}</li>
-        <li><strong>New Games in Last 7 Days:</strong> {{ new_games }}</li>
-        <li><strong>New Users in Last 7 Days:</strong> {{ new_users }}</li>
-    </ul>
+    <h2>Admin Statistics</h2>
+    
+    <div class="stat-item">
+        <h3>Total Users</h3>
+        <p class="stat-value">{{ total_users|default:"0" }}</p>
+        <span class="stat-subtitle">New (Last 7 Days): {{ new_users|default:"0" }}</span>
+    </div>
+
+    <div class="stat-item">
+        <h3>Total Registrations</h3>
+        <p class="stat-value">{{ total_registrations|default:"0" }}</p>
+        <span class="stat-subtitle">New (Last 7 Days): {{ new_registrations|default:"0" }}</span>
+    </div>
+
+    <a href="{% url 'admin:wioblapp_registration_changelist' %}" class="stat-item pending">
+        <h3>Unreviewed Registrations</h3>
+        <p class="stat-value">{{ pending_registrations|default:"0" }}</p>
+        <span class="stat-subtitle">Awaiting Review</span>
+    </a>
+
+    <a href="{% url 'admin:wioblapp_flag_changelist' %}" class="stat-item flags">
+        <h3>Unreviewed Flags</h3>
+        <p class="stat-value">{{ unreviewed_flags|default:"0" }}</p>
+        <span class="stat-subtitle">Needs Attention</span>
+    </a>
 </div>
