@@ -4,6 +4,7 @@
 
 {% block content %}
     <form action="{% url 'teams' %}" method="GET">
+    <form action="{% url 'teams' %}" method="GET">
         {% csrf_token %}
 
         {% for field in filter_teams_form %}
