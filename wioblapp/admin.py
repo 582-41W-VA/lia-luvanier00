@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.template.response import TemplateResponse
 from datetime import datetime, timedelta
-from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Announcement, Flag
+from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Announcement, Flag, Comment
 
 class WioblAdminArea(admin.AdminSite):
     site_header = 'WIOBL Admin'
@@ -62,3 +62,4 @@ wiobl_site.register(Park)
 wiobl_site.register(Game)
 wiobl_site.register(Announcement, AnnouncementAdmin)
 wiobl_site.register(Flag)
+wiobl_site.register(Comment)
