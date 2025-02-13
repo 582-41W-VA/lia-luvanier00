@@ -224,12 +224,10 @@ def member_logout(request):
 
 # --------------------------------------------------------------
 def teams(request):
-    filter_teams_form = FilterTeamsForm()
+    filter_teams_form = FilterTeamsForm(request.GET)
     groups = RegistrationType.objects.all()
     teams = Team.objects.all()
     players = Player.objects.all()
-
-    filter_teams_form = FilterTeamsForm(request.GET)
 
     if filter_teams_form.is_valid():
         group = filter_teams_form.cleaned_data.get('group')
@@ -258,11 +256,16 @@ def teams(request):
     return render(request, "teams.html", context)
 # --------------------------------------------------------------
 
+# --------------------------------------------------------------
 def team_schedule(request, team_name):
     schedule_form = TeamScheduleForm(request.GET)
+    comment_form = CreateCommentForm()
     team = team_name
     games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
-
+    comments = Comment.objects.filter(game__in=games)
+    comments = comments.order_by("-date")
+    flags = Flag.objects.all()
+    
     if schedule_form.is_valid():
         month = schedule_form.cleaned_data.get('month')
         date = schedule_form.cleaned_data.get('date')
@@ -288,10 +291,90 @@ def team_schedule(request, team_name):
 
     context = {
         "schedule_form": schedule_form,
+        "comment_form": comment_form,
         "team": team,
         "games": games,
+        "comments": comments,
+        "flags": flags,
     }
     return render(request, "team_schedule.html", context)
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
+def create_comment(request, team_name):
+    team = team_name
+
+    if request.method == "POST":
+        comment_form = CreateCommentForm(request.POST)
+        game_id = request.POST.get("post")
+        comments = Comment.objects.filter(game=game_id)
+        
+        if comment_form.is_valid():
+            game = Game.objects.get(id=game_id)
+            user_account = request.user
+            content = comment_form.cleaned_data.get('content')
+
+            if not request.user.is_authenticated:
+                messages.info(request, "Login before posting a comment")
+                return redirect("team_schedule", team)
+
+            comment = Comment.objects.create(
+                game=game,
+                user_account=user_account,
+                content=content
+            )
+
+            if comment:
+                messages.success(request, "Comment is posted successfully")
+                return redirect("team_schedule", team)
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
+def like_comment(request, team_name):
+    team = team_name
+
+    if request.method == "POST":
+        comment_id = request.POST.get('like')
+        comment = Comment.objects.get(id=comment_id)
+
+        if not comment:
+            messages.error(request, "Something went wrong")
+
+        if not request.user.is_authenticated:
+            messages.info(request, "Login before posting a comment")
+            return redirect("team_schedule", team)
+
+        comment.likes += 1
+        comment.save()
+        return redirect("team_schedule", team)
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
+def flag_comment(request, team_name):
+    team = team_name
+
+    if request.method == "POST":
+        comment_id = request.POST.get('flag')
+        comment = Comment.objects.get(id=comment_id)
+        flagged_content = comment.content
+
+        if not comment:
+            messages.error(request, "Something went wrong")
+
+        if not request.user.is_authenticated:
+            messages.info(request, "Login before posting a comment")
+            return redirect("team_schedule", team)
+
+        user_account = request.user
+        flag = Flag.objects.create(
+            user_account=user_account,
+            flagged_content=flagged_content,
+        )
+
+        if flag:
+            messages.success(request, "Comment flagged successfully")
+            return redirect("team_schedule", team)
+# --------------------------------------------------------------
 
 # --------------------------------------------------------------
 def about(request):

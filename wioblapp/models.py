@@ -84,6 +84,7 @@ class Comment(models.Model):
     user_account = models.ForeignKey(UserAccount, on_delete=models.RESTRICT, related_name="comments")
     content = models.TextField("Content")
     date = models.DateTimeField("Date", auto_now_add=True)
+    likes = models.IntegerField(default=0, blank=True, null=True)
 
     def __str__(self):
         return self.content[:20]
@@ -100,7 +101,7 @@ class Announcement(models.Model):
 
 class Flag(models.Model):
     user_account = models.ForeignKey(UserAccount, on_delete=models.RESTRICT, related_name="flags")
-    flagged_content = models.CharField("Flagged Content", max_length=100)
+    flagged_content = models.CharField("Flagged Content", max_length=1000)
     date = models.DateTimeField("Date", auto_now_add=True)
 
     def __str__(self):

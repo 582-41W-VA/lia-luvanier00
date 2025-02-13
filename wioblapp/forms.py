@@ -142,6 +142,7 @@ class TeamScheduleForm(forms.Form):
 
 # --------------------------------------------------------------
 class CreateCommentForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea(attrs={'rows':5, 'cols':85}))
     class Meta:
         model = Comment
         fields = ['content']
