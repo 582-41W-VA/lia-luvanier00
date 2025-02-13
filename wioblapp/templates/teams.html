@@ -3,98 +3,151 @@
 {% load static %}
 
 {% block content %}
-    <form action="{% url 'teams' %}" method="GET">
-    <form action="{% url 'teams' %}" method="GET">
-        {% csrf_token %}
 
-        {% for field in filter_teams_form %}
-            
-            {{ field.label }}
-            {{ field }}
+    <section class="teams-search">
+        <div class="container">
 
-        {% endfor %}
-        <button type="submit" name="search_btn">Search</button>
-    </form>
+            <div class="section-heading">
+                <h2>Teams</h2>
+            </div>
 
-    {% if filter_teams_form.group.value %}
-    <h5>Team {{ filter_teams_form.group.value }}'s Table:</h5>
-        {% if teams %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Team</th>
-                    <th>Coaches</th>
-                    <th>Players</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-            {% for team in teams %}
-                <tr>
-                    <td>{{ team }}</td>
-                    <td>
-                        {% if team.coaches.all %}
-                        <ul>
-                            {% for coach in team.coaches.all %}
-                                <li>{{ coach }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                            <p>Not assigned coaches yet</p>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if players.all %}
-                        <ul>
-                            {% for player in players.all %}
-                                {% if player.team_name == team %}
-                                    <li>{{ player }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                            <p>Not assigned players yet</p>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <form action="{% url 'team_schedule' team %}" method="GET">
-                            {% csrf_token %}
-
-                            <button type="submit" name="schedule">Schedule</button>
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-            <p>No Teams or Players Found</p>
-        {% endif %}
-    {% else %}
-    <table>
-        <thead>
-            <tr>
-                <th>Group</th>
-                <th>Team</th>
-            </tr>
-        </thead>
-        
-        <tbody>
-        {% for group in groups %}
-            <tr>
-                <td>{{ group }}</td>
-                <td>
+            <form class="search-form" action="{% url 'teams' %}" method="GET">
+                <div class="form-info">
+                    <p>Use the search bar below to search for:</p>
                     <ul>
-                    {% for team in teams %}
-                        {% if team.group == group %}
-                            <li>{{ team }}</li>
-                        {% endif %}
-                    {% endfor %}
+                        <li>Player last name</li>
+                        <li>Team name (e.g. Wolfpack)</li>
                     </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {% endif %}
+                    <p>And / Or</p>
+                    <p>If you know the league member's group or coach, you can use the options below.</p>
+                </div>
+                <div class="form">
+                    {% csrf_token %}
+                    <div class="label-flex">
+                        <label for="search">Search for Player or Team:</label>
+                        {{ filter_teams_form.search }}
+                    </div>
+                    <div class="search-flex">
+                        <div class="search-right">
+                            <div class="label-flex">
+                                <label for="group">Select a Group* :</label>
+                                {{ filter_teams_form.group }}
+                            </div>
+                        </div>
+                        <div class="search-left">
+                            <div class="label-flex">
+                                <label for="coach">Select a Coach:</label>
+                                {{ filter_teams_form.coach }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-btn">
+                    <button class="action-button button" type="submit" name="search_btn">Search</button>
+                </div>
+            </form>
+
+            {% if filter_teams_form.group.value %}
+            <div>
+                <div class="section-heading">
+                    <h5>Team {{ filter_teams_form.group.value }}'s Table:</h5>
+                </div>
+
+                {% if teams %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>Coaches</th>
+                            <th>Players</th>
+                            <th>Schedule</th>
+                        </tr>
+                    </thead>
+                        
+                    <tbody>
+                    {% for team in teams %}
+                        <tr>
+                            <td>
+                                <div class="teamlogo-flex">
+                                    <img class="team-logo" src="{% static 'images/logo.png' %}" alt="Team logo.">
+                                    {{ team }}
+                                </div>
+                            </td>
+                            <td>
+                                {% if team.coaches.all %}
+                                <ul>
+                                    {% for coach in team.coaches.all %}
+                                        <li>{{ coach }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% else %}
+                                    <p>No assigned coaches yet</p>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if players.all %}
+                                <div class="scroll-box">
+                                    <ul>
+                                        {% for player in players.all %}
+                                            {% if player.team_name == team %}
+                                                <li>{{ player }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% else %}
+                                    <p>Not assigned players yet</p>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <form action="{% url 'team_schedule' team %}" method="GET">
+                                    {% csrf_token %}
+        
+                                    <button type="submit" name="schedule" class="schedule-btn">
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                        View Schedule
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No Teams or Players Found</p>
+                {% endif %}
+                {% else %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>Team</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for group in groups %}
+                        <tr>
+                            <td>{{ group }}</td>
+                            <td>
+                                <ul>
+                                {% for team in teams %}
+                                    {% if team.group == group %}
+                                    <div class="teamlogo-flex logo-margin">
+                                        <img class="team-logo" src="{% static 'images/logo.png' %}" alt="Team logo.">
+                                        <li>{{ team }}</li>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+        </div>
+    </section>
 {% endblock %}

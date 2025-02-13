@@ -34,6 +34,12 @@ h3 {
     font-weight: 400;
 }
 
+h5 {
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 400;
+}
+
 /* Re-usable styles */
 .container {
     max-width: 1000px;
@@ -1048,6 +1054,169 @@ footer i {
     margin-bottom: 24px;
 }
 
+/* TEAMS */
+/* Search form */
+.teams-search .search-form {
+    background-color: #3663BF;
+    padding: 32px;
+    border-radius: 10px;
+    margin-bottom: 48px;
+}
+
+.teams-search .form {
+    margin-bottom: 24px;
+}
+
+.teams-search .search-form p {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.teams-search .search-form p:nth-of-type(2) {
+    margin-bottom: 24px;
+}
+
+.teams-search .search-form p:nth-of-type(3) {
+    margin-bottom: 48px;
+}
+
+.teams-search .search-form ul {
+    color: #ffffff;
+    list-style-position: inside;
+    width: fit-content;
+    margin: 0 auto 24px auto;
+}
+
+.teams-search .search-form input,
+.teams-search select {
+    margin-bottom: 32px;
+    border-radius: 5px;
+    height: 30px;
+    border: none;
+}
+
+.teams-search .search-form input {
+    width: 100%;
+}
+
+.teams-search .search-form select {
+    width: 70%;
+}
+
+.teams-search .search-form label {
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.teams-search .label-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.teams-search .search-flex {
+    display: flex;
+}
+
+.teams-search .search-right,
+.teams-search .search-left {
+    width: 50%;
+}
+
+.teams-search .search-btn {
+    text-align: center;
+}
+
+/* table */
+.teams-search table {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden; 
+    width: 95%;
+    background-image: url("/static/images/teams-schedules/sky-dunk.jpg");
+    background-position: top;
+    background-size: cover;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.teams-search table thead {
+    background-color: #BCC5D7;
+}
+
+.teams-search thead th:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.teams-search thead th:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.teams-search table tbody tr:nth-child(2n) {
+    background: rgba(217, 88, 41, 0.189);
+}
+  
+.teams-search table th,
+.teams-search table td {
+    padding: 8px;
+}
+
+.teams-search table ul {
+    list-style: none;
+}
+
+.teams-search table .schedule-btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(194, 91, 54);
+    font-size: 16px;
+}
+
+.teams-search table .schedule-btn:hover {
+    color: rgb(180, 48, 0);
+    text-decoration: underline;
+}
+
+.teams-search .teamlogo-flex {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.teams-search .logo-margin:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.teams-search .team-logo {
+    height: 20px;
+}
+
+.teams-search .scroll-box {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.teams-search .scroll-box ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.teams-search .scroll-box li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
 /* MEDIA QUERY */
 @media (max-width: 1100px) {
     /* GENERAL */
@@ -1226,6 +1395,36 @@ footer i {
     }
     .volunteers-info p:nth-of-type(1){
         font-size: 16px;
+    }
+
+    /* TEAMS */
+    /* Search form */
+    .teams-search .search-form {
+        padding: 24px;
+        margin-bottom: 32px;
+    }
+    .teams-search .form {
+        margin-bottom: 16px;
+    }
+    .teams-search .search-form p:nth-of-type(2) {
+        margin-bottom: 16px;
+    }
+    .teams-search .search-form p:nth-of-type(3) {
+        margin-bottom: 32px;
+    }
+    .teams-search .search-form ul {
+        margin-bottom: 16px;
+    }
+    .teams-search .search-form input,
+    .teams-search select {
+        margin-bottom: 24px;
+    }
+    .teams-search table .schedule-btn {
+        font-size: 14px;
+    }
+    /* table */
+    .teams-search .team-logo {
+        height: 15px;
     }
 }
 
@@ -1461,6 +1660,32 @@ footer i {
     .button-container {
         text-align: center;
     }
+
+    /* TEAMS */
+    /* Search form */
+    .teams-search .search-form {
+        padding: 16px;
+        margin-bottom: 24px;
+    }
+    .teams-search .form {
+        margin-bottom: 8px;
+    }
+    .teams-search .search-form p:nth-of-type(2) {
+        margin-bottom: 8px;
+    }
+    .teams-search .search-form p:nth-of-type(3) {
+        margin-bottom: 24px;
+    }
+    .teams-search .search-form ul {
+        margin-bottom: 8px;
+    }
+    .teams-search .search-form input,
+    .teams-search select {
+        margin-bottom: 16px;
+    }
+    .teams-search table {
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1630,6 +1855,7 @@ footer i {
     .account-info .account-right {
         width: 100%;
     }
-    
+
+
 }
 
