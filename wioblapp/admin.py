@@ -22,7 +22,7 @@ class WioblAdminArea(admin.AdminSite):
             total_registrations = Registration.objects.count() or 0
             new_registrations = Registration.objects.filter(date_time__gt=datetime.now() - timedelta(days=7)).count() or 0
             
-            pending_registrations = Registration.objects.filter(player__team_name__isnull=True).count()
+            pending_registrations = Registration.objects.filter(team__isnull=True).count()
 
             unreviewed_flags = 0  
 
@@ -36,6 +36,8 @@ class WioblAdminArea(admin.AdminSite):
             })
 
         return context
+
+
 
 
 
