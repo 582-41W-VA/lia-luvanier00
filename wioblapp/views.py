@@ -224,10 +224,12 @@ def member_logout(request):
 
 # --------------------------------------------------------------
 def teams(request):
-    filter_teams_form = FilterTeamsForm(request.GET)
+    filter_teams_form = FilterTeamsForm()
     groups = RegistrationType.objects.all()
     teams = Team.objects.all()
     players = Player.objects.all()
+
+    filter_teams_form = FilterTeamsForm(request.GET)
 
     if filter_teams_form.is_valid():
         group = filter_teams_form.cleaned_data.get('group')
