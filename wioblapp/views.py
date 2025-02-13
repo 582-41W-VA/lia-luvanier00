@@ -259,9 +259,13 @@ def teams(request):
 # --------------------------------------------------------------
 def team_schedule(request, team_name):
     schedule_form = TeamScheduleForm(request.GET)
+    comment_form = CreateCommentForm()
     team = team_name
     games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
-
+    comments = Comment.objects.filter(game__in=games)
+    comments = comments.order_by("-date")
+    flags = Flag.objects.all()
+    
     if schedule_form.is_valid():
         month = schedule_form.cleaned_data.get('month')
         date = schedule_form.cleaned_data.get('date')
@@ -287,8 +291,11 @@ def team_schedule(request, team_name):
 
     context = {
         "schedule_form": schedule_form,
+        "comment_form": comment_form,
         "team": team,
         "games": games,
+        "comments": comments,
+        "flags": flags,
     }
     return render(request, "team_schedule.html", context)
 # --------------------------------------------------------------
