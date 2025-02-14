@@ -52,25 +52,23 @@
                         </form>
                         {% if comment.user_account == request.user %}
                         <button>Edit</button>
-                        <form action="{% url 'edit_comment' team comment.id %}" method="POST">
+
+                        <form action="{% url 'edit_comment' team %}" method="POST">
                             {% csrf_token %}
-        
-                            {% for field in comment_form %}
-                                {% if field.name == "content" %}
-                                    <textarea name="{{ field.name }}" id="{{ field.id_for_label }}">{{ comment.content }}</textarea>
-                                {% else %}
-                                    {{ field }}
-                                {% endif %}
-                            {% endfor %}
+          
+                            {{ comment_form }}
 
                             <button type="submit" name="edit" value="{{ comment.id }}">Edit</button>
                         </form>
                         <form action="{% url 'delete_comment' team %}" method="POST">
                             {% csrf_token %}
-        
+          
                             <button type="submit" name="delete" value="{{ comment.id }}"><i class="fa-solid fa-trash"></i></button>
                         </form>
                         {% endif %}
+                    {% else %}
+                        <p>No comments related to this game</p>
+
                     {% endif %}
                 {% endfor %}
             {% else %}

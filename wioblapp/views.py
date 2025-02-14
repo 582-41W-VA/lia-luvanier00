@@ -542,17 +542,18 @@ def flag_comment(request, team_name):
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-def edit_comment(request, team_name, comment_id):
-    team = team_name
 
-    if not comment_id:
-        messages.error(request, "Something went wrong")
-        return redirect("team_schedule", team)
-
+def edit_comment(request, team_name):
+    comment_id = request.POST.get('edit')
     comment = get_object_or_404(Comment, id=comment_id)
     comment_form = CreateCommentForm(instance=comment)
-    
+    team = team_name
+
     if request.method == "POST":
+        if not comment_id:
+            messages.error(request, "Something went wrong")
+            return redirect("team_schedule", team)
+
         if not request.user.is_authenticated:
             messages.info(request, "Login before editing a comment")
             return redirect("team_schedule", team)
