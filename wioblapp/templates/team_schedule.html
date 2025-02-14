@@ -55,12 +55,22 @@
 
                             <button type="submit" name="flag" value="{{ comment.id }}"><i class="fa-solid fa-flag"></i></button>
                         </form>
-                        <form action="">
-                            {% if comment.user_account == request.user %}
-                                <button type="submit" name="edit">Edit</button>
-                                <button type="submit" name="delete"><i class="fa-solid fa-trash"></i></button>
-                            {% endif %}
+                        {% if comment.user_account == request.user %}
+                        <button>Edit</button>
+                        <form action="{% url 'edit_comment' team %}" method="POST">
+                            {% csrf_token %}
+          
+                            {{ comment_form }}
+                            <button type="submit" name="edit" value="{{ comment.id }}">Edit</button>
                         </form>
+                        <form action="{% url 'delete_comment' team %}" method="POST">
+                            {% csrf_token %}
+          
+                            <button type="submit" name="delete" value="{{ comment.id }}"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                        {% endif %}
+                    {% else %}
+                        <p>No comments related to this game</p>
                     {% endif %}
                 {% endfor %}
             {% else %}
