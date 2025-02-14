@@ -103,41 +103,43 @@ class FilterTeamsForm(forms.Form):
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-class TeamScheduleForm(forms.Form):
+class TeamScheduleForm(forms.ModelForm):
     MONTH_CHOICES = [
-        ("", "Select a month"),
-        ("All", "All"),
-        ("6", "June"),
-        ("7", "July"),
-        ("8", "August")
-    ]
-
-    DATE_CHOICES = [
-        ("", "----------------"),
-        ("Ascending", "Ascending"),
-        ("Descending", "Descending")
-    ]
-
-    RESULT_CHOICES = [
-        ("", "-------"),
-        ("Win", "Win"),
-        ("Lose", "Lose"),
-        ("Tie", "Tie")
+        ("June", "June"),
+        ("July", "July"),
+        ("August", "August")
     ]
 
     month = forms.ChoiceField(label="Month", 
                               choices=MONTH_CHOICES,
-                              widget=forms.Select())
-
-    date = forms.ChoiceField(label="Date",
-                           choices=DATE_CHOICES,
-                           required=False,
-                           widget=forms.Select())
-
-    result = forms.ChoiceField(label="Result", 
-                              choices=RESULT_CHOICES,
                               required=False,
                               widget=forms.Select())
+
+    date_time = forms.DateField(label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"}))
+
+    class Meta:
+        model = Game
+        fields = ["month", "date_time", "winner"]
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
+class TeamScheduleForm(forms.ModelForm):
+    MONTH_CHOICES = [
+        ("June", "June"),
+        ("July", "July"),
+        ("August", "August")
+    ]
+
+    month = forms.ChoiceField(label="Month", 
+                              choices=MONTH_CHOICES,
+                              required=False,
+                              widget=forms.Select())
+
+    date_time = forms.DateField(label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"}))
+
+    class Meta:
+        model = Game
+        fields = ["month", "date_time", "winner"]
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
