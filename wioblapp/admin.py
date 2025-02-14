@@ -79,17 +79,26 @@ class AnnouncementAdmin(admin.ModelAdmin):
             obj.user_account = request.user
         super().save_model(request, obj, form, change)
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ("user_account", "content", "date", "likes") 
+
+class FlagAdmin(admin.ModelAdmin):
+    list_display = ("user_account", "flagged_content", "date") 
+
+class TeamAdmin(admin.ModelAdmin):
+    list_display = ("name", "team_name") 
+
 
 wiobl_site.register(Role)
 wiobl_site.register(UserAccount)
 wiobl_site.register(Team)
 wiobl_site.register(FavoriteTeam)
-wiobl_site.register(Player)
+wiobl_site.register(Player, TeamAdmin)
 wiobl_site.register(RegistrationType)
 wiobl_site.register(Registration)
 wiobl_site.register(Park)
 wiobl_site.register(Game)
 wiobl_site.register(Announcement, AnnouncementAdmin)
-wiobl_site.register(Flag)
-wiobl_site.register(Comment)
 wiobl_site.register(LikedComment)
+wiobl_site.register(Flag, FlagAdmin)
+wiobl_site.register(Comment, CommentAdmin)
