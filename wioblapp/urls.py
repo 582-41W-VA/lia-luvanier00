@@ -15,4 +15,6 @@ urlpatterns = [
     path("create-comment/<str:team_name>/", views.create_comment, name="create_comment"),
     path("like-comment/<str:team_name>/", views.like_comment, name="like_comment"),
     path("flag-comment/<str:team_name>/", views.flag_comment, name="flag_comment"),
+    path("edit-comment/<str:team_name>/", views.edit_comment, name="edit_comment"),
+    path("delete-comment/<str:team_name>/", views.delete_comment, name="delete_comment"),
 ]
