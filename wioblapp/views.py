@@ -370,7 +370,7 @@ def like_comment(request, team_name):
             )
             comment.likes += 1
             comment.save()
-    
+
     return redirect("team_schedule", team_name)
 # --------------------------------------------------------------
 
@@ -388,6 +388,7 @@ def flag_comment(request, team_name):
         if not request.user.is_authenticated:
             messages.info(request, "Login before flagging a comment")
             return redirect("team_schedule", team)
+
 
         is_flagged = Flag.objects.filter(user_account=request.user, comment=comment)
 
@@ -594,7 +595,6 @@ def flag_comment(request, team_name):
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-
 def edit_comment(request, team_name):
     comment_id = request.POST.get('edit')
     comment = get_object_or_404(Comment, id=comment_id)
