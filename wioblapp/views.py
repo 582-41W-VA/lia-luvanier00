@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag
+from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag, LikedComment
 from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm, TeamScheduleForm
 
 # --------------------------------------------------------------
@@ -266,7 +266,7 @@ def team_schedule(request, team_name):
     games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
     comments = Comment.objects.filter(game__in=games)
     game_comments = []
-    flags = Flag.objects.all()   
+    flags = Flag.objects.all()  
     
     if schedule_form.is_valid():
         month = schedule_form.cleaned_data.get('month')
@@ -356,9 +356,19 @@ def like_comment(request, team_name):
             messages.info(request, "Login first, please!")
             return redirect("team_schedule", team)
 
-        comment.likes += 1
-        comment.save()
-        return redirect("team_schedule", team)
+        is_liked = LikedComment.objects.filter(comment=comment_id, user_account=request.user)
+
+        if is_liked:
+            is_liked.delete()
+            comment.likes -= 1
+            comment.save()
+        else:
+            LikedComment.objects.create(
+                comment=comment,
+                user_account=request.user,
+            )
+            comment.likes += 1
+            comment.save()
     
     return redirect("team_schedule", team_name)
 # --------------------------------------------------------------
@@ -378,18 +388,20 @@ def flag_comment(request, team_name):
             messages.info(request, "Login before flagging a comment")
             return redirect("team_schedule", team)
 
-        flagged_content = comment.content
-        user_account = request.user
-        flag = Flag.objects.create(
-            user_account=user_account,
-            flagged_content=flagged_content,
-        )
+        is_flagged = Flag.objects.filter(user_account=request.user, comment=comment)
 
-        if flag:
-            messages.success(request, "Comment flagged successfully")
-            return redirect("team_schedule", team)
-        
-        messages.error(request, "Can't be flaged. Please try again.")
+        if not is_flagged:
+            flag = Flag.objects.create(
+                user_account=request.user,
+                comment=comment,
+            )
+
+            if flag:
+                messages.success(request, "Comment flagged successfully")
+                return redirect("team_schedule", team)
+        else:
+            messages.info(request, "Comment is already flagged")
+
     return redirect("team_schedule", team_name)
 # --------------------------------------------------------------
 
