@@ -14,13 +14,13 @@
     {% if games %}
     <h3>Games</h3>
 
-        {% for game in games %}
-            {{ game.date_time }} at {{ game.park }}
+        {% for game in game_comments %}
+            {{ game.game.date_time }} at {{ game.game.park }}
 
-            {% if game.team1_score and game.team2_score %}
-                {{ game.team_1.color }} {{ game.team_1 }}: {{ game.team1_score }} --- VS --- {{ game.team_2.color }} {{ game.team_2 }}: {{ game.team2_score }}
+            {% if game.game.team1_score and game.game.team2_score %}
+                {{ game.game.team_1.color }} {{ game.game.team_1 }}: {{ game.game.team1_score }} --- VS --- {{ game.game.team_2.color }} {{ game.game.team_2 }}: {{ game.game.team2_score }}
             {% else %}
-                {{ game.team_1 }} --- VS --- {{ game.team_2 }}
+                {{ game.game.team_1 }} --- VS --- {{ game.game.team_2 }}
             {% endif %}
             <br>
 
@@ -35,9 +35,9 @@
             </form>
 
             <h6>Comments</h6>
-            {% if comments %}
-                {% for comment in comments %} 
-                    {% if comment.game == game  %}                
+            {% if game.comments %}
+                {% for comment in game.comments %} 
+                    {% if comment.game == game.game  %}                
                         {{ comment.content }} {{ comment.date }}
                         <form action="{% url 'like_comment' team %}" method="POST">
                             {% csrf_token %}
@@ -52,20 +52,25 @@
                         </form>
                         {% if comment.user_account == request.user %}
                         <button>Edit</button>
-                        <form action="{% url 'edit_comment' team %}" method="POST">
+                        <form action="{% url 'edit_comment' team comment.id %}" method="POST">
                             {% csrf_token %}
-          
-                            {{ comment_form }}
+        
+                            {% for field in comment_form %}
+                                {% if field.name == "content" %}
+                                    <textarea name="{{ field.name }}" id="{{ field.id_for_label }}">{{ comment.content }}</textarea>
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
+                            {% endfor %}
+
                             <button type="submit" name="edit" value="{{ comment.id }}">Edit</button>
                         </form>
                         <form action="{% url 'delete_comment' team %}" method="POST">
                             {% csrf_token %}
-          
+        
                             <button type="submit" name="delete" value="{{ comment.id }}"><i class="fa-solid fa-trash"></i></button>
                         </form>
                         {% endif %}
-                    {% else %}
-                        <p>No comments related to this game</p>
                     {% endif %}
                 {% endfor %}
             {% else %}
