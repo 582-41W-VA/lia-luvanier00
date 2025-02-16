@@ -265,8 +265,8 @@ def team_schedule(request, team_name):
     team = team_name
     games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
     comments = Comment.objects.filter(game__in=games)
-    comments = comments.order_by("-date")
-    flags = Flag.objects.all()
+    game_comments = []
+    flags = Flag.objects.all()   
     
     if schedule_form.is_valid():
         month = schedule_form.cleaned_data.get('month')
@@ -291,12 +291,19 @@ def team_schedule(request, team_name):
             elif result == "Lose":
                 games = games.exclude(winner=team)
 
+    for game in games:
+        game_comments.append({
+            "game": game,
+            "comments": comments.filter(game=game).order_by("-date"),
+        }) 
+
     context = {
         "schedule_form": schedule_form,
         "comment_form": comment_form,
         "team": team,
         "games": games,
         "comments": comments,
+        "game_comments": game_comments,
         "flags": flags,
     }
     return render(request, "team_schedule.html", context)
@@ -387,17 +394,17 @@ def flag_comment(request, team_name):
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-def edit_comment(request, team_name):
-    comment_id = request.POST.get('edit')
-    comment = get_object_or_404(Comment, id=comment_id)
-    comment_form = CreateCommentForm(instance=comment)
+def edit_comment(request, team_name, comment_id):
     team = team_name
 
-    if request.method == "POST":
-        if not comment_id:
-            messages.error(request, "Something went wrong")
-            return redirect("team_schedule", team)
+    if not comment_id:
+        messages.error(request, "Something went wrong")
+        return redirect("team_schedule", team)
 
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment_form = CreateCommentForm(instance=comment)
+    
+    if request.method == "POST":
         if not request.user.is_authenticated:
             messages.info(request, "Login before editing a comment")
             return redirect("team_schedule", team)
