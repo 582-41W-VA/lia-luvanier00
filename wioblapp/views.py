@@ -266,7 +266,7 @@ def team_schedule(request, team_name):
     games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
     comments = Comment.objects.filter(game__in=games)
     game_comments = []
-    flags = Flag.objects.all()  
+    flags = Flag.objects.all()   
     
     if schedule_form.is_valid():
         month = schedule_form.cleaned_data.get('month')
@@ -595,17 +595,17 @@ def flag_comment(request, team_name):
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-def edit_comment(request, team_name):
-    comment_id = request.POST.get('edit')
-    comment = get_object_or_404(Comment, id=comment_id)
-    comment_form = CreateCommentForm(instance=comment)
+def edit_comment(request, team_name, comment_id):
     team = team_name
 
-    if request.method == "POST":
-        if not comment_id:
-            messages.error(request, "Something went wrong")
-            return redirect("team_schedule", team)
+    if not comment_id:
+        messages.error(request, "Something went wrong")
+        return redirect("team_schedule", team)
 
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment_form = CreateCommentForm(instance=comment)
+    
+    if request.method == "POST":
         if not request.user.is_authenticated:
             messages.info(request, "Login before editing a comment")
             return redirect("team_schedule", team)
