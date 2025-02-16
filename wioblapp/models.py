@@ -89,6 +89,13 @@ class Comment(models.Model):
     def __str__(self):
         return self.content[:20]
 
+class LikedComment(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="likedcomments")
+    user_account = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="likedcomments")
+
+    def __str__(self):
+        return f"{self.user_account.name} Liked {self.comment.content[:20]}"
+
 class Announcement(models.Model):
     user_account = models.ForeignKey(UserAccount, on_delete=models.RESTRICT, related_name="announcements")
     title = models.CharField("Title", max_length=100)
@@ -101,9 +108,9 @@ class Announcement(models.Model):
 
 class Flag(models.Model):
     user_account = models.ForeignKey(UserAccount, on_delete=models.RESTRICT, related_name="flags")
-    flagged_content = models.CharField("Flagged Content", max_length=1000)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="flags", blank=True, null=True)
     date = models.DateTimeField("Date", auto_now_add=True)
 
     def __str__(self):
-        return self.flagged_content
+        return self.comment.content
 
