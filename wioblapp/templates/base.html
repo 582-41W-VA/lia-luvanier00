@@ -25,8 +25,7 @@
 
     <!-- Leafletjs Map API CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin=""/>
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 
 <body class="{% block body_class %}default-body{% endblock %}">
@@ -53,15 +52,15 @@
                         <li><a href="{% url 'registration' %}">Registration</a></li>
                         <li><a href="#">Contact</a></li>
                         {% if request.user.is_authenticated %}
-                            <li>
-                                <a class="orange-url account-url" href="{% url 'member_account' request.user.id %}">
-                                    <i class="fa-regular fa-user"></i> Account
-                                </a>
-                            </li>
-                            <li><a class="orange-url" href="{% url 'logout' %}">Logout</a></li>
+                        <li>
+                            <a class="orange-url account-url" href="{% url 'member_account' request.user.id %}">
+                                <i class="fa-regular fa-user"></i> Account
+                            </a>
+                        </li>
+                        <li><a class="orange-url" href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
-                            <li><a class="orange-url" href="{% url 'sign-up' %}">Sign-up</a></li>
-                            <li><a class="orange-url" href="{% url 'login' %}">Login</a></li>
+                        <li><a class="orange-url" href="{% url 'sign-up' %}">Sign-up</a></li>
+                        <li><a class="orange-url" href="{% url 'login' %}">Login</a></li>
                         {% endif %}
                     </ul>
 
@@ -79,11 +78,11 @@
     <!-- Main Content Start -->
     <div>
         {% for message in messages %}
-            <div class="base-message">
-                {{ message }}
-            </div>
+        <div class="base-message">
+            {{ message }}
+        </div>
         {% endfor %}
-        
+
         {% block content %}
         {% endblock %}
     </div>
@@ -96,9 +95,9 @@
                     <li><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">About us</a></li>
                     <li><a href="{% url 'teams' %}">Teams</a></li>
-                </ul>
-                <ul class="footer-list">
                     <li><a href="{% url 'registration' %}">Registration</a></li>
+                </ul>
+                <ul class="footer-list footer-right">
                     <li><a href="#">Contact</a></li>
                     <li><a href="{% url 'login' %}">Login</a></li>
                     <ul class="social-media-icons">
@@ -113,6 +112,13 @@
                             </a></li>
                     </ul>
                 </ul>
+                <ul class="footer-list sentence">
+                    <li>
+                        <p>"Some people want it to happen,<br>
+                            some wish it would happen, others make it happen."<br>
+                            - Michael Jordan</p>
+                    </li>
+                </ul>
             </div>
         </div>
     </footer>
@@ -122,8 +128,7 @@
 
     <!-- Leafletjs JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </body>
 
 </html>
