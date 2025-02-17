@@ -103,7 +103,7 @@ class FilterTeamsForm(forms.Form):
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-class TeamScheduleForm(forms.ModelForm):
+class TeamScheduleForm(forms.Form):
     MONTH_CHOICES = [
         ("", "Select a month"),
         ("All", "All"),
@@ -127,34 +127,17 @@ class TeamScheduleForm(forms.ModelForm):
 
     month = forms.ChoiceField(label="Month", 
                               choices=MONTH_CHOICES,
-                              required=False,
                               widget=forms.Select())
 
-    date_time = forms.DateField(label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"}))
+    date = forms.ChoiceField(label="Date",
+                           choices=DATE_CHOICES,
+                           required=False,
+                           widget=forms.Select())
 
-    class Meta:
-        model = Game
-        fields = ["month", "date_time", "winner"]
-# --------------------------------------------------------------
-
-# --------------------------------------------------------------
-class TeamScheduleForm(forms.ModelForm):
-    MONTH_CHOICES = [
-        ("June", "June"),
-        ("July", "July"),
-        ("August", "August")
-    ]
-
-    month = forms.ChoiceField(label="Month", 
-                              choices=MONTH_CHOICES,
+    result = forms.ChoiceField(label="Result", 
+                              choices=RESULT_CHOICES,
                               required=False,
                               widget=forms.Select())
-
-    date_time = forms.DateField(label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"}))
-
-    class Meta:
-        model = Game
-        fields = ["month", "date_time", "winner"]
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
