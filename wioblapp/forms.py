@@ -55,12 +55,12 @@ class RegistrationForm(forms.ModelForm):
                                      required=True, 
                                      widget=forms.RadioSelect)
 
-    street_line1 = forms.CharField(label="Street Address", max_length=20)
-    app_line2 = forms.CharField(label="Street Address Line 2", max_length=20, required=False)
-    city = forms.CharField(label="City", max_length=20)
-    province = forms.CharField(label="Province", max_length=20)
-    postal_code = forms.CharField(label="Postal Code", max_length=20)
-    country = forms.CharField(label="Country", max_length=20)
+    street_line1 = forms.CharField(label="Street Address", max_length=200)
+    app_line2 = forms.CharField(label="Street Address Line 2", max_length=200, required=False)
+    city = forms.CharField(label="City", max_length=200)
+    province = forms.CharField(label="Province", max_length=200)
+    postal_code = forms.CharField(label="Postal Code", max_length=10)
+    country = forms.CharField(label="Country", max_length=200)
 
     uniform_size = forms.ChoiceField(label="Uniform Size", choices=UNIFORM_SIZES, 
                                      required=True, 

@@ -13,13 +13,6 @@
             <form class="login-form" action="{% url 'sign-up' %}" method="POST">
                 {% csrf_token %}
 
-                <div class="error">
-                    {{ signup_form.errors }}
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}       
-                </div>
-
                 <fieldset>
                     <legend class="main-legend">Sign Up</legend>
                     <label for="firstname">First Name</label>
