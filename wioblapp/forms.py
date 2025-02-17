@@ -113,13 +113,13 @@ class TeamScheduleForm(forms.Form):
     ]
 
     DATE_CHOICES = [
-        ("", "----------------"),
+        ("", "Any"),
         ("Ascending", "Ascending"),
         ("Descending", "Descending")
     ]
 
     RESULT_CHOICES = [
-        ("", "-------"),
+        ("", "Any"),
         ("Win", "Win"),
         ("Lose", "Lose"),
         ("Tie", "Tie")
