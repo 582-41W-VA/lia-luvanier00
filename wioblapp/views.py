@@ -270,7 +270,6 @@ def teams(request):
 def team_schedule(request, team_name):
     schedule_form = TeamScheduleForm()
     team = team_name
-
     games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
     comments = Comment.objects.filter(game__in=games)
     game_comments = []
