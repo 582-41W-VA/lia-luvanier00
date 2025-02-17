@@ -105,9 +105,24 @@ class FilterTeamsForm(forms.Form):
 # --------------------------------------------------------------
 class TeamScheduleForm(forms.ModelForm):
     MONTH_CHOICES = [
-        ("June", "June"),
-        ("July", "July"),
-        ("August", "August")
+        ("", "Select a month"),
+        ("All", "All"),
+        ("6", "June"),
+        ("7", "July"),
+        ("8", "August")
+    ]
+
+    DATE_CHOICES = [
+        ("", "Any"),
+        ("Ascending", "Ascending"),
+        ("Descending", "Descending")
+    ]
+
+    RESULT_CHOICES = [
+        ("", "Any"),
+        ("Win", "Win"),
+        ("Lose", "Lose"),
+        ("Tie", "Tie")
     ]
 
     month = forms.ChoiceField(label="Month", 

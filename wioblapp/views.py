@@ -224,12 +224,10 @@ def member_logout(request):
 
 # --------------------------------------------------------------
 def teams(request):
-    filter_teams_form = FilterTeamsForm()
+    filter_teams_form = FilterTeamsForm(request.GET)
     groups = RegistrationType.objects.all()
     teams = Team.objects.all()
     players = Player.objects.all()
-
-    filter_teams_form = FilterTeamsForm(request.GET)
 
     if filter_teams_form.is_valid():
         group = filter_teams_form.cleaned_data.get('group')
@@ -238,15 +236,25 @@ def teams(request):
 
         if group: 
             teams = teams.filter(group=group)
-
-        if keyword:
-            teams = teams.filter(name__icontains=keyword)
-            players = players.filter(name__icontains=keyword)
+            players = players.filter(team_name__in=teams)
 
         if coach:
             teams = teams.filter(coaches=coach)
-        
-        players = players.filter(team_name__in=teams)
+            players = players.filter(team_name__in=teams)
+
+        if keyword:
+            keyword_teams = teams.filter(name__icontains=keyword)
+            if keyword_teams:
+                teams = keyword_teams
+            
+            keyword_players = players.filter(name__icontains=keyword)
+            if keyword_players:
+                players = keyword_players
+                teams = Team.objects.filter(players__in=keyword_players)
+
+            if not keyword_players and not keyword_teams:
+                players = []
+                teams = []
 
     context = {
         "filter_teams_form": filter_teams_form,
@@ -266,7 +274,7 @@ def team_schedule(request, team_name):
     games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
     comments = Comment.objects.filter(game__in=games)
     game_comments = []
-    flags = Flag.objects.all()  
+    flags = Flag.objects.all()   
     
     if schedule_form.is_valid():
         month = schedule_form.cleaned_data.get('month')
@@ -370,7 +378,7 @@ def like_comment(request, team_name):
             )
             comment.likes += 1
             comment.save()
-    
+
     return redirect("team_schedule", team_name)
 # --------------------------------------------------------------
 
@@ -388,6 +396,7 @@ def flag_comment(request, team_name):
         if not request.user.is_authenticated:
             messages.info(request, "Login before flagging a comment")
             return redirect("team_schedule", team)
+
 
         is_flagged = Flag.objects.filter(user_account=request.user, comment=comment)
 
@@ -594,18 +603,17 @@ def flag_comment(request, team_name):
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-
-def edit_comment(request, team_name):
-    comment_id = request.POST.get('edit')
-    comment = get_object_or_404(Comment, id=comment_id)
-    comment_form = CreateCommentForm(instance=comment)
+def edit_comment(request, team_name, comment_id):
     team = team_name
 
-    if request.method == "POST":
-        if not comment_id:
-            messages.error(request, "Something went wrong")
-            return redirect("team_schedule", team)
+    if not comment_id:
+        messages.error(request, "Something went wrong")
+        return redirect("team_schedule", team)
 
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment_form = CreateCommentForm(instance=comment)
+    
+    if request.method == "POST":
         if not request.user.is_authenticated:
             messages.info(request, "Login before editing a comment")
             return redirect("team_schedule", team)
