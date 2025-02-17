@@ -376,7 +376,7 @@ def create_comment(request, team_name):
                 messages.info(request, "Login before posting a comment")
                 return redirect("team_schedule", team)
 
-            comment = Comment.objects.create(
+            comment = Comment.objects.get_or_create(
                 game=game,
                 user_account=user_account,
                 content=content
@@ -385,6 +385,9 @@ def create_comment(request, team_name):
             if comment:
                 messages.success(request, "Comment is posted successfully")
                 return redirect("team_schedule", team)
+            
+        messages.error(request, "Comment Can't be created. Please try again.")
+    return redirect("team_schedule", team_name)
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
@@ -399,12 +402,14 @@ def like_comment(request, team_name):
             messages.error(request, "Something went wrong")
 
         if not request.user.is_authenticated:
-            messages.info(request, "Login before posting a comment")
+            messages.info(request, "Login first, please!")
             return redirect("team_schedule", team)
 
         comment.likes += 1
         comment.save()
         return redirect("team_schedule", team)
+    
+    return redirect("team_schedule", team_name)
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
@@ -414,15 +419,15 @@ def flag_comment(request, team_name):
     if request.method == "POST":
         comment_id = request.POST.get('flag')
         comment = Comment.objects.get(id=comment_id)
-        flagged_content = comment.content
 
         if not comment:
             messages.error(request, "Something went wrong")
 
         if not request.user.is_authenticated:
-            messages.info(request, "Login before posting a comment")
+            messages.info(request, "Login before flagging a comment")
             return redirect("team_schedule", team)
 
+        flagged_content = comment.content
         user_account = request.user
         flag = Flag.objects.create(
             user_account=user_account,
@@ -432,6 +437,61 @@ def flag_comment(request, team_name):
         if flag:
             messages.success(request, "Comment flagged successfully")
             return redirect("team_schedule", team)
+        
+        messages.error(request, "Can't be flaged. Please try again.")
+    return redirect("team_schedule", team_name)
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
+def edit_comment(request, team_name):
+    comment_id = request.POST.get('edit')
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment_form = CreateCommentForm(instance=comment)
+    team = team_name
+
+    if request.method == "POST":
+        if not comment_id:
+            messages.error(request, "Something went wrong")
+            return redirect("team_schedule", team)
+
+        if not request.user.is_authenticated:
+            messages.info(request, "Login before editing a comment")
+            return redirect("team_schedule", team)
+
+        comment_form = CreateCommentForm(request.POST, instance=comment)
+
+        if comment_form.is_valid():
+            comment_form.save()
+            messages.success(request, "Comment edited successfully")
+            return redirect("team_schedule", team)
+
+        messages.error(request, "Can't be edited. Please try again.")
+
+    return redirect("team_schedule", team_name)
+# --------------------------------------------------------------
+
+# --------------------------------------------------------------
+def delete_comment(request, team_name):
+    team = team_name
+
+    if request.method == "POST":
+        comment_id = request.POST.get('delete')
+        comment = get_object_or_404(Comment, id=comment_id)
+        
+        if not comment:
+            messages.error(request, "Comment can't be deleted")
+
+        if not request.user.is_authenticated:
+            messages.info(request, "Login before deleting a comment")
+            return redirect("team_schedule", team)
+
+        deleted = comment.delete()
+        if deleted:
+            messages.success(request, "Comment deleted")
+            return redirect("team_schedule", team)    
+        
+        messages.error(request, "Can't be deleted. Please try again.")
+    return redirect("team_schedule", team_name)    
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
