@@ -66,6 +66,7 @@ h5 {
 .action-button {
     background-color: #8C0303;
 }
+
 .action-button:hover {
     background-color: #bf1616;
     transform: scale(1.05);
@@ -74,6 +75,7 @@ h5 {
 .black-button {
     background-color: #000000;
 }
+
 .black-button:hover {
     background-color: #504444;
     transform: scale(1.05);
@@ -84,8 +86,8 @@ h5 {
     border-radius: 999px;
     border: 2px solid #3663BF;
     margin-bottom: 32px;
-  }
-  
+}
+
 .toggle-buttons a {
     text-decoration: none;
     padding: 10px 20px;
@@ -118,7 +120,7 @@ h5 {
     margin-bottom: 32px;
 }
 
-.error > .errorlist,
+.error>.errorlist,
 .error-message {
     padding: 10px 15px;
     border-radius: 5px;
@@ -190,7 +192,7 @@ h5 {
 }
 
 .logo img {
-    height: 60px;    
+    height: 60px;
 }
 
 .h1-acronym {
@@ -261,10 +263,10 @@ h5 {
 
 /* Footer */
 footer {
-    padding-top: 110px;
+    padding-top: 150px;
     padding-bottom: 24px;
-    background-image: url("/static/images/footer-ball.png");
-    background-position: top;
+    background: url("/static/images/footer-ball.svg");
+    background-position: bottom;
     background-size: cover;
     /* z-index: 10;
     position: relative; */
@@ -276,7 +278,7 @@ footer {
 
 .footer-flex {
     display: flex;
-    gap: 230px;
+    gap: 130px;
     align-items: center;
     justify-content: start;
 }
@@ -286,7 +288,11 @@ footer ul {
 }
 
 .footer-list li {
-    margin-bottom: 32px;
+    margin-bottom: 14px;
+}
+
+.footer-right {
+    margin-top: 3rem;
 }
 
 footer a {
@@ -303,6 +309,12 @@ footer a:hover {
 .social-media-icons {
     display: flex;
     gap: 32px;
+}
+
+.sentence {
+    color: white;
+    text-align: center;
+    font-family: Montserrat;
 }
 
 footer i {
@@ -339,7 +351,7 @@ footer i {
 }
 
 .hero-content h3 {
-    font-size : 260px;
+    font-size: 260px;
     font-family: Montserrat;
     font-weight: 400;
     letter-spacing: 50px;
@@ -416,7 +428,7 @@ footer i {
 }
 
 .reg-info-heading {
-    background-color: #000000;
+    background-color: #3663BF;
     padding: 8px;
     max-width: 90%;
     text-align: center;
@@ -426,7 +438,7 @@ footer i {
     border-top-right-radius: 10px;
 }
 
-.reg-info-heading h2{
+.reg-info-heading h2 {
     color: #FFFFFF;
 }
 
@@ -459,7 +471,7 @@ footer i {
     padding: 32px 0;
 }
 
-.affiliations-grid{
+.affiliations-grid {
     display: grid;
     grid-template-columns: repeat(4, max-content);
     gap: 20px;
@@ -508,23 +520,28 @@ footer i {
 }
 
 .court-content img {
-    height: 120px;
+    height: 82px;
 }
 
 .court-content p {
     font-size: 30px;
 }
 
-.court-content img,
-.court-content p:first-of-type {
+.court-content img {
     margin-bottom: 32px;
+}
+
+.court-content p {
+    margin-bottom: 20px;
+    font-style: italic;
+    font-family: Raleway;
 }
 
 .court-map {
     width: 50%;
 }
 
-.map { 
+.map {
     height: 350px;
 }
 
@@ -568,7 +585,8 @@ footer i {
     font-weight: bold;
 }
 
-.login-form label, input {
+.login-form label,
+input {
     display: block;
 }
 
@@ -779,7 +797,7 @@ footer i {
     font-weight: 600;
 }
 
-.volunteers-info p:nth-of-type(1){
+.volunteers-info p:nth-of-type(1) {
     font-size: 20px;
 }
 
@@ -792,7 +810,7 @@ footer i {
     font-style: italic;
 }
 
-.volunteers-info p:nth-of-type(2){
+.volunteers-info p:nth-of-type(2) {
     font-weight: 600;
 }
 
@@ -1134,7 +1152,7 @@ footer i {
 .teams-search table {
     border-collapse: separate;
     border-spacing: 0;
-    overflow: hidden; 
+    overflow: hidden;
     width: 95%;
     background-image: url("/static/images/teams-schedules/sky-dunk.jpg");
     background-position: top;
@@ -1161,7 +1179,7 @@ footer i {
 .teams-search table tbody tr:nth-child(2n) {
     background: rgba(217, 88, 41, 0.189);
 }
-  
+
 .teams-search table th,
 .teams-search table td {
     padding: 8px;
@@ -1219,6 +1237,7 @@ footer i {
 
 /* MEDIA QUERY */
 @media (max-width: 1100px) {
+
     /* GENERAL */
     h1 {
         font-size: 16px;
@@ -1235,22 +1254,26 @@ footer i {
     .court-content img {
         height: 100px;
     }
-    
+
 }
 
 @media (max-width: 992px) {
+
     /* GENERAL */
     section {
         padding: 40px 0;
     }
+
     h2 {
         font-size: 25px;
     }
+
     h3 {
         font-size: 22px;
     }
+
     .logo img {
-        height: 50px;    
+        height: 50px;
     }
 
     /* Footer */
@@ -1258,13 +1281,16 @@ footer i {
         padding-top: 80px;
         padding-bottom: 8px;
     }
+
     .footer-flex {
         gap: 130px;
         justify-content: center;
     }
+
     .footer-list li {
         margin-bottom: 24px;
     }
+
     .social-media-icons {
         gap: 24px;
     }
@@ -1279,6 +1305,7 @@ footer i {
     .reg-info-container {
         padding: 40px 16x;
     }
+
     .reg-info-container p {
         font-size: 18px;
     }
@@ -1287,19 +1314,24 @@ footer i {
     .court-card {
         padding: 32px;
     }
+
     .courtcard-flex {
         gap: 32px;
     }
+
     .court-content {
         width: 80%;
         top: -50px;
     }
+
     .court-content img {
         height: 80px;
     }
+
     .court-content p {
         font-size: 20px;
     }
+
     .court-content img,
     .court-content p:first-of-type {
         margin-bottom: 24px;
@@ -1313,9 +1345,11 @@ footer i {
     .affiliations {
         padding-bottom: 40px;
     }
+
     .affiliations-bg {
         padding: 24px 0;
     }
+
     .affiliations img {
         height: 45px;
     }
@@ -1326,14 +1360,17 @@ footer i {
         padding: 32px;
         height: 100%;
     }
+
     .login-section .form-container {
         height: 100vh;
     }
+
     .form-container img,
     .error-message,
     .choice {
         margin-bottom: 32px;
     }
+
     .form-container img {
         height: 100px;
     }
@@ -1349,15 +1386,19 @@ footer i {
     .goals-flex {
         gap: 64px;
     }
+
     .goal-flex {
         margin-bottom: 24px;
     }
+
     .goals-flex p:first-of-type {
         font-size: 24px;
     }
+
     .goals-images img:first-of-type {
         height: 200px;
     }
+
     .goals-images img:nth-of-type(2) {
         height: 100px;
         right: 20%;
@@ -1367,10 +1408,12 @@ footer i {
     .info-card {
         padding: 24px;
     }
+
     .info-card p:nth-of-type(1) {
         font-size: 24px;
         margin-bottom: 8px;
     }
+
     .info-card p:nth-of-type(2) {
         font-size: 16px;
     }
@@ -1385,15 +1428,18 @@ footer i {
     .volunteers-content {
         padding: 36px;
     }
+
     .volunteers-info {
         padding: 36px;
     }
+
     .volunteers-info h3,
     .volunteers-info p:first-of-type,
     .volunteers-info ul {
         margin-bottom: 16px;
     }
-    .volunteers-info p:nth-of-type(1){
+
+    .volunteers-info p:nth-of-type(1) {
         font-size: 16px;
     }
 
@@ -1403,25 +1449,32 @@ footer i {
         padding: 24px;
         margin-bottom: 32px;
     }
+
     .teams-search .form {
         margin-bottom: 16px;
     }
+
     .teams-search .search-form p:nth-of-type(2) {
         margin-bottom: 16px;
     }
+
     .teams-search .search-form p:nth-of-type(3) {
         margin-bottom: 32px;
     }
+
     .teams-search .search-form ul {
         margin-bottom: 16px;
     }
+
     .teams-search .search-form input,
     .teams-search select {
         margin-bottom: 24px;
     }
+
     .teams-search table .schedule-btn {
         font-size: 14px;
     }
+
     /* table */
     .teams-search .team-logo {
         height: 15px;
@@ -1429,13 +1482,16 @@ footer i {
 }
 
 @media (max-width: 768px) {
+
     /* GENERAL */
     section {
         padding: 32px 0;
     }
+
     h1 {
         font-size: 14px;
     }
+
     h2 {
         font-size: 20px;
     }
@@ -1444,12 +1500,15 @@ footer i {
     footer {
         padding-top: 70px;
     }
+
     .footer-flex {
         gap: 100px;
     }
+
     .footer-list li {
         margin-bottom: 16px;
     }
+
     .social-media-icons {
         gap: 8px;
     }
@@ -1465,18 +1524,23 @@ footer i {
     .announcements-bg {
         padding: 40px;
     }
+
     .announcement-card:hover {
         transform: none;
     }
+
     .announcement-img {
         height: 130px;
     }
+
     .announcements-flex {
         gap: 32px;
     }
+
     .announcement-content {
         padding: 16px;
     }
+
     .announcement-content a {
         margin-bottom: 8px;
     }
@@ -1485,6 +1549,7 @@ footer i {
     .reg-info-container {
         padding: 32px 8px;
     }
+
     .reg-info-container p {
         font-size: 16px;
     }
@@ -1493,6 +1558,7 @@ footer i {
     .affiliations {
         padding-bottom: 32px;
     }
+
     .affiliations img {
         height: 40px;
     }
@@ -1501,29 +1567,36 @@ footer i {
     .court-card {
         gap: 8px;
     }
+
     .courtcard-flex {
         flex-direction: column;
         gap: 16px;
     }
+
     .court-content {
         padding: 32px 16px;
         width: 100%;
         top: -35px;
         left: 0;
     }
+
     .court-content img {
         height: 70px;
     }
+
     .court-content p {
         font-size: 18px;
     }
+
     .court-content img,
     .court-content p:first-of-type {
         margin-bottom: 16px;
     }
+
     .court-map {
         width: 100%;
     }
+
     .map {
         height: 250px;
     }
@@ -1534,35 +1607,42 @@ footer i {
         padding: 24px;
         height: 100%;
     }
+
     .form-container img,
     .error-message,
     .choice {
         margin-bottom: 24px;
     }
+
     .form-container img {
         height: 90px;
     }
-    
+
     /* ABOUT PAGE */
     /* about banner */
     .about-section h2 {
         margin-top: 120px;
     }
+
     /* about goals */
     .goals-flex {
         gap: 36px;
         flex-direction: column;
     }
+
     .goal-flex {
         margin-bottom: 24px;
     }
-    .goals-info{
+
+    .goals-info {
         width: 100%;
     }
+
     .goals-images {
         width: 100%;
         text-align: center;
     }
+
     .goals-images img:nth-of-type(2) {
         top: 65%;
     }
@@ -1571,6 +1651,7 @@ footer i {
     .info-card {
         padding: 16px;
     }
+
     .info-card p:nth-of-type(1) {
         font-size: 18px;
     }
@@ -1580,11 +1661,13 @@ footer i {
         padding: 24px;
         width: 100%;
     }
+
     .volunteers-info {
         padding: 24px;
         width: 100%;
         margin-left: 0;
     }
+
     .volunteers-info h3,
     .volunteers-info p:first-of-type,
     .volunteers-info ul {
@@ -1596,45 +1679,58 @@ footer i {
     .registration-information p {
         font-size: 18px;
     }
+
     .registration-information p:nth-of-type(2) {
         margin-bottom: 24px;
     }
+
     .registration-information p:nth-of-type(3) {
         font-size: 22px;
     }
+
     .registration-information ul {
         margin-bottom: 24px;
     }
+
     .registration-information li {
         font-size: 16px;
     }
+
     /* registration form */
     .registration form {
         padding: 36px;
     }
+
     .registration .register-flex {
         display: flex;
         gap: 16px;
         flex-direction: column;
     }
+
     .registration .label-input {
         width: 100%;
     }
+
     .registration .radio-group {
         gap: 24px;
     }
+
     .registration .register-flex {
         margin-bottom: 16px;
     }
-    .registration  .margin-responsive {
+
+    .registration .margin-responsive {
         margin-left: 38px;
     }
+
     .registration .form-label {
         font-size: 20px;
     }
+
     .registration .icon-flex {
         margin-bottom: 16px;
     }
+
     .registration i {
         font-size: 26px;
     }
@@ -1643,20 +1739,25 @@ footer i {
     .account-info .profile-info {
         margin-bottom: 24px;
     }
+
     .account-info .profile-info img {
         height: 130px;
         margin-bottom: 8px;
     }
+
     .account-info .profile-info p {
         font-size: 18px;
     }
+
     .account-info .account-flex {
         gap: 32px;
     }
+
     .account-info .input-edit {
         flex-direction: column;
         gap: 8px;
     }
+
     .button-container {
         text-align: center;
     }
@@ -1667,35 +1768,44 @@ footer i {
         padding: 16px;
         margin-bottom: 24px;
     }
+
     .teams-search .form {
         margin-bottom: 8px;
     }
+
     .teams-search .search-form p:nth-of-type(2) {
         margin-bottom: 8px;
     }
+
     .teams-search .search-form p:nth-of-type(3) {
         margin-bottom: 24px;
     }
+
     .teams-search .search-form ul {
         margin-bottom: 8px;
     }
+
     .teams-search .search-form input,
     .teams-search select {
         margin-bottom: 16px;
     }
+
     .teams-search table {
         font-size: 14px;
     }
 }
 
 @media (max-width: 576px) {
+
     /* GENERAL */
     section {
         padding: 24px 0;
     }
+
     h1 {
-       display: none;
+        display: none;
     }
+
     .h1-acronym {
         display: block;
     }
@@ -1704,6 +1814,7 @@ footer i {
     footer {
         padding-top: 48px;
     }
+
     .footer-flex {
         gap: 40px;
     }
@@ -1719,9 +1830,11 @@ footer i {
     .announcements-bg {
         padding: 32px;
     }
+
     .announcement-img {
         height: 100px;
     }
+
     .announcements-flex {
         gap: 24px;
         grid-template-columns: repeat(1, 1fr);
@@ -1731,6 +1844,7 @@ footer i {
     .reg-info-container {
         padding: 24px 8px;
     }
+
     .reg-info-container p {
         font-size: 14px;
     }
@@ -1739,9 +1853,11 @@ footer i {
     .court-content img {
         height: 50px;
     }
+
     .court-content p {
         font-size: 16px;
     }
+
     .court-content img,
     .court-content p:first-of-type {
         margin-bottom: 8px;
@@ -1751,11 +1867,13 @@ footer i {
     .affiliations {
         padding-bottom: 24px;
     }
-    .affiliations-grid{
+
+    .affiliations-grid {
         grid-template-columns: repeat(2, max-content);
         gap: 40px;
         justify-content: center;
     }
+
     .affiliations-grid img {
         margin-left: auto;
         margin-right: auto;
@@ -1766,9 +1884,11 @@ footer i {
     .goals-flex {
         gap: 24px;
     }
+
     .goal-flex {
         margin-bottom: 16px;
     }
+
     .goals-images img:nth-of-type(2) {
         right: 10%;
     }
@@ -1777,6 +1897,7 @@ footer i {
     .info-card {
         padding: 8px;
     }
+
     .info-card p:nth-of-type(1) {
         font-size: 16px;
     }
@@ -1785,6 +1906,7 @@ footer i {
     .volunteers-content {
         padding: 16px;
     }
+
     .volunteers-info {
         padding: 16px;
     }
@@ -1794,50 +1916,63 @@ footer i {
     .registration-information p {
         font-size: 16px;
     }
+
     .registration-information p:nth-of-type(2) {
         margin-bottom: 16px;
     }
+
     .registration-information p:nth-of-type(3) {
         font-size: 18px;
     }
+
     .registration-information ul {
         margin-bottom: 16px;
     }
+
     .registration-information li {
         font-size: 14px;
     }
+
     /* registration form */
     .registration form {
         padding: 24px;
     }
+
     .registration .register-flex {
         gap: 8px;
         margin-bottom: 8px;
     }
+
     .registration .radio-group {
         grid-template-columns: repeat(1, 1fr);
         gap: 8px;
         text-align: left;
     }
+
     .registration .radio-option {
         flex-direction: row;
         justify-content: start;
         margin-bottom: 8px;
     }
-    .registration .radio-option input{
+
+    .registration .radio-option input {
         width: 10%;
         margin-left: -12px;
     }
-    .registration .radio-option label{
+
+    .registration .radio-option label {
         width: 90%;
         margin-bottom: 0px;
     }
+
     .registration .form-label {
         font-size: 18px;
     }
+
     .registration .icon-flex {
         margin-bottom: 8px;
     }
+
     .registration i {
         font-size: 22px;
     }
@@ -1846,11 +1981,13 @@ footer i {
     .account-info .profile-info img {
         height: 100px;
     }
+
     .account-info .account-flex {
         flex-direction: column;
         gap: 8px;
         text-align: center;
     }
+
     .account-info .account-left,
     .account-info .account-right {
         width: 100%;
@@ -1858,4 +1995,3 @@ footer i {
 
 
 }
-
