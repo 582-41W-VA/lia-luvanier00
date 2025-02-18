@@ -135,7 +135,7 @@
                                     {% if team.group == group %}
                                     <div class="teamlogo-flex logo-margin">
                                         <img class="team-logo" src="{% static 'images/logo.png' %}" alt="Team logo.">
-                                        <li>{{ team }}</li>
+                                        <li><a href="{% url 'team_schedule' team %}">{{ team }}</a></li>
                                     </div>
                                     {% endif %}
                                 {% endfor %}
