@@ -1108,18 +1108,22 @@ input {
 
 .teams-search .search-form input,
 .teams-search select {
-    margin-bottom: 32px;
     border-radius: 5px;
     height: 30px;
     border: none;
 }
 
 .teams-search .search-form input {
+    margin-bottom: 32px;
     width: 100%;
 }
 
-.teams-search .search-form select {
+.teams .search-form select {
     width: 70%;
+}
+
+.schedule .search-form select {
+    width: 100%;
 }
 
 .teams-search .search-form label {
@@ -1135,8 +1139,14 @@ input {
     justify-content: center;
 }
 
+.teams-search .search-margin {
+    margin-bottom: 48px;
+}
+
 .teams-search .search-flex {
     display: flex;
+    justify-content: space-around;
+    gap: 16px;
 }
 
 .teams-search .search-right,
@@ -1148,7 +1158,7 @@ input {
     text-align: center;
 }
 
-/* table */
+/* teams & schedule table */
 .teams-search table {
     border-collapse: separate;
     border-spacing: 0;
@@ -1176,7 +1186,7 @@ input {
     border-bottom-right-radius: 8px;
 }
 
-.teams-search table tbody tr:nth-child(2n) {
+.teams table tbody tr:nth-child(2n) {
     background: rgba(217, 88, 41, 0.189);
 }
 
@@ -1233,6 +1243,60 @@ input {
 .teams-search .scroll-box li {
     padding: 8px;
     border-bottom: 1px solid #ddd;
+}
+
+/* schedule table */
+.schedule table tbody tr:nth-child(1), 
+.schedule table tbody tr:nth-child(2n + 1) {
+    background: rgba(217, 88, 41, 0.189);
+}
+
+.schedule .comments-section {
+    border: 2px solid black;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.schedule summary {
+    font-weight: bold;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.schedule .comment-td {
+    text-align: center;
+}
+
+.schedule .comment {
+    display: flex;
+    align-items: center;
+    background-color: #e5eaf2;
+    padding: 8px;
+    margin-bottom: 4px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.schedule .username {
+    font-weight: bold;
+    color: gray;
+    margin-right: 8px;
+}
+
+.schedule .comment-text {
+    flex: 1;
+}
+
+.schedule .comment-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: 10px;
+}
+
+.schedule .icon {
+    cursor: pointer;
+    font-size: 14px;
+    color: #c44;
 }
 
 /* MEDIA QUERY */
@@ -1471,6 +1535,10 @@ input {
         margin-bottom: 24px;
     }
 
+    .teams-search .search-margin {
+        margin-bottom: 36px;
+    }
+
     .teams-search table .schedule-btn {
         font-size: 14px;
     }
@@ -1514,7 +1582,6 @@ input {
     }
 
     /* HOME */
-
     /* Hero Banner */
     .hero-content h3 {
         font-size: 150px;
