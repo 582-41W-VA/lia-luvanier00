@@ -11,7 +11,6 @@ class Role(models.Model):
 
 class UserAccount(AbstractUser):
     role = models.ForeignKey(Role, on_delete=models.RESTRICT, related_name="user_accounts", null=True, blank=True)
-    bio = models.TextField("Bio", blank=True, null=True)
     phone = models.CharField("Phone Number", max_length=15,  blank=True, null=True)
 
     def __str__(self):
