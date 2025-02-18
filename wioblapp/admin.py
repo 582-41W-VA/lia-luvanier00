@@ -99,8 +99,17 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ("user_account", "content", "date", "likes") 
 
 class FlagAdmin(admin.ModelAdmin):
-    list_display = ("user_account", "flagged_content", "date") 
+    list_display = ("comment", "reviewed", "date")  
+    list_filter = ("reviewed",)
+    exclude = ('user_account',)  
 
+    def save_model(self, request, obj, form, change):
+        if not obj.pk: 
+            obj.user_account = request.user  
+        super().save_model(request, obj, form, change)
+
+
+wiobl_site = WioblAdminArea(name='WioblAdmin')
 
 class FlagAdmin(admin.ModelAdmin):
     list_display = ("comment", "reviewed", "date")  
