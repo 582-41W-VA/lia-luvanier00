@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag, LikedComment
 from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm, TeamScheduleForm
 
+from django.db.models import F
+
 # --------------------------------------------------------------
 def index(request):
     announcements = Announcement.objects.order_by("-date")[:4]
@@ -297,10 +299,9 @@ def team_schedule(request, team_name):
             if result == "Win":
                 games = games.filter(winner=team)
             elif result == "Lose":
-                tie_games = games.filter(team1_score=F('team2_score'))
-                games = games.exclude(winner=team).exclude(tie_games)
+                games = games.exclude(winner=team).exclude(team1_score=F('team2_score')).exclude(team1_score__isnull=True).exclude(team2_score__isnull=True)
             elif result == "Tie":
-                games = games.filter(team1_score=F('team2_score'), team1_score__isnull=False)
+                games = games.filter(team1_score=F('team2_score'), team1_score__isnull=False, team2_score__isnull=False)
 
     for game in games:
         game_comments.append({
@@ -468,8 +469,6 @@ def delete_comment(request, team_name):
         messages.error(request, "Can't be deleted. Please try again.")
     return redirect("team_schedule", team_name)    
 # --------------------------------------------------------------
-
-
 
 # --------------------------------------------------------------
 def about(request):
