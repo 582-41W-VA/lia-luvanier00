@@ -49,18 +49,22 @@
                     <ul class="menu-list" id="menu-list">
                         <li><a href="{% url 'about' %}">About us</a></li>
                         <li><a href="{% url 'teams' %}">Teams</a></li>
-                        <li><a href="{% url 'registration' %}">Registration</a></li>
-                        <li><a href="#">Contact</a></li>
                         {% if request.user.is_authenticated %}
-                        <li>
-                            <a class="orange-url account-url" href="{% url 'member_account' request.user.id %}">
-                                <i class="fa-regular fa-user"></i> Account
-                            </a>
-                        </li>
-                        <li><a class="orange-url" href="{% url 'logout' %}">Logout</a></li>
+                            {% if request.user.role.name == "Coach" %}
+                                <li><a href="{% url 'admin:index' %}">Admin Panel</a></li>
+                            {% elif request.user.role.name == "Admin" %}
+                                <li><a href="{% url 'admin:index' %}">Admin Panel</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'registration' %}">Registration</a></li>
+                            <li>
+                                <a class="orange-url account-url" href="{% url 'member_account' request.user.id %}">
+                                    <i class="fa-regular fa-user"></i> Account
+                                </a>
+                            </li>
+                            <li><a class="orange-url" href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
-                        <li><a class="orange-url" href="{% url 'sign-up' %}">Sign-up</a></li>
-                        <li><a class="orange-url" href="{% url 'login' %}">Login</a></li>
+                            <li><a class="orange-url" href="{% url 'sign-up' %}">Sign-up</a></li>
+                            <li><a class="orange-url" href="{% url 'login' %}">Login</a></li>
                         {% endif %}
                     </ul>
 
@@ -95,11 +99,15 @@
                     <li><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">About us</a></li>
                     <li><a href="{% url 'teams' %}">Teams</a></li>
-                    <li><a href="{% url 'registration' %}">Registration</a></li>
                 </ul>
                 <ul class="footer-list footer-right">
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'registration' %}">Registration</a></li>
+                        <li><a class="orange-url" href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a class="orange-url" href="{% url 'sign-up' %}">Sign-up</a></li>
+                        <li><a class="orange-url" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
                     <ul class="social-media-icons">
                         <li><a href="#">
                                 <i class="fa-brands fa-square-facebook"></i>
