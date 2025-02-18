@@ -20,7 +20,6 @@ from .models import (
 
 
 
-
 class WioblAdminArea(admin.AdminSite):
     site_header = "WIOBL Admin"
     site_url = "/wioblapp/"
