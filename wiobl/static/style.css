@@ -61,6 +61,7 @@ h5 {
     border: none;
     color: #FFFFFF;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .action-button {
@@ -70,6 +71,14 @@ h5 {
 .action-button:hover {
     background-color: #bf1616;
     transform: scale(1.05);
+}
+
+.blue-button {
+    background-color: #3663BF;
+}
+
+.blue-button:hover {
+    background-color: #5177c3;
 }
 
 .black-button {
@@ -1261,42 +1270,52 @@ input {
     font-weight: bold;
     padding: 4px;
     cursor: pointer;
+    text-transform: capitalize;
 }
 
-.schedule .comment-td {
-    text-align: center;
+.schedule .comment-flex {
+    display: flex;
+    gap: 24px;
+    align-items:flex-end;
+    margin-bottom: 24px;
 }
 
 .schedule .comment {
-    display: flex;
-    align-items: center;
+    padding: 16px;
+}
+
+.schedule .comment-info {
     background-color: #e5eaf2;
-    padding: 8px;
     margin-bottom: 4px;
     border-radius: 5px;
-    position: relative;
+}
+
+.schedule .comment-infoflex {
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.schedule .comment-txt {
+    font-size: 18px;
+}
+
+.schedule .date {
+    font-size: 14px;
+    font-weight: bold;
+    color: #4c4545;
+}
+
+.schedule .comment-actions {
+    display: flex;
+    gap: 8px;
 }
 
 .schedule .username {
     font-weight: bold;
     color: gray;
     margin-right: 8px;
-}
-
-.schedule .comment-text {
-    flex: 1;
-}
-
-.schedule .comment-actions {
-    display: flex;
-    gap: 8px;
-    margin-left: 10px;
-}
-
-.schedule .icon {
-    cursor: pointer;
-    font-size: 14px;
-    color: #c44;
 }
 
 /* MEDIA QUERY */
