@@ -47,12 +47,13 @@ class AnnouncementAdmin(admin.ModelAdmin):
 
 
 class FlagAdmin(admin.ModelAdmin):
-    list_display = ("user_account", "comment", "reviewed", "date")
+    list_display = ("comment", "reviewed", "date")  
     list_filter = ("reviewed",)
+    exclude = ('user_account',)  
 
     def save_model(self, request, obj, form, change):
         if not obj.pk: 
-            obj.reviewed = False
+            obj.user_account = request.user  
         super().save_model(request, obj, form, change)
 
 wiobl_site = WioblAdminArea(name='WioblAdmin')
