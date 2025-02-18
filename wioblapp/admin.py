@@ -1,9 +1,9 @@
 from django.urls import reverse
 from django.contrib import admin
 from django.contrib.admin import AdminSite
-from django.template.response import TemplateResponse
 from datetime import datetime, timedelta
 from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Announcement, Flag, Comment
+
 
 class WioblAdminArea(admin.AdminSite):
     site_header = 'WIOBL Admin'
@@ -21,10 +21,9 @@ class WioblAdminArea(admin.AdminSite):
             new_users = UserAccount.objects.filter(date_joined__gt=datetime.now() - timedelta(days=7)).count() or 0
             total_registrations = Registration.objects.count() or 0
             new_registrations = Registration.objects.filter(date_time__gt=datetime.now() - timedelta(days=7)).count() or 0
-            
             pending_registrations = Registration.objects.filter(team__isnull=True).count()
 
-            unreviewed_flags = 0  
+            unreviewed_flags = Flag.objects.filter(reviewed=False).count() 
 
             context.update({
                 'total_users': total_users,
@@ -37,20 +36,27 @@ class WioblAdminArea(admin.AdminSite):
 
         return context
 
-
-
-
-
-wiobl_site = WioblAdminArea(name='WioblAdmin')
-
 class AnnouncementAdmin(admin.ModelAdmin):
-    list_display = ("title", "date", "user_account") 
+    list_display = ("title", "date", "user_account")
     exclude = ("user_account",)
 
     def save_model(self, request, obj, form, change):
-        if not obj.pk:  
+        if not obj.pk: 
             obj.user_account = request.user
         super().save_model(request, obj, form, change)
+
+
+class FlagAdmin(admin.ModelAdmin):
+    list_display = ("user_account", "comment", "reviewed", "date")
+    list_filter = ("reviewed",)
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk: 
+            obj.reviewed = False
+        super().save_model(request, obj, form, change)
+
+wiobl_site = WioblAdminArea(name='WioblAdmin')
+
 
 wiobl_site.register(Role)
 wiobl_site.register(UserAccount)
@@ -61,5 +67,5 @@ wiobl_site.register(Registration)
 wiobl_site.register(Park)
 wiobl_site.register(Game)
 wiobl_site.register(Announcement, AnnouncementAdmin)
-wiobl_site.register(Flag)
+wiobl_site.register(Flag, FlagAdmin) 
 wiobl_site.register(Comment)

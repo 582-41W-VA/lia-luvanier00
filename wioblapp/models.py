@@ -117,7 +117,8 @@ class Flag(models.Model):
     user_account = models.ForeignKey(UserAccount, on_delete=models.RESTRICT, related_name="flags")
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="flags", blank=True, null=True)
     date = models.DateTimeField("Date", auto_now_add=True)
+    reviewed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.comment.content
+        return self.comment.content if self.comment else "No Comment"
 
