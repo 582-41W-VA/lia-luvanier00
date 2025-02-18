@@ -1,7 +1,6 @@
 from django.urls import reverse
 from django.contrib import admin
 from django.contrib.admin import AdminSite
-from django.template.response import TemplateResponse
 from datetime import datetime, timedelta
 from .models import (
     Role,
@@ -18,6 +17,7 @@ from .models import (
     LikedComment,
     FavoriteTeam,
 )
+
 
 
 class WioblAdminArea(admin.AdminSite):
@@ -40,16 +40,10 @@ class WioblAdminArea(admin.AdminSite):
                 or 0
             )
             total_registrations = Registration.objects.count() or 0
-            new_registrations = (
-                Registration.objects.filter(
-                    date_time__gt=datetime.now() - timedelta(days=7)
-                ).count()
-                or 0
-            )
+            new_registrations = Registration.objects.filter(date_time__gt=datetime.now() - timedelta(days=7)).count() or 0
+            pending_registrations = Registration.objects.filter(team__isnull=True).count()
 
-            pending_registrations = Registration.objects.filter(
-                team__isnull=True
-            ).count()
+            unreviewed_flags = Flag.objects.filter(reviewed=False).count() 
 
             unreviewed_flags = 0
 
@@ -66,10 +60,6 @@ class WioblAdminArea(admin.AdminSite):
 
         return context
 
-
-wiobl_site = WioblAdminArea(name="WioblAdmin")
-
-
 class AnnouncementAdmin(admin.ModelAdmin):
     list_display = ("title", "date", "user_account")
     exclude = ("user_account",)
@@ -85,8 +75,17 @@ class CommentAdmin(admin.ModelAdmin):
 class FlagAdmin(admin.ModelAdmin):
     list_display = ("user_account", "flagged_content", "date") 
 
-class TeamAdmin(admin.ModelAdmin):
-    list_display = ("name", "team_name") 
+
+class FlagAdmin(admin.ModelAdmin):
+    list_display = ("user_account", "comment", "reviewed", "date")
+    list_filter = ("reviewed",)
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk: 
+            obj.reviewed = False
+        super().save_model(request, obj, form, change)
+
+wiobl_site = WioblAdminArea(name='WioblAdmin')
 
 
 wiobl_site.register(Role)
