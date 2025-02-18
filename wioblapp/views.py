@@ -32,12 +32,6 @@ def sign_up(request):
             username = f"{firstname}{lastname}"
             email = signup_form.cleaned_data.get("email")
             password = signup_form.cleaned_data.get("password1")
-            role = signup_form.cleaned_data.get("role")
-            bio = signup_form.cleaned_data.get("bio")
-
-            # if UserAccount.objects.filter(first_name=firstname).exists():
-            #     messages.error(request, f"Firstname {firstname} is already exist!")
-            #     return render (request, "sign-up.html", {"signup_form": signup_form,})
 
             if UserAccount.objects.filter(username=username).exists():
                 messages.error(request, f"Username {username} is already exist!")
@@ -53,14 +47,8 @@ def sign_up(request):
                 username=username,
                 email=email,
                 password=password,
-                role=Role.objects.get(name=role),
-                bio=bio
+                role=Role.objects.get(name="Parent")
             )
-
-            if role.name in ["Admin", "Coach"]:
-                member.is_staff = True
-                member.is_superuser = True
-                member.save()
 
             messages.success(request, "You signed-up successfully")
             auth_member = authenticate(request, username=username, password=password)
@@ -136,7 +124,6 @@ def member_account(request, account_id):
             member.first_name = account_form.cleaned_data["first_name"]
             member.last_name = account_form.cleaned_data["last_name"]
             member.email = account_form.cleaned_data["email"]
-            member.role = account_form.cleaned_data["role"]
             new_password = account_form.cleaned_data.get("password")
             member.set_password(new_password)
             member.phone = account_form.cleaned_data["phone"]
