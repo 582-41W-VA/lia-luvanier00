@@ -297,15 +297,16 @@ def team_schedule(request, team_name):
             if result == "Win":
                 games = games.filter(winner=team)
             elif result == "Lose":
-                games = games.exclude(winner=team)
-
+                tie_games = games.filter(team1_score=F('team2_score'))
+                games = games.exclude(winner=team).exclude(tie_games)
+            elif result == "Tie":
+                games = games.filter(team1_score=F('team2_score'), team1_score__isnull=False)
 
     for game in games:
         game_comments.append({
             "game": game,
             "comments": comments.filter(game=game).order_by("-date"),
         }) 
-
 
     context = {
         "schedule_form": schedule_form,
