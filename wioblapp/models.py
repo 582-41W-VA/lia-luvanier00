@@ -36,6 +36,13 @@ class Team(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+class FavoriteTeam(models.Model):
+    user_account = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="favoriteteams")
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="favoriteteams", blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user_account.name} favorite teams"
+
 class Player(models.Model):
     related_account = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="players")
     team_name = models.ForeignKey(Team, on_delete=models.RESTRICT, related_name="players", blank=True, null=True)
@@ -119,5 +126,5 @@ class Flag(models.Model):
     date = models.DateTimeField("Date", auto_now_add=True)
 
     def __str__(self):
-        return self.comment.content
+        return self.comment.content[:20]
 
