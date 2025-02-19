@@ -95,38 +95,39 @@
     <footer class="{% block footer_class %}default-footer{% endblock %}">
         <div class="container">
             <div class="footer-flex">
-                <ul class="footer-list">
-                    <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About us</a></li>
+                <ul class="footer-item">
+                    <li class="list-item"><a href="{% url 'index' %}">Home</a></li>
+                    <li class="list-item"><a href="{% url 'about' %}">About us</a></li>
                     <li><a href="{% url 'teams' %}">Teams</a></li>
                 </ul>
-                <ul class="footer-list footer-right">
+                <ul class="footer-item">
                     {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'registration' %}">Registration</a></li>
+                        <li class="list-item"><a href="{% url 'registration' %}">Registration</a></li>
                         <li><a class="orange-url" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
-                        <li><a class="orange-url" href="{% url 'sign-up' %}">Sign-up</a></li>
-                        <li><a class="orange-url" href="{% url 'login' %}">Login</a></li>
+                        <li class="list-item"><a class="orange-url" href="{% url 'sign-up' %}">Sign-up</a></li>
+                        <li class="list-item"><a class="orange-url" href="{% url 'login' %}">Login</a></li>
                     {% endif %}
                     <ul class="social-media-icons">
                         <li><a href="#">
                                 <i class="fa-brands fa-square-facebook"></i>
-                            </a></li>
+                            </a>
+                        </li>
                         <li><a href="#">
                                 <i class="fa-brands fa-square-x-twitter"></i>
-                            </a></li>
+                            </a>
+                        </li>
                         <li><a href="#">
                                 <i class="fa-brands fa-instagram"></i>
-                            </a></li>
+                            </a>
+                        </li>
                     </ul>
                 </ul>
-                <ul class="footer-list sentence">
-                    <li>
-                        <p>"Some people want it to happen,<br>
-                            some wish it would happen, others make it happen."<br>
-                            - Michael Jordan</p>
-                    </li>
-                </ul>
+                <div class="footer-item sentence">
+                    <p>"Some people want it to happen,<br>
+                        some wish it would happen, others make it happen."<br>
+                        <span class="quote-author">- Michael Jordan</span></p>
+                </div>
             </div>
         </div>
     </footer>

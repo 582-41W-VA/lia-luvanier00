@@ -292,13 +292,11 @@ h6 {
 
 /* Footer */
 footer {
-    padding-top: 150px;
+    padding-top: 125px;
     padding-bottom: 24px;
     background: url("/static/images/footer-ball.svg");
-    background-position: bottom;
+    background-position: top;
     background-size: cover;
-    /* z-index: 10;
-    position: relative; */
 }
 
 .footer-login {
@@ -307,21 +305,18 @@ footer {
 
 .footer-flex {
     display: flex;
-    gap: 130px;
+    gap: 80px;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 footer ul {
     list-style: none;
 }
 
-.footer-list li {
+footer .list-item {
     margin-bottom: 14px;
-}
-
-.footer-right {
-    margin-top: 3rem;
 }
 
 footer a {
@@ -344,7 +339,15 @@ footer a:hover {
     color: white;
     text-align: center;
     font-family: Montserrat;
+    line-height: 1.5;
 }
+
+.sentence .quote-author {
+    font-weight: 600;
+    font-style: italic;
+}
+
+
 
 footer i {
     font-size: 30px;
@@ -548,16 +551,13 @@ footer i {
     left: 20%;
 }
 
-.court-content img {
-    height: 82px;
-}
-
 .court-content p {
     font-size: 30px;
 }
 
 .court-content img {
     margin-bottom: 32px;
+    height: 70px;
 }
 
 .court-content p {
@@ -1448,6 +1448,10 @@ input {
         font-size: 16px;
     }
 
+    .footer-flex {
+        gap: 70px;
+    }
+
     /* Nav */
     .menu-list {
         flex-wrap: wrap;
@@ -1457,7 +1461,7 @@ input {
     /* HOME */
     /* Court */
     .court-content img {
-        height: 100px;
+        height: 60px;
     }
 
 }
@@ -1481,18 +1485,15 @@ input {
         height: 50px;
     }
 
-    /* Footer */
-    footer {
-        padding-top: 80px;
-        padding-bottom: 8px;
+    .footer {
+        padding-top: 100px;
     }
 
     .footer-flex {
-        gap: 130px;
-        justify-content: center;
+        gap: 50px;
     }
 
-    .footer-list li {
+    footer .list-item {
         margin-bottom: 24px;
     }
 
@@ -1530,7 +1531,7 @@ input {
     }
 
     .court-content img {
-        height: 80px;
+        height: 40px;
     }
 
     .court-content p {
@@ -1748,14 +1749,14 @@ input {
 
     /* Footer */
     footer {
-        padding-top: 70px;
+        padding-top: 80px;
     }
 
-    .footer-flex {
+    /* .footer-flex {
         gap: 100px;
-    }
+    } */
 
-    .footer-list li {
+    footer .list-item {
         margin-bottom: 16px;
     }
 
@@ -1830,7 +1831,7 @@ input {
     }
 
     .court-content img {
-        height: 70px;
+        height: 30px;
     }
 
     .court-content p {
@@ -2061,12 +2062,12 @@ input {
 
     /* Footer */
     footer {
-        padding-top: 48px;
+        padding-top: 70px;
     }
 
-    .footer-flex {
+    /* .footer-flex {
         gap: 40px;
-    }
+    } */
 
     /* HOME */
 
@@ -2100,7 +2101,7 @@ input {
 
     /* Courts */
     .court-content img {
-        height: 50px;
+        height: 25px;
     }
 
     .court-content p {
