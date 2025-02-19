@@ -48,10 +48,10 @@ class Player(models.Model):
 
 class Registration(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="registrations")
-    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True, related_name="registrations")  # Add this line
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True, related_name="registrations")
     reg_type = models.ForeignKey(RegistrationType, on_delete=models.CASCADE, related_name="registrations")
     address = models.CharField("Address", max_length=200)
-    email = models.EmailField("Email Adress", max_length=254, blank=True, null=True)
+    email = models.EmailField("Email Address", max_length=254, blank=True, null=True)
     phone = models.CharField("Phone Number", max_length=15)
     uniform_size = models.CharField("Uniform Size", max_length=3)
     consent = models.BooleanField("Consent", default=False, null=False)
@@ -59,8 +59,13 @@ class Registration(models.Model):
     date_time = models.DateTimeField("Date", auto_now_add=True)
     message = models.TextField("Special Requests", blank=True, null=True)
 
+    @property
+    def validated(self):
+        return self.team is not None
+
     def __str__(self):
         return f"{self.player} - {self.reg_type}"
+
 
 class Park(models.Model):
     name = models.CharField("Park Name", max_length=100)

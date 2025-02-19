@@ -6,10 +6,7 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}">
   
-<<<<<<< HEAD:wioblapp/templates/admin/base.html
-  
-=======
->>>>>>> comment-flag:templates/admin/base.html
+
   {% if not is_popup and is_nav_sidebar_enabled %}
     <link rel="stylesheet" href="{% static 'admin/css/nav_sidebar.css' %}">
     <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>
@@ -93,7 +90,7 @@
           {% endif %}
         {% endblock messages %}
         
-        <!-- Content -->
+
         <div id="content" class="{% block coltype %}colM{% endblock %}">
           {% block pretitle %}{% endblock %}
           {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}
