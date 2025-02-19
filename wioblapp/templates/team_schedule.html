@@ -48,6 +48,9 @@
                     <th>Team2</th>
                 </tr>
             </thead>
+            <div>
+                
+            </div>
 
             <tbody>
                 <!-- Game Content START-->
@@ -56,13 +59,21 @@
                     <!-- GAME INFO ROW START -->
                     <tr class="game-row">
                         <!-- COLUMN 1 -->
-                        <td>{{ game.game.date_time }} at {{ game.game.park }}</td>
+                        <td>
+                            {{ game.game.date_time }} at {{ game.game.park }}
+                        </td>
                        
                         {% if game.game.team1_score and game.game.team2_score %}
                             <!-- COLUMN 2 -->
-                            <td>{{ game.game.team_1.color }} {{ game.game.team_1 }}: {{ game.game.team1_score }}</td>
+                            <td>
+                                <i class="fa-solid fa-circle" style="color: {{ game.game.team_1.color }};"></i>
+                                {{ game.game.team_1 }}: {{ game.game.team1_score }}
+                            </td>
                             <!-- COLUMN 3 -->
-                            <td>{{ game.game.team_2.color }} {{ game.game.team_2 }}: {{ game.game.team2_score }}</td>
+                            <td>
+                                <i class="fa-solid fa-circle" style="color: {{ game.game.team_2.color }};"></i>
+                                {{ game.game.team_2 }}: {{ game.game.team2_score }}
+                            </td>
                         {% else %}
                             <!-- COLUMN 2 -->
                             <td>{{ game.game.team_1 }}</td>
@@ -75,91 +86,145 @@
                     <tr class="comment-row">
                         <td colspan="3">
                             <details class="comments-section">
+
                                 <summary>Comment</summary>
-                                <div>                                    
-                                    <!-- Post a comment -->
+
+                                <!-- Post a comment START-->
+                                <div class="submit-comment">
                                     <form action="{% url 'create_comment' team %}" method="POST">
                                         {% csrf_token %}
                                         
+                                        <!-- Flex START -->
                                         <div class="comment-flex">
                                             {% for field in comment_form %}
                                                 {{ field }}
                                             {% endfor %}
 
-                                            <button class="button blue-button" type="submit" name="post" value="{{ game.game.id }}">Send</button>                 
-                                        </div>
-    
-                                    </form> <!-- Post a comment END -->
+                                            <button class="button button-small blue-button" type="submit" name="post" value="{{ game.game.id }}">Submit</button>                 
+                                        </div> <!-- Flex END -->
+                                    </form>
+                                </div> <!-- Post a comment END-->
 
-                                    <!-- See comments START -->
-                                    <div>
+                                <!-- See comments START -->
+                                <div>
+                                    <div class="heading">
                                         <h6>Comments</h6>
-                                        {% if game.comments %}
-                                            {% for comment in game.comments %} 
-                                                {% if comment.game == game.game  %}
-
-                                                    <!-- single comment START -->
-                                                    <div>
-                                                        <div class="comment comment-info">
-                                                            <div class="comment-infoflex">
-                                                                <p class="comment-txt">{{ comment.content }}</p>
-                                                                <p class="date">{{ comment.date }}</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="comment comment-actions">
-                                                            <!-- Like count and like button -->
-                                                            <form action="{% url 'like_comment' team %}" method="POST">
-                                                                {% csrf_token %}
-
-                                                                <p>Likes: {{ comment.likes }}</p>
-                                                                <button type="submit" name="like" value="{{ comment.id }}"><i class="fa-solid fa-heart"></i></button>
-                                                            </form>
-
-                                                            <!-- Flag button -->
-                                                            <form action="{% url 'flag_comment' team %}" method="POST">
-                                                                {% csrf_token %}
-
-                                                                <button type="submit" name="flag" value="{{ comment.id }}"><i class="fa-solid fa-flag"></i></button>
-                                                            </form>
-
-                                                            <!-- Edit own comment -->
-                                                            {% if comment.user_account == request.user %}
-
-                                                            <!-- 1. Edit button -->
-                                                            <button>Edit</button>
-                                                            <form action="{% url 'edit_comment' team comment.id %}" method="POST">
-                                                                {% csrf_token %}
-                                            
-                                                                {% for field in comment_form %}
-                                                                    {% if field.name == "content" %}
-                                                                        <textarea name="{{ field.name }}" id="{{ field.id_for_label }}">{{ comment.content }}</textarea>
-                                                                    {% else %}
-                                                                        {{ field }}
-                                                                    {% endif %}
-                                                                {% endfor %}
-
-                                                                <!-- 2. Submit edit button -->
-                                                                <button type="submit" name="edit" value="{{ comment.id }}">Edit</button>
-                                                            </form>
-                                                            <form action="{% url 'delete_comment' team %}" method="POST">
-                                                                {% csrf_token %}
-
-                                                                <!-- Delete button -->
-                                                                <button type="submit" name="delete" value="{{ comment.id }}"><i class="fa-solid fa-trash"></i></button>
-                                                            </form>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div> <!-- single comment END -->
-
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% else %}
-                                            <p>No comments related to this game</p>
-                                        {% endif %} <!-- See comments END -->
                                     </div>
+                                    {% if game.comments %}
+                                        {% for comment in game.comments %} 
+                                            {% if comment.game == game.game  %}
 
+                                                <!-- single comment START -->
+                                                <div class="comment">
+                                                    <!-- Comment info START -->
+                                                    <div class="comment-info">
+                                                        <div class="comment-infoflex">
+
+                                                            <!-- Comment left START -->
+                                                            <div class="comment-left">
+                                                                <p class="comment-txt">
+                                                                <span class="username">User: </span>
+                                                                {{ comment.content }}
+                                                                </p>
+                                                                <div class="edit-flex">
+                                                                    <p class="date">{{ comment.date }}</p>
+                                                                    {% if comment.user_account == request.user %}
+                                                                    <button id="edit-btn" class="bluetext-btn">Edit</button>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div> <!-- Comment left END -->
+
+                                                            <!-- Comment right START -->
+                                                            <div class="comment-right">
+                                                                <!-- Flex START -->
+                                                                <div class="actions-flex">
+                                                                    <!-- Like form START -->
+                                                                    <form action="{% url 'like_comment' team %}" method="POST">
+                                                                        {% csrf_token %}
+    
+                                                                        <div class="like-flex">
+                                                                            <p class="like-count">{{ comment.likes }}</p>
+                                                                            <button class="icon" type="submit" name="like" value="{{ comment.id }}">
+                                                                                <span class="tooltip-wrapper" data-tooltip="Like comment">
+                                                                                    <i class="fa-solid fa-heart"></i>
+                                                                                </span>
+                                                                            </button> 
+                                                                        </div>
+                                                                    </form> <!-- Like form END -->
+    
+                                                                    <!-- Flag button form START -->
+                                                                    <form action="{% url 'flag_comment' team %}" method="POST" class="flag-form">
+                                                                        {% csrf_token %}
+                                                                    
+                                                                        <button type="button" class="icon flag-btn" id="flag-icon">
+                                                                            <span class="tooltip-wrapper" data-tooltip="Flag comment">
+                                                                                <i class="fa-solid fa-flag"></i>
+                                                                            </span>
+                                                                        </button>
+                                                                    
+                                                                        <div class="popup" id="popup">
+                                                                            <p class="warning">Do you want to flag this comment?</p>
+                                                                            <div class="controls-flex">
+                                                                                <button class="button button-small blue-button" type="submit" name="flag" value="{{ comment.id }}">Yes, flag comment</button>
+                                                                                <button type="button" class="button button-small action-button cancel-btn" id="cancel-popup">Cancel</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form> <!-- Flag button form END -->
+                                                                </div> <!-- Flex END -->
+                                                            </div> <!-- Comment right END -->
+
+                                                        </div>
+                                                    </div> <!-- Comment info END -->
+
+                                                    <!-- Comment edit START -->
+                                                    <div class="comment-edit" id="comment-edit">
+                                                        {% if comment.user_account == request.user %}
+                                                        <!-- Flex START -->
+                                                        <div class="comment-flex">
+
+                                                            <!-- Comment edit form START -->
+                                                            <form class="edit-form" action="{% url 'edit_comment' team comment.id %}" method="POST">
+                                                                {% csrf_token %}
+                                                                
+                                                                <div class="comment-flex">
+                                                                    <div class="comment-left">
+                                                                        {% for field in comment_form %}
+                                                                        {% if field.name == "content" %}
+                                                                            <textarea class="textarea-edit" name="{{ field.name }}" id="{{ field.id_for_label }}">{{ comment.content }}</textarea>
+                                                                        {% else %}
+                                                                            {{ field }}
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                    </div>
+                                                                    <div class="comment-right">
+                                                                        <button class="button button-small blue-button"  type="submit" name="edit" value="{{ comment.id }}">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form> <!-- Comment edit form END -->
+
+                                                            <!-- Delete form START -->
+                                                            <form class="delete-form"action="{% url 'delete_comment' team %}" method="POST">
+                                                                {% csrf_token %}
+
+                                                                <button class="icon" type="submit" name="delete" value="{{ comment.id }}">
+                                                                    <span class="tooltip-wrapper" data-tooltip="Delete comment">
+                                                                        <i class="fa-solid fa-trash"></i>
+                                                                    </span>
+                                                                </button> 
+                                                            </form> <!-- Delete form END -->
+                                                        </div> <!-- Flex END -->
+                                                        {% endif %}
+                                                    </div> <!-- Comment edit END -->
+
+                                                </div> <!-- single comment END -->
+
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>No comments related to this game</p>
+                                    {% endif %} <!-- See comments END -->
                                 </div>
+
                             </details>
                         </td>
                     </tr> <!-- COMMENT ROW END -->

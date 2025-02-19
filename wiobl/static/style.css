@@ -40,6 +40,12 @@ h5 {
     font-weight: 400;
 }
 
+h6 {
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 700;
+}
+
 /* Re-usable styles */
 .container {
     max-width: 1000px;
@@ -57,34 +63,48 @@ h5 {
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
-    transition: background-color 0.3s ease, transform 0.3s ease;
     border: none;
     color: #FFFFFF;
     transition: 0.5s;
     cursor: pointer;
 }
 
+.button-small {
+    padding: 4px 16px !important;
+    font-size: 14px;
+}
+
 .action-button {
     background-color: #8C0303;
 }
-
 .action-button:hover {
     background-color: #bf1616;
     transform: scale(1.05);
 }
 
 .blue-button {
-    background-color: #3663BF;
+    background-color: #12316e;
+}
+.blue-button:hover {
+    background-color: #5e85d4;
+    transform: scale(1.05);
 }
 
-.blue-button:hover {
-    background-color: #5177c3;
+.bluetext-btn {
+    background: transparent;
+    border: none;
+    color: #0055ff;
+    cursor: pointer;
+    font-size: 14px;
+}
+.bluetext-btn:hover {
+    color: #3f7df9;
+    transform: scale(1.05);
 }
 
 .black-button {
     background-color: #000000;
 }
-
 .black-button:hover {
     background-color: #504444;
     transform: scale(1.05);
@@ -1173,9 +1193,6 @@ input {
     border-spacing: 0;
     overflow: hidden;
     width: 95%;
-    background-image: url("/static/images/teams-schedules/sky-dunk.jpg");
-    background-position: top;
-    background-size: cover;
     text-align: left;
     margin-left: auto;
     margin-right: auto;
@@ -1262,7 +1279,7 @@ input {
 
 .schedule .comments-section {
     border: 2px solid black;
-    padding: 8px;
+    padding: 16px;
     border-radius: 5px;
 }
 
@@ -1275,18 +1292,40 @@ input {
 
 .schedule .comment-flex {
     display: flex;
-    gap: 24px;
-    align-items:flex-end;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.schedule .heading {
+    margin-bottom: 16px;
+}
+
+.schedule .comment:not(:last-of-type) {
+    margin-bottom: 16px;
+}
+
+.schedule .submit-comment {
     margin-bottom: 24px;
 }
 
-.schedule .comment {
-    padding: 16px;
+.schedule .comment-edit {
+    margin-top: 16px;
+    display: none;
+}
+
+.schedule textarea {
+    width: 100%;
+}
+
+.schedule .textarea-edit {
+    height: 40px;
+    width: 400px;
 }
 
 .schedule .comment-info {
     background-color: #e5eaf2;
-    margin-bottom: 4px;
+    padding: 16px;
     border-radius: 5px;
 }
 
@@ -1299,6 +1338,13 @@ input {
 
 .schedule .comment-txt {
     font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.schedule .edit-flex {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .schedule .date {
@@ -1307,15 +1353,90 @@ input {
     color: #4c4545;
 }
 
-.schedule .comment-actions {
+.schedule .actions-flex {
     display: flex;
-    gap: 8px;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
 }
 
 .schedule .username {
-    font-weight: bold;
-    color: gray;
+    font-weight: 900;
+    color: #103b93;
     margin-right: 8px;
+}
+
+.schedule .like-flex {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.schedule .like-count {
+    font-size: 20px;
+}
+
+.schedule .icon {
+    position: relative;
+    cursor: pointer;
+    font-size: 22px;
+    color: #c44;
+    border: none;
+    background-color: transparent;
+}
+
+.schedule .icon:hover {
+    color: rgb(252, 109, 109);
+}
+
+.schedule .tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.schedule .tooltip-wrapper::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.schedule .tooltip-wrapper:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.schedule .flag-btn {
+   display: none;
+}
+
+.schedule .popup {
+    padding: 8px;
+    background: rgb(255, 233, 224);
+    border: 2px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.schedule .controls-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.schedule .warning {
+    margin-bottom: 8px;
 }
 
 /* MEDIA QUERY */
@@ -1562,9 +1683,49 @@ input {
         font-size: 14px;
     }
 
-    /* table */
+    /* team table */
     .teams-search .team-logo {
         height: 15px;
+    }
+
+    /* schedule table */
+    .schedule .comment-flex {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .schedule .comment:not(:last-of-type) {
+        margin-bottom: 8px;
+    }
+
+    .schedule .heading {
+        margin-bottom: 8px;
+    }
+    
+    .schedule .submit-comment {
+        margin-bottom: 16px;
+    }
+    
+    .schedule .comment-edit {
+        margin-top: 8px;
+    }
+    
+    .schedule .comment-infoflex {
+        gap: 16px;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .schedule .comment-txt {
+        font-size: 16px;
+    }
+
+    .schedule .actions-flex {
+        gap: 8px;
+    }
+
+    .schedule .like-count {
+        font-size: 18px;
     }
 }
 
