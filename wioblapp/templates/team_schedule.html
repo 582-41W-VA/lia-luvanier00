@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% block 'title' %} {{request.user.username}}'s Account {% endblock %}
+{% block 'title' %} {{ team }} Schedule {% endblock %}
 {% load static %}
 
 {% block content %}
 
 <section class="teams-search schedule">
     <div class="container">
-        <form action="{% url 'team_schedule' team %}" method="POST">
+        <form action="{% url 'team_schedule' team %}" method="GET">
             {% csrf_token %}
 
             <div class="section-heading">
@@ -27,6 +27,9 @@
                         <label for="result">Order by Game {{ schedule_form.result.label }}</label>
                         {{ schedule_form.result }}
                     </div>
+                </div>
+                <div class="search-btn">
+                    <button class="action-button button" type="submit">Filter Games</button>
                 </div>
             </div>
         </form>
@@ -123,8 +126,8 @@
                                                             <!-- Comment left START -->
                                                             <div class="comment-left">
                                                                 <p class="comment-txt">
-                                                                <span class="username">User: </span>
-                                                                {{ comment.content }}
+                                                                    <span class="username">User: </span>
+                                                                    {{ comment.content }}
                                                                 </p>
                                                                 <div class="edit-flex">
                                                                     <p class="date">{{ comment.date }}</p>
@@ -163,7 +166,7 @@
                                                                         </button>
                                                                     
                                                                         <div class="popup" id="popup">
-                                                                            <p class="warning">Do you want to flag this comment?</p>
+                                                                            <p class="warning">Do you want to flag this comment to be reviewed by a moderator?</p>
                                                                             <div class="controls-flex">
                                                                                 <button class="button button-small blue-button" type="submit" name="flag" value="{{ comment.id }}">Yes, flag comment</button>
                                                                                 <button type="button" class="button button-small action-button cancel-btn" id="cancel-popup">Cancel</button>
@@ -203,7 +206,7 @@
                                                             </form> <!-- Comment edit form END -->
 
                                                             <!-- Delete form START -->
-                                                            <form class="delete-form"action="{% url 'delete_comment' team %}" method="POST">
+                                                            <form class="delete-form" action="{% url 'delete_comment' team %}" method="POST">
                                                                 {% csrf_token %}
 
                                                                 <button class="icon" type="submit" name="delete" value="{{ comment.id }}">

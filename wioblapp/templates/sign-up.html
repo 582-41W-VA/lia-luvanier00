@@ -31,21 +31,6 @@
                     {{ signup_form.password2 }}
                 </fieldset>
 
-                <fieldset class="role">
-                    <legend>Role</legend>
-                    {% for field in signup_form.role %}
-                        <div class="radio-flex">
-                            {{ field.tag }}
-                            {{ field.choice_label }}
-                        </div>
-                    {% endfor %}
-                </fieldset>
-
-                <div class="form-bio">
-                    <label for="bio">Biography</label>
-                    {{ signup_form.bio }}
-                </div>
-
                 <div>
                     <button name="sign-up" class="action-button button">sign-up</button>
                 </div>

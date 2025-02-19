@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractUser
 
 class Role(models.Model):
@@ -10,7 +11,6 @@ class Role(models.Model):
 
 class UserAccount(AbstractUser):
     role = models.ForeignKey(Role, on_delete=models.RESTRICT, related_name="user_accounts", null=True, blank=True)
-    bio = models.TextField("Bio", blank=True, null=True)
     phone = models.CharField("Phone Number", max_length=15,  blank=True, null=True)
 
     def __str__(self):
@@ -19,7 +19,8 @@ class UserAccount(AbstractUser):
 class RegistrationType(models.Model):
     reg_type = models.CharField("Registration Type", max_length=50, primary_key=True)
     description = models.CharField("Description", max_length=300)
-    cost = models.IntegerField("Cost")
+    cost = models.IntegerField("Cost", 
+                               validators=[MinValueValidator(0)])
 
     def __str__(self):
         return str(self.reg_type)
@@ -27,7 +28,8 @@ class RegistrationType(models.Model):
 class Team(models.Model):
     name = models.CharField("Team Name", max_length=20, primary_key=True)
     coaches = models.ManyToManyField(UserAccount, related_name="teams", blank=True)
-    place = models.IntegerField("Place", default=0)
+    place = models.IntegerField("Place", default=0, 
+                                validators=[MinValueValidator(0)])
     group = models.ForeignKey(RegistrationType, on_delete=models.CASCADE, related_name="teams", blank=True, null=True)
     color = models.CharField("Team Color", max_length=7, blank=True, null=True)
 
@@ -63,6 +65,8 @@ class Registration(models.Model):
 class Park(models.Model):
     name = models.CharField("Park Name", max_length=100)
     address = models.CharField(max_length=255)
+    latitude = models.DecimalField(max_digits=20, decimal_places=16, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=20, decimal_places=16, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -73,8 +77,10 @@ class Game(models.Model):
     park = models.ForeignKey(Park, on_delete=models.CASCADE, related_name="games")
     winner = models.ForeignKey(Team, on_delete=models.RESTRICT, related_name="games", blank=True, null=True)
     date_time = models.DateTimeField("Date")
-    team1_score = models.IntegerField("Team #1 Score", blank=True, null=True)
-    team2_score = models.IntegerField("Team #2 Score", blank=True, null=True)
+    team1_score = models.IntegerField("Team #1 Score", 
+                                      validators=[MinValueValidator(0)], blank=True, null=True)
+    team2_score = models.IntegerField("Team #2 Score", 
+                                      validators=[MinValueValidator(0)], blank=True, null=True)
 
     def __str__(self):
         return f"{self.team_1} / {self.team_2}"
@@ -84,7 +90,8 @@ class Comment(models.Model):
     user_account = models.ForeignKey(UserAccount, on_delete=models.RESTRICT, related_name="comments")
     content = models.TextField("Content")
     date = models.DateTimeField("Date", auto_now_add=True)
-    likes = models.IntegerField(default=0, blank=True, null=True)
+    likes = models.IntegerField(default=0, 
+                                validators=[MinValueValidator(0)], blank=True, null=True)
 
     def __str__(self):
         return self.content[:20]

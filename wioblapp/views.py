@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag, LikedComment
 from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm, TeamScheduleForm
 
+from django.db.models import F
+
 # --------------------------------------------------------------
 def index(request):
     announcements = Announcement.objects.order_by("-date")[:4]
@@ -30,12 +32,6 @@ def sign_up(request):
             username = f"{firstname}{lastname}"
             email = signup_form.cleaned_data.get("email")
             password = signup_form.cleaned_data.get("password1")
-            role = signup_form.cleaned_data.get("role")
-            bio = signup_form.cleaned_data.get("bio")
-
-            # if UserAccount.objects.filter(first_name=firstname).exists():
-            #     messages.error(request, f"Firstname {firstname} is already exist!")
-            #     return render (request, "sign-up.html", {"signup_form": signup_form,})
 
             if UserAccount.objects.filter(username=username).exists():
                 messages.error(request, f"Username {username} is already exist!")
@@ -51,14 +47,8 @@ def sign_up(request):
                 username=username,
                 email=email,
                 password=password,
-                role=Role.objects.get(name=role),
-                bio=bio
+                role=Role.objects.get(name="Parent")
             )
-
-            if role.name in ["Admin", "Coach"]:
-                member.is_staff = True
-                member.is_superuser = True
-                member.save()
 
             messages.success(request, "You signed-up successfully")
             auth_member = authenticate(request, username=username, password=password)
@@ -134,7 +124,6 @@ def member_account(request, account_id):
             member.first_name = account_form.cleaned_data["first_name"]
             member.last_name = account_form.cleaned_data["last_name"]
             member.email = account_form.cleaned_data["email"]
-            member.role = account_form.cleaned_data["role"]
             new_password = account_form.cleaned_data.get("password")
             member.set_password(new_password)
             member.phone = account_form.cleaned_data["phone"]
@@ -297,15 +286,15 @@ def team_schedule(request, team_name):
             if result == "Win":
                 games = games.filter(winner=team)
             elif result == "Lose":
-                games = games.exclude(winner=team)
-
+                games = games.exclude(winner=team).exclude(team1_score=F('team2_score')).exclude(team1_score__isnull=True).exclude(team2_score__isnull=True)
+            elif result == "Tie":
+                games = games.filter(team1_score=F('team2_score'), team1_score__isnull=False, team2_score__isnull=False)
 
     for game in games:
         game_comments.append({
             "game": game,
             "comments": comments.filter(game=game).order_by("-date"),
         }) 
-
 
     context = {
         "schedule_form": schedule_form,
@@ -467,8 +456,6 @@ def delete_comment(request, team_name):
         messages.error(request, "Can't be deleted. Please try again.")
     return redirect("team_schedule", team_name)    
 # --------------------------------------------------------------
-
-
 
 # --------------------------------------------------------------
 def about(request):

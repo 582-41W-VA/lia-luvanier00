@@ -1172,10 +1172,11 @@ input {
     margin-bottom: 48px;
 }
 
-.teams-search .search-flex {
+.search-flex {
     display: flex;
     justify-content: space-around;
     gap: 16px;
+    margin-bottom: 24px;
 }
 
 .teams-search .search-right,
