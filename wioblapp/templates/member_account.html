@@ -75,6 +75,56 @@
 
                 <div class="account-flex">
                     <div class="account-left">
+                        <h3>Favorite Team(s)</h3>
+                    </div>
+                    <div class="account-right">
+                        <div class=" account-content account-reg">
+                            <div class="teams-search">
+                                {% if favorite_teams %}
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Group</th>
+                                                <th>Team</th>
+                                                <th>Place</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for team in favorite_teams %}
+                                            <tr>
+                                                <td>{{ team.team.group }}</td>
+                                                <td><a href="{% url 'team_schedule' team.team.name %}">{{ team.team.name }}</a></td>
+                                                <td>
+                                                    {% if team.team.place == 0 %}
+                                                        <span>N/A</span>
+                                                    {% else %}
+                                                        {{ team.team.place }}
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    <form action="{% url 'dislike_team' team.team.name %}" method="POST">
+                                                        {% csrf_token %}
+        
+                                                        <button type="submit" name="dislike">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p>You don't have favorite team</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-flex">
+                    <div class="account-left">
                         <h3>Payment information</h3>
                     </div>
                     <div class="account-right">
