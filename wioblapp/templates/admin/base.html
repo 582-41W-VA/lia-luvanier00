@@ -5,7 +5,7 @@
 <head>
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}">
-  
+
   {% if not is_popup and is_nav_sidebar_enabled %}
     <link rel="stylesheet" href="{% static 'admin/css/nav_sidebar.css' %}">
     <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>
