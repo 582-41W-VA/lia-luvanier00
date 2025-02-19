@@ -6,10 +6,6 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}">
   
-<<<<<<< HEAD:wioblapp/templates/admin/base.html
-  
-=======
->>>>>>> comment-flag:templates/admin/base.html
   {% if not is_popup and is_nav_sidebar_enabled %}
     <link rel="stylesheet" href="{% static 'admin/css/nav_sidebar.css' %}">
     <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>
@@ -32,7 +28,7 @@
   {% endblock %}
   
   {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'admin/css/custom_admin.css' %}">
 </head>
@@ -56,26 +52,27 @@
           {% include 'admin/navbar.html' %}
         </header>
       {% endblock %}
+
+      <!-- Statistics Section -->
+      {% if total_users %}
+        <div id="stats-container">
+          {% include 'admin/stats_box.html' %}
+        </div>
+      {% endif %}
       
       {% block nav-breadcrumbs %}
         <nav aria-label="{% translate 'Breadcrumbs' %}">
           {% block breadcrumbs %}
             <div class="breadcrumbs">
               <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+              {% if title %} &rsaquo; {{ title }}{% endif %}
             </div>
           {% endblock %}
         </nav>
       {% endblock %}
     {% endif %}
-    <!-- Statistics Section -->
-    {% if total_users %}
-      <div id="stats-container">
-        {% include 'admin/stats_box.html' %}
-      </div>
-    {% endif %}
 
     <div class="main" id="main">
-
       {% if not is_popup and is_nav_sidebar_enabled %}
         {% block nav-sidebar %}
           {% include 'admin/nav_sidebar.html' %}
@@ -96,15 +93,15 @@
         <!-- Content -->
         <div id="content" class="{% block coltype %}colM{% endblock %}">
           {% block pretitle %}{% endblock %}
+          {% block content_title %}{% if title %}<h1>WIOBL Admin Panel</h1>{% endif %}{% endblock %}
           {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}
           
           {% block content %}
             {% block object-tools %}{% endblock %}
             {{ content }}
           {% endblock %}
-
           
-          
+          {% block sidebar %}{% endblock %}
           <br class="clear">
         </div>
         <!-- END Content -->

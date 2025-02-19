@@ -13,13 +13,6 @@
             <form class="login-form" action="{% url 'sign-up' %}" method="POST">
                 {% csrf_token %}
 
-                <div class="error">
-                    {{ signup_form.errors }}
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}       
-                </div>
-
                 <fieldset>
                     <legend class="main-legend">Sign Up</legend>
                     <label for="firstname">First Name</label>
@@ -37,21 +30,6 @@
                     <label for="password2">Password Confirmation</label>
                     {{ signup_form.password2 }}
                 </fieldset>
-
-                <fieldset class="role">
-                    <legend>Role</legend>
-                    {% for field in signup_form.role %}
-                        <div class="radio-flex">
-                            {{ field.tag }}
-                            {{ field.choice_label }}
-                        </div>
-                    {% endfor %}
-                </fieldset>
-
-                <div class="form-bio">
-                    <label for="bio">Biography</label>
-                    {{ signup_form.bio }}
-                </div>
 
                 <div>
                     <button name="sign-up" class="action-button button">sign-up</button>

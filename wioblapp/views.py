@@ -4,8 +4,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag
+from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag, LikedComment
 from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm, TeamScheduleForm
+
+from django.db.models import F
 
 # --------------------------------------------------------------
 def index(request):
@@ -30,12 +32,6 @@ def sign_up(request):
             username = f"{firstname}{lastname}"
             email = signup_form.cleaned_data.get("email")
             password = signup_form.cleaned_data.get("password1")
-            role = signup_form.cleaned_data.get("role")
-            bio = signup_form.cleaned_data.get("bio")
-
-            if UserAccount.objects.filter(first_name=firstname).exists():
-                messages.error(request, f"Firstname {firstname} is already exist!")
-                return render (request, "sign-up.html", {"signup_form": signup_form,})
 
             if UserAccount.objects.filter(username=username).exists():
                 messages.error(request, f"Username {username} is already exist!")
@@ -51,14 +47,8 @@ def sign_up(request):
                 username=username,
                 email=email,
                 password=password,
-                role=Role.objects.get(name=role),
-                bio=bio
+                role=Role.objects.get(name="Parent")
             )
-
-            if role.name in ["Admin", "Coach"]:
-                member.is_staff = True
-                member.is_superuser = True
-                member.save()
 
             messages.success(request, "You signed-up successfully")
             auth_member = authenticate(request, username=username, password=password)
@@ -134,7 +124,6 @@ def member_account(request, account_id):
             member.first_name = account_form.cleaned_data["first_name"]
             member.last_name = account_form.cleaned_data["last_name"]
             member.email = account_form.cleaned_data["email"]
-            member.role = account_form.cleaned_data["role"]
             new_password = account_form.cleaned_data.get("password")
             member.set_password(new_password)
             member.phone = account_form.cleaned_data["phone"]
@@ -224,12 +213,10 @@ def member_logout(request):
 
 # --------------------------------------------------------------
 def teams(request):
-    filter_teams_form = FilterTeamsForm()
+    filter_teams_form = FilterTeamsForm(request.GET)
     groups = RegistrationType.objects.all()
     teams = Team.objects.all()
     players = Player.objects.all()
-
-    filter_teams_form = FilterTeamsForm(request.GET)
 
     if filter_teams_form.is_valid():
         group = filter_teams_form.cleaned_data.get('group')
@@ -238,15 +225,25 @@ def teams(request):
 
         if group: 
             teams = teams.filter(group=group)
-
-        if keyword:
-            teams = teams.filter(name__icontains=keyword)
-            players = players.filter(name__icontains=keyword)
+            players = players.filter(team_name__in=teams)
 
         if coach:
             teams = teams.filter(coaches=coach)
-        
-        players = players.filter(team_name__in=teams)
+            players = players.filter(team_name__in=teams)
+
+        if keyword:
+            keyword_teams = teams.filter(name__icontains=keyword)
+            if keyword_teams:
+                teams = keyword_teams
+            
+            keyword_players = players.filter(name__icontains=keyword)
+            if keyword_players:
+                players = keyword_players
+                teams = Team.objects.filter(players__in=keyword_players)
+
+            if not keyword_players and not keyword_teams:
+                players = []
+                teams = []
 
     context = {
         "filter_teams_form": filter_teams_form,
@@ -260,12 +257,53 @@ def teams(request):
 
 # --------------------------------------------------------------
 def team_schedule(request, team_name):
-    schedule_form = TeamScheduleForm()
+    schedule_form = TeamScheduleForm(request.GET)
+    comment_form = CreateCommentForm()
     team = team_name
+    games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
+    comments = Comment.objects.filter(game__in=games)
+    game_comments = []
+    flags = Flag.objects.all()  
+    
+    if schedule_form.is_valid():
+        month = schedule_form.cleaned_data.get('month')
+        date = schedule_form.cleaned_data.get('date')
+        result = schedule_form.cleaned_data.get('result')
+
+        if month:
+            if month == "All":
+                games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
+            else:
+                games = games.filter(date_time__month=int(month))
+
+        if date:
+            if date == "Ascending":
+                games = games.order_by("-date_time")
+            elif date == "Descending":
+                games = games.order_by("date_time")
+
+        if result:
+            if result == "Win":
+                games = games.filter(winner=team)
+            elif result == "Lose":
+                games = games.exclude(winner=team).exclude(team1_score=F('team2_score')).exclude(team1_score__isnull=True).exclude(team2_score__isnull=True)
+            elif result == "Tie":
+                games = games.filter(team1_score=F('team2_score'), team1_score__isnull=False, team2_score__isnull=False)
+
+    for game in games:
+        game_comments.append({
+            "game": game,
+            "comments": comments.filter(game=game).order_by("-date"),
+        }) 
+
     context = {
         "schedule_form": schedule_form,
         "comment_form": comment_form,
         "team": team,
+        "games": games,
+        "comments": comments,
+        "game_comments": game_comments,
+        "flags": flags,
     }
     return render(request, "team_schedule.html", context)
 # --------------------------------------------------------------
@@ -288,7 +326,7 @@ def create_comment(request, team_name):
                 messages.info(request, "Login before posting a comment")
                 return redirect("team_schedule", team)
 
-            comment = Comment.objects.create(
+            comment = Comment.objects.get_or_create(
                 game=game,
                 user_account=user_account,
                 content=content
@@ -297,6 +335,9 @@ def create_comment(request, team_name):
             if comment:
                 messages.success(request, "Comment is posted successfully")
                 return redirect("team_schedule", team)
+            
+        messages.error(request, "Comment Can't be created. Please try again.")
+    return redirect("team_schedule", team_name)
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
@@ -311,12 +352,24 @@ def like_comment(request, team_name):
             messages.error(request, "Something went wrong")
 
         if not request.user.is_authenticated:
-            messages.info(request, "Login before posting a comment")
+            messages.info(request, "Login first, please!")
             return redirect("team_schedule", team)
 
-        comment.likes += 1
-        comment.save()
-        return redirect("team_schedule", team)
+        is_liked = LikedComment.objects.filter(comment=comment_id, user_account=request.user)
+
+        if is_liked:
+            is_liked.delete()
+            comment.likes -= 1
+            comment.save()
+        else:
+            LikedComment.objects.create(
+                comment=comment,
+                user_account=request.user,
+            )
+            comment.likes += 1
+            comment.save()
+
+    return redirect("team_schedule", team_name)
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
@@ -326,112 +379,82 @@ def flag_comment(request, team_name):
     if request.method == "POST":
         comment_id = request.POST.get('flag')
         comment = Comment.objects.get(id=comment_id)
-        flagged_content = comment.content
 
         if not comment:
             messages.error(request, "Something went wrong")
 
         if not request.user.is_authenticated:
-            messages.info(request, "Login before posting a comment")
+            messages.info(request, "Login before flagging a comment")
             return redirect("team_schedule", team)
 
-        user_account = request.user
-        flag = Flag.objects.create(
-            user_account=user_account,
-            flagged_content=flagged_content,
-        )
 
-        if flag:
-            messages.success(request, "Comment flagged successfully")
-            return redirect("team_schedule", team)
-# --------------------------------------------------------------
+        is_flagged = Flag.objects.filter(user_account=request.user, comment=comment)
 
-# --------------------------------------------------------------
-def team_schedule(request, team_name):
-    schedule_form = TeamScheduleForm()
-    team = team_name
-    context = {
-        "schedule_form": schedule_form,
-        "comment_form": comment_form,
-        "team": team,
-    }
-    return render(request, "team_schedule.html", context)
+        if not is_flagged:
+            flag = Flag.objects.create(
+                user_account=request.user,
+                comment=comment,
+            )
+
+            if flag:
+                messages.success(request, "Comment flagged successfully")
+                return redirect("team_schedule", team)
+        else:
+            messages.info(request, "Comment is already flagged")
+
+    return redirect("team_schedule", team_name)
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-def create_comment(request, team_name):
+def edit_comment(request, team_name, comment_id):
     team = team_name
 
+    if not comment_id:
+        messages.error(request, "Something went wrong")
+        return redirect("team_schedule", team)
+
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment_form = CreateCommentForm(instance=comment)
+    
     if request.method == "POST":
-        comment_form = CreateCommentForm(request.POST)
-        game_id = request.POST.get("post")
-        comments = Comment.objects.filter(game=game_id)
-        
+        if not request.user.is_authenticated:
+            messages.info(request, "Login before editing a comment")
+            return redirect("team_schedule", team)
+
+        comment_form = CreateCommentForm(request.POST, instance=comment)
+
         if comment_form.is_valid():
-            game = Game.objects.get(id=game_id)
-            user_account = request.user
-            content = comment_form.cleaned_data.get('content')
+            comment_form.save()
+            messages.success(request, "Comment edited successfully")
+            return redirect("team_schedule", team)
 
-            if not request.user.is_authenticated:
-                messages.info(request, "Login before posting a comment")
-                return redirect("team_schedule", team)
+        messages.error(request, "Can't be edited. Please try again.")
 
-            comment = Comment.objects.create(
-                game=game,
-                user_account=user_account,
-                content=content
-            )
-
-            if comment:
-                messages.success(request, "Comment is posted successfully")
-                return redirect("team_schedule", team)
+    return redirect("team_schedule", team_name)
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-def like_comment(request, team_name):
+def delete_comment(request, team_name):
     team = team_name
 
     if request.method == "POST":
-        comment_id = request.POST.get('like')
-        comment = Comment.objects.get(id=comment_id)
-
+        comment_id = request.POST.get('delete')
+        comment = get_object_or_404(Comment, id=comment_id)
+        
         if not comment:
-            messages.error(request, "Something went wrong")
+            messages.error(request, "Comment can't be deleted")
 
         if not request.user.is_authenticated:
-            messages.info(request, "Login before posting a comment")
+            messages.info(request, "Login before deleting a comment")
             return redirect("team_schedule", team)
 
-        comment.likes += 1
-        comment.save()
-        return redirect("team_schedule", team)
-# --------------------------------------------------------------
-
-# --------------------------------------------------------------
-def flag_comment(request, team_name):
-    team = team_name
-
-    if request.method == "POST":
-        comment_id = request.POST.get('flag')
-        comment = Comment.objects.get(id=comment_id)
-        flagged_content = comment.content
-
-        if not comment:
-            messages.error(request, "Something went wrong")
-
-        if not request.user.is_authenticated:
-            messages.info(request, "Login before posting a comment")
-            return redirect("team_schedule", team)
-
-        user_account = request.user
-        flag = Flag.objects.create(
-            user_account=user_account,
-            flagged_content=flagged_content,
-        )
-
-        if flag:
-            messages.success(request, "Comment flagged successfully")
-            return redirect("team_schedule", team)
+        deleted = comment.delete()
+        if deleted:
+            messages.success(request, "Comment deleted")
+            return redirect("team_schedule", team)    
+        
+        messages.error(request, "Can't be deleted. Please try again.")
+    return redirect("team_schedule", team_name)    
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------

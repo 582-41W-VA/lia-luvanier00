@@ -14,14 +14,10 @@ class LoginForm(forms.Form):
 class SignUpForm(UserCreationForm):
     firstname = forms.CharField(label="First Name", max_length=50)
     lastname = forms.CharField(label="Last Name", max_length=50)
-    role = forms.ModelChoiceField(queryset=Role.objects.all(), 
-                                     required=True, 
-                                     widget=forms.RadioSelect)
-    bio = forms.CharField(max_length=500, widget=forms.Textarea(), required=False)
 
     class Meta:
         model = UserAccount
-        fields = ["firstname", "lastname", "email", "password1", "password2", "role", "bio"]
+        fields = ["firstname", "lastname", "email", "password1", "password2"]
 # --------------------------------------------------------------
  
 # --------------------------------------------------------------
@@ -55,12 +51,12 @@ class RegistrationForm(forms.ModelForm):
                                      required=True, 
                                      widget=forms.RadioSelect)
 
-    street_line1 = forms.CharField(label="Street Address", max_length=20)
-    app_line2 = forms.CharField(label="Street Address Line 2", max_length=20, required=False)
-    city = forms.CharField(label="City", max_length=20)
-    province = forms.CharField(label="Province", max_length=20)
-    postal_code = forms.CharField(label="Postal Code", max_length=20)
-    country = forms.CharField(label="Country", max_length=20)
+    street_line1 = forms.CharField(label="Street Address", max_length=200)
+    app_line2 = forms.CharField(label="Street Address Line 2", max_length=200, required=False)
+    city = forms.CharField(label="City", max_length=200)
+    province = forms.CharField(label="Province", max_length=200)
+    postal_code = forms.CharField(label="Postal Code", max_length=10)
+    country = forms.CharField(label="Country", max_length=200)
 
     uniform_size = forms.ChoiceField(label="Uniform Size", choices=UNIFORM_SIZES, 
                                      required=True, 
@@ -82,7 +78,7 @@ class ModifyAccountForm(forms.ModelForm):
 
     class Meta:
         model = UserAccount
-        fields = ["username", "first_name", "last_name", "password", "email", "phone", "role"]
+        fields = ["username", "first_name", "last_name", "password", "email", "phone"]
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
@@ -103,43 +99,41 @@ class FilterTeamsForm(forms.Form):
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-class TeamScheduleForm(forms.ModelForm):
+class TeamScheduleForm(forms.Form):
     MONTH_CHOICES = [
-        ("June", "June"),
-        ("July", "July"),
-        ("August", "August")
+        ("", "Select a month"),
+        ("All", "All"),
+        ("6", "June"),
+        ("7", "July"),
+        ("8", "August")
+    ]
+
+    DATE_CHOICES = [
+        ("", "Any"),
+        ("Ascending", "Ascending"),
+        ("Descending", "Descending")
+    ]
+
+    RESULT_CHOICES = [
+        ("", "Any"),
+        ("Win", "Win"),
+        ("Lose", "Lose"),
+        ("Tie", "Tie")
     ]
 
     month = forms.ChoiceField(label="Month", 
                               choices=MONTH_CHOICES,
-                              required=False,
                               widget=forms.Select())
 
-    date_time = forms.DateField(label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"}))
+    date = forms.ChoiceField(label="Date",
+                           choices=DATE_CHOICES,
+                           required=False,
+                           widget=forms.Select())
 
-    class Meta:
-        model = Game
-        fields = ["month", "date_time", "winner"]
-# --------------------------------------------------------------
-
-# --------------------------------------------------------------
-class TeamScheduleForm(forms.ModelForm):
-    MONTH_CHOICES = [
-        ("June", "June"),
-        ("July", "July"),
-        ("August", "August")
-    ]
-
-    month = forms.ChoiceField(label="Month", 
-                              choices=MONTH_CHOICES,
+    result = forms.ChoiceField(label="Result", 
+                              choices=RESULT_CHOICES,
                               required=False,
                               widget=forms.Select())
-
-    date_time = forms.DateField(label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"}))
-
-    class Meta:
-        model = Game
-        fields = ["month", "date_time", "winner"]
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
