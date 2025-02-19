@@ -20,6 +20,7 @@ from .models import (
 
 
 
+
 class WioblAdminArea(admin.AdminSite):
     site_header = "WIOBL Admin"
     site_url = "/wioblapp/"
@@ -62,6 +63,29 @@ class WioblAdminArea(admin.AdminSite):
 class ValidatedRegistrationFilter(SimpleListFilter):
     title = 'Validated'
     parameter_name = 'validated'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('True', 'Validated'),
+            ('False', 'Unvalidated'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'True':
+            return queryset.filter(team__isnull=False)
+        if self.value() == 'False':
+            return queryset.filter(team__isnull=True)
+        return queryset
+
+class RegistrationAdmin(admin.ModelAdmin):
+    list_display = ("player", "validated", "reg_type", "team", "date_time")
+    list_filter = (ValidatedRegistrationFilter,)
+
+    def validated(self, obj):
+        return obj.validated
+    validated.boolean = True 
+    validated.short_description = "Validated"  
+
 
     def lookups(self, request, model_admin):
         return (
