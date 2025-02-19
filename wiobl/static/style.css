@@ -1653,6 +1653,7 @@ input {
     .teams-search .search-form {
         padding: 24px;
         margin-bottom: 32px;
+        text-align: center;
     }
 
     .teams-search .form {
