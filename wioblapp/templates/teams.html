@@ -173,6 +173,7 @@
                                             <form action="{% url 'like_team' team %}" method="POST">
                                                 {% csrf_token %}
 
+<<<<<<< HEAD
                                                 <div class="schedule">
                                                     <div class="like-flex">
                                                         <button class="icon" type="submit" name="like">
@@ -182,6 +183,13 @@
                                                         </button> 
                                                     </div>
                                                 </div>
+=======
+                                                <button class="icon" type="submit">
+                                                    <span class="tooltip-wrapper" data-tooltip="Like comment">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </span>
+                                                </button>
+>>>>>>> 88369d6 (Add Favorite_Teams [Collection])
                                             </form>
                                         {% endif %}
                                     {% endfor %}

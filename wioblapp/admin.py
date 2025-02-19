@@ -2,22 +2,7 @@ from django.urls import reverse
 from django.contrib import admin
 from django.contrib.admin import AdminSite, SimpleListFilter
 from datetime import datetime, timedelta
-from .models import (
-    Role,
-    UserAccount,
-    Team,
-    Player,
-    RegistrationType,
-    Registration,
-    Park,
-    Game,
-    Announcement,
-    Flag,
-    Comment,
-    LikedComment,
-    FavoriteTeam,
-)
-
+from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Announcement, Flag, Comment, LikedComment, FavoriteTeam
 
 
 
@@ -120,7 +105,8 @@ wiobl_site.register(Role)
 wiobl_site.register(UserAccount)
 wiobl_site.register(Team)
 wiobl_site.register(FavoriteTeam)
-wiobl_site.register(Player, TeamAdmin)
+wiobl_site.register(Player)
+wiobl_site.register(FavoriteTeam)
 wiobl_site.register(RegistrationType)
 wiobl_site.register(Registration, RegistrationAdmin)
 wiobl_site.register(Park)

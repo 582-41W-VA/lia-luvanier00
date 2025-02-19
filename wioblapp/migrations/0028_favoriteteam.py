@@ -6,41 +6,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
+
     dependencies = [
-        ("wioblapp", "0027_remove_useraccount_bio"),
+        ('wioblapp', '0027_remove_useraccount_bio'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name="FavoriteTeam",
+            name='FavoriteTeam',
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "team",
-                    models.ForeignKey(
-                        blank=True,
-                        null=True,
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="favoriteteams",
-                        to="wioblapp.team",
-                    ),
-                ),
-                (
-                    "user_account",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="favoriteteams",
-                        to=settings.AUTH_USER_MODEL,
-                    ),
-                ),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('team', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='favoriteteams', to='wioblapp.team')),
+                ('user_account', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='favoriteteams', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
