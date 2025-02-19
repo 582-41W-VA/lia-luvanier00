@@ -24,19 +24,19 @@
                 <div class="form">
                     {% csrf_token %}
                     <div class="label-flex">
-                        <label for="search">Search for Player or Team:</label>
+                        <label for="{{ filter_teams_form.search.id_for_label }}">{{ filter_teams_form.search.label }}</label>
                         {{ filter_teams_form.search }}
                     </div>
                     <div class="search-flex">
                         <div class="search-right">
                             <div class="label-flex">
-                                <label for="group">Select a Group* :</label>
+                                <label for="{{ filter_teams_form.group.id_for_label }}">{{ filter_teams_form.group.label }}</label>
                                 {{ filter_teams_form.group }}
                             </div>
                         </div>
                         <div class="search-left">
                             <div class="label-flex">
-                                <label for="coach">Select a Coach:</label>
+                                <label for="{{ filter_teams_form.coach.id_for_label }}">{{ filter_teams_form.coach.label }}</label>
                                 {{ filter_teams_form.coach }}
                             </div>
                         </div>
