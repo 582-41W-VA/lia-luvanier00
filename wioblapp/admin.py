@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.contrib import admin
-from django.contrib.admin import AdminSite
+from django.contrib.admin import AdminSite, SimpleListFilter
 from datetime import datetime, timedelta
 from .models import (
     Role,
@@ -17,6 +17,7 @@ from .models import (
     LikedComment,
     FavoriteTeam,
 )
+
 
 
 
@@ -45,20 +46,46 @@ class WioblAdminArea(admin.AdminSite):
 
             unreviewed_flags = Flag.objects.filter(reviewed=False).count() 
 
-            unreviewed_flags = 0
+            unvalidated_registrations_url = reverse('admin:wioblapp_registration_changelist') + "?validated=False"
 
-            context.update(
-                {
-                    "total_users": total_users,
-                    "new_users": new_users,
-                    "total_registrations": total_registrations,
-                    "new_registrations": new_registrations,
-                    "pending_registrations": pending_registrations,
-                    "unreviewed_flags": unreviewed_flags,
-                }
-            )
+            context.update({
+                'total_users': total_users,
+                'new_users': new_users,
+                'total_registrations': total_registrations,
+                'new_registrations': new_registrations,
+                'pending_registrations': pending_registrations,
+                'unreviewed_flags': unreviewed_flags,
+                'unvalidated_registrations_url': unvalidated_registrations_url, 
+            })
 
         return context
+    
+class ValidatedRegistrationFilter(SimpleListFilter):
+    title = 'Validated'
+    parameter_name = 'validated'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('True', 'Validated'),
+            ('False', 'Unvalidated'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'True':
+            return queryset.filter(team__isnull=False)
+        if self.value() == 'False':
+            return queryset.filter(team__isnull=True)
+        return queryset
+
+class RegistrationAdmin(admin.ModelAdmin):
+    list_display = ("player", "validated", "reg_type", "team", "date_time")
+    list_filter = (ValidatedRegistrationFilter,)
+
+    def validated(self, obj):
+        return obj.validated
+    validated.boolean = True 
+    validated.short_description = "Validated"  
+
 
 class AnnouncementAdmin(admin.ModelAdmin):
     list_display = ("title", "date", "user_account")
@@ -95,7 +122,7 @@ wiobl_site.register(Team)
 wiobl_site.register(FavoriteTeam)
 wiobl_site.register(Player, TeamAdmin)
 wiobl_site.register(RegistrationType)
-wiobl_site.register(Registration)
+wiobl_site.register(Registration, RegistrationAdmin)
 wiobl_site.register(Park)
 wiobl_site.register(Game)
 wiobl_site.register(Announcement, AnnouncementAdmin)

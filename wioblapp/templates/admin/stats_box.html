@@ -13,7 +13,7 @@
         <span class="stat-subtitle">New (Last 7 Days): {{ new_registrations|default:"0" }}</span>
     </div>
 
-    <a href="{% url 'admin:wioblapp_registration_changelist' %}" class="stat-item pending">
+    <a href="{{ unvalidated_registrations_url }}" class="stat-item pending">
         <h3>Unreviewed Registrations</h3>
         <p class="stat-value">{{ pending_registrations|default:"0" }}</p>
         <span class="stat-subtitle">Awaiting Review</span>
