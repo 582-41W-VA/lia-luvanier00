@@ -319,7 +319,7 @@ def like_team(request, team_name):
     if request.method == "POST":
         if not request.user.is_authenticated:
             messages.info(request, "Login first, please!")
-            return redirect("teams", team_name)
+            return redirect("teams")
 
         is_liked = FavoriteTeam.objects.filter(
             user_account=request.user, team=team_name

@@ -64,7 +64,7 @@ class FavoriteTeam(models.Model):
     )
 
     def __str__(self):
-        return f"{self.user_account.name} favorite teams"
+        return f"{self.user_account} favorite teams"
 
 
 class Player(models.Model):
