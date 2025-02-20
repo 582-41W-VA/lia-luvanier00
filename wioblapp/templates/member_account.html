@@ -81,7 +81,7 @@
                         <div class=" account-content account-reg">
                             <div class="teams-search">
                                 {% if favorite_teams %}
-                                    <table>
+                                    <table style="overflow: visible;">
                                         <thead>
                                             <tr>
                                                 <th>Group</th>
@@ -103,13 +103,17 @@
                                                     {% endif %}
                                                 </td>
                                                 <td>
-                                                    <form action="{% url 'dislike_team' team.team.name %}" method="POST">
-                                                        {% csrf_token %}
-        
-                                                        <button type="submit" name="dislike">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </form>
+                                                    <div class="schedule">
+                                                        <form action="{% url 'dislike_team' team.team.name %}" method="POST">
+                                                            {% csrf_token %}
+            
+                                                            <button class="icon" type="submit" name="dislike">
+                                                                <span class="tooltip-wrapper" data-tooltip="Remove team">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </span>
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         {% endfor %}
