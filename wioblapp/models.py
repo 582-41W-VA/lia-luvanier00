@@ -191,4 +191,4 @@ class Flag(models.Model):
     reviewed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.comment.content[:20]
+        return str(self.comment) if self.comment else "No Comment flagged"
