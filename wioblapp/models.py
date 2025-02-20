@@ -108,7 +108,7 @@ class LikedComment(models.Model):
     user_account = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="likedcomments")
 
     def __str__(self):
-        return f"{self.user_account.name} Liked {self.comment.content[:20]}"
+        return f"{self.user_account} Liked {self.comment.content[:20]}"
 
 class Announcement(models.Model):
     user_account = models.ForeignKey(UserAccount, on_delete=models.RESTRICT, related_name="announcements")
