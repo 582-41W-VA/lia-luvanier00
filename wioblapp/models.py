@@ -41,7 +41,7 @@ class FavoriteTeam(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="favoriteteams", blank=True, null=True)
 
     def __str__(self):
-        return f"{self.user_account.name} favorite teams"
+        return f"{self.user_account} favorite teams"
 
 class Player(models.Model):
     related_account = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="players")
