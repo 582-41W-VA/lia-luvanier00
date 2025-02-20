@@ -60,6 +60,7 @@
                             <th>Coaches</th>
                             <th>Players</th>
                             <th>Schedule</th>
+                            <th></th>
                         </tr>
                     </thead>
                         
@@ -108,6 +109,17 @@
                                     </button>
                                 </form>
                             </td>
+                            <td>
+                                <form action="{% url 'like_team' team %}" method="POST">
+                                    {% csrf_token %}
+
+                                    <button class="icon" type="submit">
+                                        <span class="tooltip-wrapper" data-tooltip="Like comment">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </span>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -121,6 +133,7 @@
                         <tr>
                             <th>Group</th>
                             <th>Team</th>
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -139,6 +152,23 @@
                                     {% endif %}
                                 {% endfor %}
                                 </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    {% for team in teams %}
+                                        {% if team.group == group %}
+                                            <form action="{% url 'like_team' team %}" method="POST">
+                                                {% csrf_token %}
+
+                                                <button class="icon" type="submit">
+                                                    <span class="tooltip-wrapper" data-tooltip="Like comment">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </span>
+                                                </button>
+                                            </form>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </ul>
                             </td>
                         </tr>
                     {% endfor %}
