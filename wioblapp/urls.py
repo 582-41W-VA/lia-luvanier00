@@ -19,4 +19,5 @@ urlpatterns = [
     path("flag-comment/<str:team_name>/", views.flag_comment, name="flag_comment"),
     path("edit-comment/<str:team_name>/<int:comment_id>/",views.edit_comment,name="edit_comment"),
     path("delete-comment/<str:team_name>/", views.delete_comment, name="delete_comment"),
+    path("api/parks", views.getParks, name="get_parks"),
 ]

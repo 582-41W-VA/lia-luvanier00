@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse 
 
 from .models import (
     Role,
@@ -598,3 +599,8 @@ def about(request):
 
 
 # --------------------------------------------------------------
+
+# --------------------------------------------------------------
+def getParks(request):
+    parks = Park.objects.values("id", "name", "address", "latitude", "longitude")
+    return JsonResponse(list(parks), safe=False)
