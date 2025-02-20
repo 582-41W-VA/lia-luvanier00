@@ -34,14 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // map api
 document.addEventListener('DOMContentLoaded', function () {
-    const coordinates_court_1 = [45.46120974762705, -73.80929962254508];//Pointe Claire Park
-    const coordinates_court_2 = [45.48934050768304, -73.85824621609802];//Pierrefonds-Roxboro Park
-    const coordinates_court_3 = [45.48272170531596, -73.8067795278847];//Dollard-Ddes-Ormeaux Park
-    const coordinates_court_4 = [45.44387748895584, -73.8607540133765];//Kirkland Park
-    const locationName_1 = 'Lakeside Heights, Pointe-Claire, QC';
-    const locationName_2 = 'Parc Ménard, Pierrefonds-Roxboro, QC';
-    const locationName_3 = 'Dollard-Ddes-Ormeaux, QC';
-    const locationName_4 = 'Kirkland, QC';
 
     const map = L.map('map', {
         layers: [
@@ -49,29 +41,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 'attribution': 'Map data ©️ <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
             })
         ],
-        center: coordinates_court_1,
+        center: [45.46120974762705, -73.80929962254508],
         zoom: 12
     });
 
-    const marker_1 = L.marker(coordinates_court_1)
-        .addTo(map)
-        .bindPopup(locationName_1)
-        .openPopup();
+    fetch("http://127.0.0.1:8000/wioblapp/api/parks")
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(park => {
+                const lat = parseFloat(park.latitude);
+                const lon = parseFloat(park.longitude);
 
-    const marker_2 = L.marker(coordinates_court_2)
-        .addTo(map)
-        .bindPopup(locationName_2)
-        .openPopup();
+                L.marker([lat, lon])
+                    .addTo(map)
+                    .bindPopup(`<b>${park.name}</b><br>${park.address}`)
+                    .openPopup();
+            });
 
-    const marker_3 = L.marker(coordinates_court_3)
-        .addTo(map)
-        .bindPopup(locationName_3)
-        .openPopup();
+            if (data.length > 0) {
+                map.setView([parseFloat(data[0].latitude), parseFloat(data[0].longitude)], 12);
+            }
+        })
 
-    const marker_4 = L.marker(coordinates_court_4)
-        .addTo(map)
-        .bindPopup(locationName_4)
-        .openPopup();
+        .catch(error => console.error("Error connect API data locations:", error));
 });
 
 // * * * * * * * * COMMENTS * * * * * * * * 
@@ -123,7 +115,7 @@ function stylePopupFlag() {
     const popups = document.querySelectorAll("#popup");
 
     popups.forEach((popup) => {
-        popup.style.display = "none"; 
+        popup.style.display = "none";
         popup.style.position = "absolute";
         popup.style.right = "10%";
         popup.style.zIndex = "10";
@@ -137,7 +129,7 @@ function stylePopupFlag() {
 
     const flagIcons = document.querySelectorAll("#flag-icon");
     flagIcons.forEach((flagIcon) => {
-        flagIcon.style.display = "block"; 
+        flagIcon.style.display = "block";
     });
 }
 

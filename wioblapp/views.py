@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse 
 
 from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag, LikedComment, FavoriteTeam
 from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm, TeamScheduleForm
@@ -501,3 +502,8 @@ def delete_comment(request, team_name):
 def about(request):
     return render(request, "about.html")
 # --------------------------------------------------------------
+
+# --------------------------------------------------------------
+def getParks(request):
+    parks = Park.objects.values("id", "name", "address", "latitude", "longitude")
+    return JsonResponse(list(parks), safe=False)
