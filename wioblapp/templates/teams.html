@@ -26,6 +26,14 @@
                         <label for="{{ filter_teams_form.search.id_for_label }}">{{ filter_teams_form.search.label }}</label>
                         {{ filter_teams_form.search }}
                     </div>
+
+                    <div class="search-flex">
+                        <div class="search-right">
+                            <div class="label-flex">
+                                <label for="{{ filter_teams_form.group.id_for_label }}">{{ filter_teams_form.group.label }}</label>
+                                {{ filter_teams_form.group }}
+                            </div>
+
                     <div class="search-flex">
                         <div class="search-right">
                             <div class="label-flex">
@@ -37,6 +45,7 @@
                             <div class="label-flex">
                                 <label for="{{ filter_teams_form.coach.id_for_label }}">{{ filter_teams_form.coach.label }}</label>
                                 {{ filter_teams_form.coach }}
+
                             </div>
                         </div>
                     </div>
@@ -113,11 +122,15 @@
                                 <form action="{% url 'like_team' team %}" method="POST">
                                     {% csrf_token %}
 
-                                    <button class="icon" type="submit">
-                                        <span class="tooltip-wrapper" data-tooltip="Like comment">
-                                            <i class="fa-solid fa-heart"></i>
-                                        </span>
-                                    </button>
+                                    <div class="schedule">
+                                        <div class="like-flex">
+                                            <button class="icon" type="submit" name="like">
+                                                <span class="tooltip-wrapper" data-tooltip="Like team">
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </span>
+                                            </button> 
+                                        </div>
+                                    </div>
                                 </form>
                             </td>
                         </tr>
@@ -160,11 +173,15 @@
                                             <form action="{% url 'like_team' team %}" method="POST">
                                                 {% csrf_token %}
 
-                                                <button class="icon" type="submit">
-                                                    <span class="tooltip-wrapper" data-tooltip="Like comment">
-                                                        <i class="fa-solid fa-heart"></i>
-                                                    </span>
-                                                </button>
+                                                <div class="schedule">
+                                                    <div class="like-flex">
+                                                        <button class="icon" type="submit" name="like">
+                                                            <span class="tooltip-wrapper" data-tooltip="Like team">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </span>
+                                                        </button> 
+                                                    </div>
+                                                </div>
                                             </form>
                                         {% endif %}
                                     {% endfor %}

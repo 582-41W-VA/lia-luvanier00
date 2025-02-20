@@ -28,7 +28,7 @@
                     <a href="{% url 'admin:index' %}">Coach</a>
                 </div>
     
-                <label for="{{ login_form.email.id_for_label }}">{{ login_form.email.label }}</label>
+                <label for="{{ login_form.username.id_for_label }}">{{ login_form.email.label }}</label>
                 {{ login_form.email }}
 
                 <!-- <input type="text" id="{{ login_form.username.id_for_label }}" name="{{ login_form.username.name }}" value="{{ login_form.username.value|default:'' }}" required> -->
