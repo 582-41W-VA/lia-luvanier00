@@ -15,19 +15,19 @@
 
                 <fieldset>
                     <legend class="main-legend">Sign Up</legend>
-                    <label for="firstname">First Name</label>
+                    <label for="{{ signup_form.firstname.id_for_label }}">{{ signup_form.firstname.label }}</label>
                     {{ signup_form.firstname }}
                     
-                    <label for="lastname">Last Name</label>
+                    <label for="{{ signup_form.lastname.id_for_label }}">{{ signup_form.lastname.label }}</label>
                     {{ signup_form.lastname }}
                     
-                    <label for="email">Email</label>
+                    <label for="{{ signup_form.email.id_for_label }}">{{ signup_form.email.label }}</label>
                     {{ signup_form.email }}
                     
-                    <label for="password1">Password</label>
+                    <label for="{{ signup_form.password1.id_for_label }}">{{ signup_form.password1.label }}</label>
                     {{ signup_form.password1 }}
 
-                    <label for="password2">Password Confirmation</label>
+                    <label for="{{ signup_form.password2.id_for_label }}">{{ signup_form.password2.label }}</label>
                     {{ signup_form.password2 }}
                 </fieldset>
 

@@ -38,11 +38,11 @@
 
                     <div class="register-flex margin-left">
                         <div class="label-input">
-                            <label class="small-txt" for="firstname">First Name</label>
+                            <label class="small-txt" for="{{ register_form.firstname.id_for_label }}">{{ register_form.firstname.label }}</label>
                             {{ register_form.firstname }}
                         </div>
                         <div class="label-input">
-                            <label class="small-txt" for="lastname">Last Name</label>
+                            <label class="small-txt" for="{{ register_form.lastname.id_for_label }}">{{ register_form.lastname.label }}</label>
                             {{ register_form.lastname }}
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <div class="label-input">
                             <div class="icon-flex">
                                 <i class="fa-solid fa-pencil"></i>
-                                <label class="form-label" for="dob">Player Date of Birth</label>
+                                <label class="form-label" for="{{ register_form.dob.id_for_label }}">{{ register_form.dob.label }}</label>
                             </div>
                             <div class="margin-left">
                                 {{ register_form.dob }}
@@ -60,7 +60,7 @@
                         <div class="label-input">
                             <div class="icon-flex">
                                 <i class="fa-solid fa-user"></i>
-                                <label class="form-label" for="gender">Gender</label>
+                                <label class="form-label" for="{{ register_form.gender.id_for_label }}">{{ register_form.gender.label }}</label>
                             </div>
                             <div class="margin-left radio-flex">
                                 <div class="radio-flex">
@@ -95,31 +95,31 @@
 
                     <div class="margin-left">
                         <div class="label-input-full">
-                            <label class="small-txt" for="street_line1">Street Address</label>
+                            <label class="small-txt" for="{{ register_form.street_line1.id_for_label}}">{{ register_form.street_line1.label}}</label>
                             {{ register_form.street_line1 }}
                         </div>
     
                         <div class="label-input-full">
-                            <label class="small-txt" for="app_line2">Street Address 2</label>
+                            <label class="small-txt" for="{{ register_form.app_line2.id_for_label}}">{{ register_form.app_line2.label}}</label>
                             {{ register_form.app_line2 }}
                         </div>
                         <div class="register-flex">
                             <div  class="label-input">
-                                <label class="small-txt" for="city">City</label>
+                                <label class="small-txt" for="{{ register_form.city.id_for_label}}">{{ register_form.city.label}}</label>
                                 {{ register_form.city }}
                             </div>
                             <div  class="label-input">
-                                <label class="small-txt" for="province">Province</label>
+                                <label class="small-txt" for="{{ register_form.province.id_for_label}}">{{ register_form.province.label}}</label>
                                 {{ register_form.province }}
                             </div>
                         </div>
                         <div class="register-flex">
                             <div  class="label-input">
-                                <label class="small-txt" for="postal_code">Postal Code</label>
+                                <label class="small-txt" for="{{ register_form.postal_code.id_for_label}}">{{ register_form.postal_code.label}}</label>
                                 {{ register_form.postal_code }}
                             </div>
                             <div  class="label-input">
-                                <label class="small-txt" for="country">Country</label>
+                                <label class="small-txt" for="{{ register_form.country.id_for_label}}">{{ register_form.country.label}}</label>
                                 {{ register_form.country }}
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                         <div class="label-input-full">
                             <div class="icon-flex">
                                 <i class="fa-solid fa-phone"></i>
-                                <label class="form-label" for="phone">Phone Number</label>
+                                <label class="form-label" for="{{ register_form.phone.id_for_label}}">{{ register_form.phone.label}}</label>
                             </div>
                             <div class="margin-left">
                                 {{ register_form.phone }}
@@ -141,7 +141,7 @@
                         <div class="label-input-full">
                             <div class="icon-flex">
                                 <i class="fa-solid fa-at"></i>
-                                <label class="form-label" for="email">Email</label>
+                                <label class="form-label" for="{{ register_form.email.id_for_label}}">{{ register_form.email.label}}</label>
                             </div>
                             <div class="margin-left">
                                 {{ register_form.email }}
@@ -152,7 +152,7 @@
                     <div class="label-input-full">
                         <div class="icon-flex">
                             <i class="fa-solid fa-shirt"></i>
-                            <label for="uniform_size">Uniform Size</label>
+                            <label class="form-label" for="{{ register_form.uniform_size.id_for_label}}">{{ register_form.uniform_size.label}}</label>
                         </div>
                         <div class="margin-left">
                             {{ register_form.uniform_size }}                           
@@ -164,7 +164,7 @@
                     <div class="label-input-full">
                         <div class="icon-flex">
                             <i class="fa-regular fa-square-check"></i>
-                            <label class="form-label" for="consent">Consent</label>
+                            <label class="form-label" for="{{ register_form.consent.id_for_label}}">{{ register_form.consent.label}}</label>
                         </div>
                         <div class="checkbox-flex margin-left">
                             <div class="checkbox-input">
@@ -178,7 +178,7 @@
                     <div class="label-input-full">
                         <div class="icon-flex">
                             <i class="fa-regular fa-square-check"></i>
-                            <label class="form-label" for="volunteer">Volunteer</label>
+                            <label class="form-label" for="{{ register_form.volunteer.id_for_label}}">{{ register_form.volunteer.label}}</label>
                         </div>
                         <div class="checkbox-flex margin-left">
                             <p>Would you like to be a volunteer for the league?</p>
@@ -195,7 +195,7 @@
                     <div class="label-input-full">
                         <div class="icon-flex">
                             <i class="fa-regular fa-note-sticky"></i>
-                            <label class="form-label" for="requests">Special Requests</label>
+                            <label class="form-label" for="{{ register_form.message.id_for_label}}">{{ register_form.message.label}}</label>
                         </div>
                         <div class="margin-left">
                             {{ register_form.message }}
