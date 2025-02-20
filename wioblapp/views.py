@@ -4,8 +4,30 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag, LikedComment, FavoriteTeam
-from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm, TeamScheduleForm
+from .models import (
+    Role,
+    UserAccount,
+    Team,
+    Player,
+    RegistrationType,
+    Registration,
+    Park,
+    Game,
+    Comment,
+    Announcement,
+    Flag,
+    LikedComment,
+    FavoriteTeam,
+)
+from .forms import (
+    SignUpForm,
+    RegistrationForm,
+    ModifyAccountForm,
+    LoginForm,
+    FilterTeamsForm,
+    CreateCommentForm,
+    TeamScheduleForm,
+)
 
 from django.db.models import F
 
@@ -335,44 +357,6 @@ def dislike_team(request, team_name):
 
 # --------------------------------------------------------------
 
-
-# --------------------------------------------------------------
-def like_team(request, team_name):
-    team = Team.objects.get(name=team_name)
-
-    if request.method == "POST":
-        if not request.user.is_authenticated:
-            messages.info(request, "Login first, please!")
-            return redirect("teams", team_name)
-
-        is_liked = FavoriteTeam.objects.filter(user_account=request.user, team=team_name)
-
-        if is_liked:
-            is_liked.delete()
-            messages.info(request, f"Team {team_name}'s Like removed")
-        else:
-            FavoriteTeam.objects.create(
-                user_account=request.user,
-                team=team,
-            )
-            messages.success(request, f"Liked team {team_name}")
-
-    return redirect("teams")
-# --------------------------------------------------------------
-
-# --------------------------------------------------------------
-def dislike_team(request, team_name):
-    account_id = request.user.id
-    team = Team.objects.get(name=team_name)
-
-    is_liked = FavoriteTeam.objects.filter(user_account=request.user, team=team_name)
-
-    if is_liked:
-        is_liked.delete()
-        messages.info(request, f"Team {team_name}'s Like removed")
-
-    return redirect("member_account", account_id)
-# --------------------------------------------------------------
 
 # --------------------------------------------------------------
 def team_schedule(request, team_name):

@@ -2,7 +2,22 @@ from django.urls import reverse
 from django.contrib import admin
 from django.contrib.admin import AdminSite, SimpleListFilter
 from datetime import datetime, timedelta
-from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Announcement, Flag, Comment, LikedComment, FavoriteTeam
+from .models import (
+    Role,
+    UserAccount,
+    Team,
+    Player,
+    RegistrationType,
+    Registration,
+    Park,
+    Game,
+    Announcement,
+    Flag,
+    Comment,
+    LikedComment,
+    FavoriteTeam,
+)
+
 
 
 
