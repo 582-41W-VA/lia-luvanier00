@@ -113,11 +113,15 @@
                                 <form action="{% url 'like_team' team %}" method="POST">
                                     {% csrf_token %}
 
-                                    <button class="icon" type="submit">
-                                        <span class="tooltip-wrapper" data-tooltip="Like comment">
-                                            <i class="fa-solid fa-heart"></i>
-                                        </span>
-                                    </button>
+                                    <div class="schedule">
+                                        <div class="like-flex">
+                                            <button class="icon" type="submit" name="like">
+                                                <span class="tooltip-wrapper" data-tooltip="Like team">
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </span>
+                                            </button> 
+                                        </div>
+                                    </div>
                                 </form>
                             </td>
                         </tr>
@@ -160,11 +164,15 @@
                                             <form action="{% url 'like_team' team %}" method="POST">
                                                 {% csrf_token %}
 
-                                                <button class="icon" type="submit">
-                                                    <span class="tooltip-wrapper" data-tooltip="Like comment">
-                                                        <i class="fa-solid fa-heart"></i>
-                                                    </span>
-                                                </button>
+                                                <div class="schedule">
+                                                    <div class="like-flex">
+                                                        <button class="icon" type="submit" name="like">
+                                                            <span class="tooltip-wrapper" data-tooltip="Like team">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </span>
+                                                        </button> 
+                                                    </div>
+                                                </div>
                                             </form>
                                         {% endif %}
                                     {% endfor %}
