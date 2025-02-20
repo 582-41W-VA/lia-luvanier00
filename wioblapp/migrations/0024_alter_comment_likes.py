@@ -5,15 +5,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0023_alter_park_latitude_alter_park_longitude'),
+        ("wioblapp", "0023_alter_park_latitude_alter_park_longitude"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='comment',
-            name='likes',
-            field=models.IntegerField(blank=True, default=0, null=True, validators=[django.core.validators.MinValueValidator(0)]),
+            model_name="comment",
+            name="likes",
+            field=models.IntegerField(
+                blank=True,
+                default=0,
+                null=True,
+                validators=[django.core.validators.MinValueValidator(0)],
+            ),
         ),
     ]

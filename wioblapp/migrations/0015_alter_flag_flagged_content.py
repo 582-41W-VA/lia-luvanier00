@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0014_comment_likes'),
+        ("wioblapp", "0014_comment_likes"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='flag',
-            name='flagged_content',
-            field=models.CharField(max_length=1000, verbose_name='Flagged Content'),
+            model_name="flag",
+            name="flagged_content",
+            field=models.CharField(max_length=1000, verbose_name="Flagged Content"),
         ),
     ]

@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0023_flag_comment'),
+        ("wioblapp", "0023_flag_comment"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='flag',
-            name='flagged_content',
+            model_name="flag",
+            name="flagged_content",
         ),
     ]

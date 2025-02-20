@@ -5,15 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0017_likedcomment'),
+        ("wioblapp", "0017_likedcomment"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='flag',
-            name='comment',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='flags', to='wioblapp.comment'),
+            model_name="flag",
+            name="comment",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="flags",
+                to="wioblapp.comment",
+            ),
         ),
     ]

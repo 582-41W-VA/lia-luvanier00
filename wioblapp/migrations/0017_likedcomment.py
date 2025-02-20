@@ -6,18 +6,39 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0016_merge_20250214_0914'),
+        ("wioblapp", "0016_merge_20250214_0914"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='LikedComment',
+            name="LikedComment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('comment', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='likedcomments', to='wioblapp.comment')),
-                ('user_account', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='likedcomments', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "comment",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="likedcomments",
+                        to="wioblapp.comment",
+                    ),
+                ),
+                (
+                    "user_account",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="likedcomments",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

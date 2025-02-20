@@ -14,13 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from wioblapp.admin import wiobl_site
 
 urlpatterns = [
     path("wioblapp/", include("wioblapp.urls")),
-    path('admin/', wiobl_site.urls),
+    path("admin/", wiobl_site.urls),
 ]
 
 wiobl_site.index_title = "West Island Outdoor Basketball League"

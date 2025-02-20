@@ -9,161 +9,457 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Game',
+            name="Game",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_time', models.DateTimeField(verbose_name='Date')),
-                ('team1_score', models.IntegerField(blank=True, null=True, verbose_name='Team #1 Score')),
-                ('team2_score', models.IntegerField(blank=True, null=True, verbose_name='Team #2 Score')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_time", models.DateTimeField(verbose_name="Date")),
+                (
+                    "team1_score",
+                    models.IntegerField(
+                        blank=True, null=True, verbose_name="Team #1 Score"
+                    ),
+                ),
+                (
+                    "team2_score",
+                    models.IntegerField(
+                        blank=True, null=True, verbose_name="Team #2 Score"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Park',
+            name="Park",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='Park Name')),
-                ('address', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Park Name")),
+                ("address", models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='RegistrationType',
+            name="RegistrationType",
             fields=[
-                ('reg_type', models.CharField(max_length=50, primary_key=True, serialize=False, verbose_name='Registration Type')),
-                ('description', models.CharField(max_length=300, verbose_name='Description')),
-                ('cost', models.IntegerField(verbose_name='Cost')),
+                (
+                    "reg_type",
+                    models.CharField(
+                        max_length=50,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="Registration Type",
+                    ),
+                ),
+                (
+                    "description",
+                    models.CharField(max_length=300, verbose_name="Description"),
+                ),
+                ("cost", models.IntegerField(verbose_name="Cost")),
             ],
         ),
         migrations.CreateModel(
-            name='Role',
+            name="Role",
             fields=[
-                ('name', models.CharField(max_length=100, primary_key=True, serialize=False, verbose_name='Role')),
-                ('description', models.TextField(verbose_name='Role Description')),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=100,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="Role",
+                    ),
+                ),
+                ("description", models.TextField(verbose_name="Role Description")),
             ],
         ),
         migrations.CreateModel(
-            name='UserAccount',
+            name="UserAccount",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
-                ('username', models.CharField(error_messages={'unique': 'A user with that username already exists.'}, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.', max_length=150, unique=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator()], verbose_name='username')),
-                ('first_name', models.CharField(blank=True, max_length=150, verbose_name='first name')),
-                ('last_name', models.CharField(blank=True, max_length=150, verbose_name='last name')),
-                ('email', models.EmailField(blank=True, max_length=254, verbose_name='email address')),
-                ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
-                ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
-                ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('bio', models.TextField(blank=True, null=True, verbose_name='Bio')),
-                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')),
-                ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.permission', verbose_name='user permissions')),
-                ('role', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, related_name='user_accounts', to='wioblapp.role')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "is_superuser",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates that this user has all permissions without explicitly assigning them.",
+                        verbose_name="superuser status",
+                    ),
+                ),
+                (
+                    "username",
+                    models.CharField(
+                        error_messages={
+                            "unique": "A user with that username already exists."
+                        },
+                        help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+                        max_length=150,
+                        unique=True,
+                        validators=[
+                            django.contrib.auth.validators.UnicodeUsernameValidator()
+                        ],
+                        verbose_name="username",
+                    ),
+                ),
+                (
+                    "first_name",
+                    models.CharField(
+                        blank=True, max_length=150, verbose_name="first name"
+                    ),
+                ),
+                (
+                    "last_name",
+                    models.CharField(
+                        blank=True, max_length=150, verbose_name="last name"
+                    ),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        blank=True, max_length=254, verbose_name="email address"
+                    ),
+                ),
+                (
+                    "is_staff",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates whether the user can log into this admin site.",
+                        verbose_name="staff status",
+                    ),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(
+                        default=True,
+                        help_text="Designates whether this user should be treated as active. Unselect this instead of deleting accounts.",
+                        verbose_name="active",
+                    ),
+                ),
+                (
+                    "date_joined",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now, verbose_name="date joined"
+                    ),
+                ),
+                ("bio", models.TextField(blank=True, null=True, verbose_name="Bio")),
+                (
+                    "groups",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+                        related_name="user_set",
+                        related_query_name="user",
+                        to="auth.group",
+                        verbose_name="groups",
+                    ),
+                ),
+                (
+                    "user_permissions",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="Specific permissions for this user.",
+                        related_name="user_set",
+                        related_query_name="user",
+                        to="auth.permission",
+                        verbose_name="user permissions",
+                    ),
+                ),
+                (
+                    "role",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        related_name="user_accounts",
+                        to="wioblapp.role",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'user',
-                'verbose_name_plural': 'users',
-                'abstract': False,
+                "verbose_name": "user",
+                "verbose_name_plural": "users",
+                "abstract": False,
             },
             managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
+                ("objects", django.contrib.auth.models.UserManager()),
             ],
         ),
         migrations.CreateModel(
-            name='Announcement',
+            name="Announcement",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100, verbose_name='Title')),
-                ('content', models.TextField(verbose_name='Content')),
-                ('img_url', models.URLField(blank=True, null=True)),
-                ('date', models.DateTimeField(auto_now_add=True, verbose_name='Date')),
-                ('user_account', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, related_name='announcements', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100, verbose_name="Title")),
+                ("content", models.TextField(verbose_name="Content")),
+                ("img_url", models.URLField(blank=True, null=True)),
+                ("date", models.DateTimeField(auto_now_add=True, verbose_name="Date")),
+                (
+                    "user_account",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        related_name="announcements",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Flag',
+            name="Flag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('flagged_content', models.CharField(max_length=100, verbose_name='Flagged Content')),
-                ('date', models.DateTimeField(auto_now_add=True, verbose_name='Date')),
-                ('user_account', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, related_name='flags', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "flagged_content",
+                    models.CharField(max_length=100, verbose_name="Flagged Content"),
+                ),
+                ("date", models.DateTimeField(auto_now_add=True, verbose_name="Date")),
+                (
+                    "user_account",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        related_name="flags",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('content', models.TextField(verbose_name='Content')),
-                ('date', models.DateTimeField(auto_now_add=True, verbose_name='Date')),
-                ('user_account', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, related_name='comments', to=settings.AUTH_USER_MODEL)),
-                ('game', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='wioblapp.game')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("content", models.TextField(verbose_name="Content")),
+                ("date", models.DateTimeField(auto_now_add=True, verbose_name="Date")),
+                (
+                    "user_account",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        related_name="comments",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "game",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="comments",
+                        to="wioblapp.game",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='game',
-            name='park',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='games', to='wioblapp.park'),
+            model_name="game",
+            name="park",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="games",
+                to="wioblapp.park",
+            ),
         ),
         migrations.CreateModel(
-            name='Player',
+            name="Player",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, verbose_name='Name')),
-                ('dob', models.DateField(verbose_name='Date Of Birth')),
-                ('gender', models.CharField(blank=True, max_length=20, null=True, verbose_name='Gender')),
-                ('related_account', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='players', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50, verbose_name="Name")),
+                ("dob", models.DateField(verbose_name="Date Of Birth")),
+                (
+                    "gender",
+                    models.CharField(
+                        blank=True, max_length=20, null=True, verbose_name="Gender"
+                    ),
+                ),
+                (
+                    "related_account",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="players",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Registration',
+            name="Registration",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('address', models.CharField(max_length=200, verbose_name='Address')),
-                ('uniform_size', models.CharField(max_length=3, verbose_name='Uniform Size')),
-                ('consent', models.BooleanField(default=False, verbose_name='Consent')),
-                ('volunteer', models.BooleanField(default=False, verbose_name='Volunteer')),
-                ('email', models.EmailField(blank=True, max_length=254, null=True, unique=True, verbose_name='Email Adress')),
-                ('phone', models.CharField(max_length=15, verbose_name='Phone Number')),
-                ('date_time', models.DateTimeField(auto_now_add=True, verbose_name='Date')),
-                ('message', models.TextField(blank=True, null=True, verbose_name='Special Requests')),
-                ('player', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='registrations', to='wioblapp.player')),
-                ('reg_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='registrations', to='wioblapp.registrationtype')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("address", models.CharField(max_length=200, verbose_name="Address")),
+                (
+                    "uniform_size",
+                    models.CharField(max_length=3, verbose_name="Uniform Size"),
+                ),
+                ("consent", models.BooleanField(default=False, verbose_name="Consent")),
+                (
+                    "volunteer",
+                    models.BooleanField(default=False, verbose_name="Volunteer"),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        blank=True,
+                        max_length=254,
+                        null=True,
+                        unique=True,
+                        verbose_name="Email Adress",
+                    ),
+                ),
+                ("phone", models.CharField(max_length=15, verbose_name="Phone Number")),
+                (
+                    "date_time",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Date"),
+                ),
+                (
+                    "message",
+                    models.TextField(
+                        blank=True, null=True, verbose_name="Special Requests"
+                    ),
+                ),
+                (
+                    "player",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="registrations",
+                        to="wioblapp.player",
+                    ),
+                ),
+                (
+                    "reg_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="registrations",
+                        to="wioblapp.registrationtype",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Team',
+            name="Team",
             fields=[
-                ('name', models.CharField(max_length=20, primary_key=True, serialize=False, verbose_name='Team Name')),
-                ('place', models.IntegerField(default=0, verbose_name='Place')),
-                ('coaches', models.ManyToManyField(related_name='teams', to=settings.AUTH_USER_MODEL)),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=20,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="Team Name",
+                    ),
+                ),
+                ("place", models.IntegerField(default=0, verbose_name="Place")),
+                (
+                    "coaches",
+                    models.ManyToManyField(
+                        related_name="teams", to=settings.AUTH_USER_MODEL
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='player',
-            name='team_name',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.RESTRICT, related_name='players', to='wioblapp.team'),
+            model_name="player",
+            name="team_name",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.RESTRICT,
+                related_name="players",
+                to="wioblapp.team",
+            ),
         ),
         migrations.AddField(
-            model_name='game',
-            name='team_1',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Team1_games', to='wioblapp.team'),
+            model_name="game",
+            name="team_1",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="Team1_games",
+                to="wioblapp.team",
+            ),
         ),
         migrations.AddField(
-            model_name='game',
-            name='team_2',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Team2_games', to='wioblapp.team'),
+            model_name="game",
+            name="team_2",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="Team2_games",
+                to="wioblapp.team",
+            ),
         ),
         migrations.AddField(
-            model_name='game',
-            name='winner',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.RESTRICT, related_name='games', to='wioblapp.team'),
+            model_name="game",
+            name="winner",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.RESTRICT,
+                related_name="games",
+                to="wioblapp.team",
+            ),
         ),
     ]
