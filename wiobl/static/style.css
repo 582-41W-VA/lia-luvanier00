@@ -347,8 +347,6 @@ footer a:hover {
     font-style: italic;
 }
 
-
-
 footer i {
     font-size: 30px;
 }
@@ -1776,6 +1774,10 @@ input {
 
     .social-media-icons {
         gap: 8px;
+    }
+
+    footer a {
+        font-size: 18px;
     }
 
     /* HOME */
