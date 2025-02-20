@@ -17,7 +17,7 @@
                         <li>Player last name</li>
                         <li>Team name (e.g. Wolfpack)</li>
                     </ul>
-                    <p>And / Or</p>
+                    <p>AND / OR</p>
                     <p>If you know the league member's group or coach, you can use the options below.</p>
                 </div>
                 <div class="form">
@@ -26,13 +26,11 @@
                         <label for="search">Search for Player or Team:</label>
                         {{ filter_teams_form.search }}
                     </div>
-                    <div class="search-margin">
-                        <div class="search-flex">
-                            <div class="search-right">
-                                <div class="label-flex">
-                                    <label for="group">Select a Group* :</label>
-                                    {{ filter_teams_form.group }}
-                                </div>
+                    <div class="search-flex">
+                        <div class="search-right">
+                            <div class="label-flex">
+                                <label for="group">Select a Group:</label>
+                                {{ filter_teams_form.group }}
                             </div>
                             <div class="search-left">
                                 <div class="label-flex">
