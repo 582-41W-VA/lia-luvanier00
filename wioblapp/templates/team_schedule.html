@@ -62,20 +62,26 @@
                     <!-- GAME INFO ROW START -->
                     <tr class="game-row">
                         <!-- COLUMN 1 -->
-                        <td>
+                        <td class="park-info">
                             {{ game.game.date_time }} at {{ game.game.park }}
                         </td>
                        
                         {% if game.game.team1_score and game.game.team2_score %}
                             <!-- COLUMN 2 -->
                             <td>
-                                <i class="fa-solid fa-circle" style="color: {{ game.game.team_1.color }};"></i>
-                                {{ game.game.team_1 }}: {{ game.game.team1_score }}
-                            </td>
+                                <div class="td-flex">
+                                    <i class="fa-solid fa-circle" style="color: {{ game.game.team_1.color }};"></i>
+                                    <span class="team-name">{{ game.game.team_1 }}:</span> 
+                                    <span class="team-score">{{ game.game.team1_score }}</span>
+                                </div>
+                            </td>                            
                             <!-- COLUMN 3 -->
                             <td>
-                                <i class="fa-solid fa-circle" style="color: {{ game.game.team_2.color }};"></i>
-                                {{ game.game.team_2 }}: {{ game.game.team2_score }}
+                                <div class="td-flex">
+                                    <i class="fa-solid fa-circle" style="color: {{ game.game.team_2.color }};"></i>
+                                    <span class="team-name">{{ game.game.team_2 }}:</span>
+                                    <span class="team-score">{{ game.game.team2_score }}</span>
+                                </div>
                             </td>
                         {% else %}
                             <!-- COLUMN 2 -->

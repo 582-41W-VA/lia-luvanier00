@@ -347,8 +347,6 @@ footer a:hover {
     font-style: italic;
 }
 
-
-
 footer i {
     font-size: 30px;
 }
@@ -1101,8 +1099,8 @@ input {
     margin-bottom: 24px;
 }
 
-/* TEAMS */
-/* Search form */
+/* TEAMS & SCHEDULE */
+/* form - both pages */
 .teams-search .search-form {
     background-color: #3663BF;
     padding: 32px;
@@ -1147,14 +1145,6 @@ input {
     width: 100%;
 }
 
-.teams .search-form select {
-    width: 70%;
-}
-
-.schedule .search-form select {
-    width: 100%;
-}
-
 .teams-search .search-form label {
     color: #ffffff;
     margin-bottom: 8px;
@@ -1163,20 +1153,22 @@ input {
 
 .teams-search .label-flex {
     display: flex;
+    gap: 8px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .teams-search .search-margin {
     margin-bottom: 48px;
 }
 
-.search-flex {
+.teams-search .search-flex {
     display: flex;
     justify-content: space-around;
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 36px;
+    margin-bottom: 36px;
 }
 
 .teams-search .search-right,
@@ -1186,6 +1178,16 @@ input {
 
 .teams-search .search-btn {
     text-align: center;
+}
+
+/* teams search form */
+.teams .search-form select {
+    width: 70%;
+}
+
+/* schedule search form */
+.schedule .search-form select {
+    width: 100%;
 }
 
 /* teams & schedule table */
@@ -1276,6 +1278,16 @@ input {
 .schedule table tbody tr:nth-child(1), 
 .schedule table tbody tr:nth-child(2n + 1) {
     background: rgba(217, 88, 41, 0.189);
+}
+
+.schedule .park-info {
+    font-style: italic;
+}
+
+.schedule .td-flex {
+    display: flex;
+    gap: 4px;
+    align-items: center;
 }
 
 .schedule .comments-section {
@@ -1764,6 +1776,10 @@ input {
         gap: 8px;
     }
 
+    footer a {
+        font-size: 18px;
+    }
+
     /* HOME */
     /* Hero Banner */
     .hero-content h3 {
@@ -2243,5 +2259,14 @@ input {
         width: 100%;
     }
 
+    /* TEAMS */
+    .teams-search .search-flex {
+        gap: 8px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+    }
 
+    .schedule .td-flex {
+        flex-direction: column;
+    }
 }
