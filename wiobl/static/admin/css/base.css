@@ -7,7 +7,7 @@ html[data-theme="light"],
 :root {
     --primary: #79aec8;
     --secondary: #417690;
-    --accent: #f5dd5d;
+    --accent: orange;
     --primary-fg: #fff;
 
     --body-fg: #333;
@@ -459,6 +459,7 @@ table thead th.sorted .sortoptions a.ascending {
 table thead th.sorted .sortoptions a.ascending:focus,
 table thead th.sorted .sortoptions a.ascending:hover {
     background-position: 0 -42px;
+    
 }
 
 table thead th.sorted .sortoptions a.descending {
