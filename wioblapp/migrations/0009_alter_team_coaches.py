@@ -5,15 +5,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0008_team_group'),
+        ("wioblapp", "0008_team_group"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='team',
-            name='coaches',
-            field=models.ManyToManyField(blank=True, null=True, related_name='teams', to=settings.AUTH_USER_MODEL),
+            model_name="team",
+            name="coaches",
+            field=models.ManyToManyField(
+                blank=True, null=True, related_name="teams", to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

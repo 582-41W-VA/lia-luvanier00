@@ -4,20 +4,23 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0022_park_latitude_park_longitude'),
+        ("wioblapp", "0022_park_latitude_park_longitude"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='park',
-            name='latitude',
-            field=models.DecimalField(blank=True, decimal_places=16, max_digits=20, null=True),
+            model_name="park",
+            name="latitude",
+            field=models.DecimalField(
+                blank=True, decimal_places=16, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='park',
-            name='longitude',
-            field=models.DecimalField(blank=True, decimal_places=16, max_digits=20, null=True),
+            model_name="park",
+            name="longitude",
+            field=models.DecimalField(
+                blank=True, decimal_places=16, max_digits=20, null=True
+            ),
         ),
     ]

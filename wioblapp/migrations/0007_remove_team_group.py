@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0006_team_group'),
+        ("wioblapp", "0006_team_group"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='team',
-            name='group',
+            model_name="team",
+            name="group",
         ),
     ]

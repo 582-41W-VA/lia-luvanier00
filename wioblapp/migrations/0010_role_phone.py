@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0009_alter_team_coaches'),
+        ("wioblapp", "0009_alter_team_coaches"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='role',
-            name='phone',
-            field=models.CharField(blank=True, max_length=15, null=True, verbose_name='Phone Number'),
+            model_name="role",
+            name="phone",
+            field=models.CharField(
+                blank=True, max_length=15, null=True, verbose_name="Phone Number"
+            ),
         ),
     ]

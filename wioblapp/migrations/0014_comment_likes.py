@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0013_alter_team_coaches'),
+        ("wioblapp", "0013_alter_team_coaches"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='comment',
-            name='likes',
+            model_name="comment",
+            name="likes",
             field=models.IntegerField(blank=True, default=0, null=True),
         ),
     ]

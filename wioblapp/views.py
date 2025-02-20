@@ -4,10 +4,33 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .models import Role, UserAccount, Team, Player, RegistrationType, Registration, Park, Game, Comment, Announcement, Flag, LikedComment, FavoriteTeam
-from .forms import SignUpForm, RegistrationForm, ModifyAccountForm, LoginForm, FilterTeamsForm, CreateCommentForm, TeamScheduleForm
+from .models import (
+    Role,
+    UserAccount,
+    Team,
+    Player,
+    RegistrationType,
+    Registration,
+    Park,
+    Game,
+    Comment,
+    Announcement,
+    Flag,
+    LikedComment,
+    FavoriteTeam,
+)
+from .forms import (
+    SignUpForm,
+    RegistrationForm,
+    ModifyAccountForm,
+    LoginForm,
+    FilterTeamsForm,
+    CreateCommentForm,
+    TeamScheduleForm,
+)
 
 from django.db.models import F
+
 
 # --------------------------------------------------------------
 def index(request):
@@ -17,7 +40,10 @@ def index(request):
         "announcements": announcements,
     }
     return render(request, "index.html", context)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def sign_up(request):
@@ -35,11 +61,23 @@ def sign_up(request):
 
             if UserAccount.objects.filter(username=username).exists():
                 messages.error(request, f"Username {username} is already exist!")
-                return render (request, "sign-up.html", {"signup_form": signup_form,})
-            
+                return render(
+                    request,
+                    "sign-up.html",
+                    {
+                        "signup_form": signup_form,
+                    },
+                )
+
             if UserAccount.objects.filter(email=email).exists():
                 messages.error(request, f"Email {email} is already exist")
-                return render (request, "sign-up.html", {"signup_form": signup_form,})
+                return render(
+                    request,
+                    "sign-up.html",
+                    {
+                        "signup_form": signup_form,
+                    },
+                )
 
             member = UserAccount.objects.create_user(
                 first_name=firstname,
@@ -47,7 +85,7 @@ def sign_up(request):
                 username=username,
                 email=email,
                 password=password,
-                role=Role.objects.get(name="Parent")
+                role=Role.objects.get(name="Parent"),
             )
 
             messages.success(request, "You signed-up successfully")
@@ -56,18 +94,21 @@ def sign_up(request):
                 login(request, auth_member)
                 return redirect("index")
             else:
-                 messages.error(request, "error logging in")
+                messages.error(request, "error logging in")
 
     context = {
         "signup_form": signup_form,
     }
     return render(request, "sign-up.html", context)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def member_login(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect("index")
 
     login_form = LoginForm()
 
@@ -89,13 +130,16 @@ def member_login(request):
                 else:
                     messages.error(request, "Email OR Password is incorrect!")
             except UserAccount.DoesNotExist:
-                    messages.error(request, "Email OR Password is incorrect!")
+                messages.error(request, "Email OR Password is incorrect!")
 
     context = {
         "login_form": login_form,
     }
     return render(request, "login.html", context)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 @login_required(login_url="login")
@@ -131,7 +175,9 @@ def member_account(request, account_id):
             member.save()
             messages.success(request, "Your account updated successfully")
 
-            auth_member = authenticate(request, username=member.username, password=new_password)
+            auth_member = authenticate(
+                request, username=member.username, password=new_password
+            )
             if auth_member is not None:
                 login(request, auth_member)
                 return redirect("member_account", account_id=request.user.id)
@@ -146,7 +192,10 @@ def member_account(request, account_id):
         "registrations": registrations,
     }
     return render(request, "member_account.html", context)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 @login_required(login_url="login")
@@ -179,10 +228,7 @@ def register_player(request):
             member = UserAccount.objects.get(email=request.user.email)
 
             player, created = Player.objects.get_or_create(
-                related_account=member,
-                name=playername,
-                dob=dob,
-                gender=gender
+                related_account=member, name=playername, dob=dob, gender=gender
             )
 
             registration = Registration.objects.create(
@@ -194,24 +240,30 @@ def register_player(request):
                 uniform_size=uniform_size,
                 consent=consent,
                 volunteer=volunteer,
-                message=message
+                message=message,
             )
 
             messages.success(request, "Registration submitted successfully")
-            return redirect('index') 
+            return redirect("index")
 
     context = {
         "register_form": register_form,
     }
     return render(request, "registration.html", context)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 @login_required(login_url="login")
 def member_logout(request):
     logout(request)
     return redirect("login")
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def teams(request):
@@ -221,11 +273,11 @@ def teams(request):
     players = Player.objects.all()
 
     if filter_teams_form.is_valid():
-        group = filter_teams_form.cleaned_data.get('group')
-        coach = filter_teams_form.cleaned_data.get('coach')
-        keyword = filter_teams_form.cleaned_data.get('search')
+        group = filter_teams_form.cleaned_data.get("group")
+        coach = filter_teams_form.cleaned_data.get("coach")
+        keyword = filter_teams_form.cleaned_data.get("search")
 
-        if group: 
+        if group:
             teams = teams.filter(group=group)
             players = players.filter(team_name__in=teams)
 
@@ -237,7 +289,7 @@ def teams(request):
             keyword_teams = teams.filter(name__icontains=keyword)
             if keyword_teams:
                 teams = keyword_teams
-            
+
             keyword_players = players.filter(name__icontains=keyword)
             if keyword_players:
                 players = keyword_players
@@ -255,7 +307,10 @@ def teams(request):
     }
 
     return render(request, "teams.html", context)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def like_team(request, team_name):
@@ -266,7 +321,9 @@ def like_team(request, team_name):
             messages.info(request, "Login first, please!")
             return redirect("teams", team_name)
 
-        is_liked = FavoriteTeam.objects.filter(user_account=request.user, team=team_name)
+        is_liked = FavoriteTeam.objects.filter(
+            user_account=request.user, team=team_name
+        )
 
         if is_liked:
             is_liked.delete()
@@ -279,7 +336,10 @@ def like_team(request, team_name):
             messages.success(request, f"Liked team {team_name}")
 
     return redirect("teams")
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def dislike_team(request, team_name):
@@ -293,26 +353,33 @@ def dislike_team(request, team_name):
         messages.info(request, f"Team {team_name}'s Like removed")
 
     return redirect("member_account", account_id)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def team_schedule(request, team_name):
     schedule_form = TeamScheduleForm(request.GET)
     comment_form = CreateCommentForm()
     team = team_name
-    games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
+    games = (
+        Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team)
+    ).distinct()
     comments = Comment.objects.filter(game__in=games)
     game_comments = []
-    flags = Flag.objects.all()  
-    
+    flags = Flag.objects.all()
+
     if schedule_form.is_valid():
-        month = schedule_form.cleaned_data.get('month')
-        date = schedule_form.cleaned_data.get('date')
-        result = schedule_form.cleaned_data.get('result')
+        month = schedule_form.cleaned_data.get("month")
+        date = schedule_form.cleaned_data.get("date")
+        result = schedule_form.cleaned_data.get("result")
 
         if month:
             if month == "All":
-                games = ( Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team) ).distinct()
+                games = (
+                    Game.objects.filter(team_1=team) | Game.objects.filter(team_2=team)
+                ).distinct()
             else:
                 games = games.filter(date_time__month=int(month))
 
@@ -326,15 +393,26 @@ def team_schedule(request, team_name):
             if result == "Win":
                 games = games.filter(winner=team)
             elif result == "Lose":
-                games = games.exclude(winner=team).exclude(team1_score=F('team2_score')).exclude(team1_score__isnull=True).exclude(team2_score__isnull=True)
+                games = (
+                    games.exclude(winner=team)
+                    .exclude(team1_score=F("team2_score"))
+                    .exclude(team1_score__isnull=True)
+                    .exclude(team2_score__isnull=True)
+                )
             elif result == "Tie":
-                games = games.filter(team1_score=F('team2_score'), team1_score__isnull=False, team2_score__isnull=False)
+                games = games.filter(
+                    team1_score=F("team2_score"),
+                    team1_score__isnull=False,
+                    team2_score__isnull=False,
+                )
 
     for game in games:
-        game_comments.append({
-            "game": game,
-            "comments": comments.filter(game=game).order_by("-date"),
-        }) 
+        game_comments.append(
+            {
+                "game": game,
+                "comments": comments.filter(game=game).order_by("-date"),
+            }
+        )
 
     context = {
         "schedule_form": schedule_form,
@@ -346,7 +424,10 @@ def team_schedule(request, team_name):
         "flags": flags,
     }
     return render(request, "team_schedule.html", context)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def create_comment(request, team_name):
@@ -356,36 +437,37 @@ def create_comment(request, team_name):
         comment_form = CreateCommentForm(request.POST)
         game_id = request.POST.get("post")
         comments = Comment.objects.filter(game=game_id)
-        
+
         if comment_form.is_valid():
             game = Game.objects.get(id=game_id)
             user_account = request.user
-            content = comment_form.cleaned_data.get('content')
+            content = comment_form.cleaned_data.get("content")
 
             if not request.user.is_authenticated:
                 messages.info(request, "Login before posting a comment")
                 return redirect("team_schedule", team)
 
             comment = Comment.objects.get_or_create(
-                game=game,
-                user_account=user_account,
-                content=content
+                game=game, user_account=user_account, content=content
             )
 
             if comment:
                 messages.success(request, "Comment is posted successfully")
                 return redirect("team_schedule", team)
-            
+
         messages.error(request, "Comment Can't be created. Please try again.")
     return redirect("team_schedule", team_name)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def like_comment(request, team_name):
     team = team_name
 
     if request.method == "POST":
-        comment_id = request.POST.get('like')
+        comment_id = request.POST.get("like")
         comment = Comment.objects.get(id=comment_id)
 
         if not comment:
@@ -395,7 +477,9 @@ def like_comment(request, team_name):
             messages.info(request, "Login first, please!")
             return redirect("team_schedule", team)
 
-        is_liked = LikedComment.objects.filter(comment=comment_id, user_account=request.user)
+        is_liked = LikedComment.objects.filter(
+            comment=comment_id, user_account=request.user
+        )
 
         if is_liked:
             is_liked.delete()
@@ -410,14 +494,17 @@ def like_comment(request, team_name):
             comment.save()
 
     return redirect("team_schedule", team_name)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def flag_comment(request, team_name):
     team = team_name
 
     if request.method == "POST":
-        comment_id = request.POST.get('flag')
+        comment_id = request.POST.get("flag")
         comment = Comment.objects.get(id=comment_id)
 
         if not comment:
@@ -426,7 +513,6 @@ def flag_comment(request, team_name):
         if not request.user.is_authenticated:
             messages.info(request, "Login before flagging a comment")
             return redirect("team_schedule", team)
-
 
         is_flagged = Flag.objects.filter(user_account=request.user, comment=comment)
 
@@ -443,7 +529,10 @@ def flag_comment(request, team_name):
             messages.info(request, "Comment is already flagged")
 
     return redirect("team_schedule", team_name)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def edit_comment(request, team_name, comment_id):
@@ -455,7 +544,7 @@ def edit_comment(request, team_name, comment_id):
 
     comment = get_object_or_404(Comment, id=comment_id)
     comment_form = CreateCommentForm(instance=comment)
-    
+
     if request.method == "POST":
         if not request.user.is_authenticated:
             messages.info(request, "Login before editing a comment")
@@ -471,16 +560,19 @@ def edit_comment(request, team_name, comment_id):
         messages.error(request, "Can't be edited. Please try again.")
 
     return redirect("team_schedule", team_name)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def delete_comment(request, team_name):
     team = team_name
 
     if request.method == "POST":
-        comment_id = request.POST.get('delete')
+        comment_id = request.POST.get("delete")
         comment = get_object_or_404(Comment, id=comment_id)
-        
+
         if not comment:
             messages.error(request, "Comment can't be deleted")
 
@@ -491,13 +583,18 @@ def delete_comment(request, team_name):
         deleted = comment.delete()
         if deleted:
             messages.success(request, "Comment deleted")
-            return redirect("team_schedule", team)    
-        
+            return redirect("team_schedule", team)
+
         messages.error(request, "Can't be deleted. Please try again.")
-    return redirect("team_schedule", team_name)    
+    return redirect("team_schedule", team_name)
+
+
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def about(request):
     return render(request, "about.html")
+
+
 # --------------------------------------------------------------

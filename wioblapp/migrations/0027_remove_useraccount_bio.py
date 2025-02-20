@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0026_merge_20250218_1948'),
+        ("wioblapp", "0026_merge_20250218_1948"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='useraccount',
-            name='bio',
+            model_name="useraccount",
+            name="bio",
         ),
     ]

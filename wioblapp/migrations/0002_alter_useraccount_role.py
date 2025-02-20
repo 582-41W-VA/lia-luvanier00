@@ -5,15 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0001_initial'),
+        ("wioblapp", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='useraccount',
-            name='role',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.RESTRICT, related_name='user_accounts', to='wioblapp.role'),
+            model_name="useraccount",
+            name="role",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.RESTRICT,
+                related_name="user_accounts",
+                to="wioblapp.role",
+            ),
         ),
     ]

@@ -5,15 +5,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0012_team_color'),
+        ("wioblapp", "0012_team_color"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='team',
-            name='coaches',
-            field=models.ManyToManyField(blank=True, related_name='teams', to=settings.AUTH_USER_MODEL),
+            model_name="team",
+            name="coaches",
+            field=models.ManyToManyField(
+                blank=True, related_name="teams", to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

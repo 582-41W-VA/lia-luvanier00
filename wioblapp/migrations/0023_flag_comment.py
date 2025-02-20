@@ -5,15 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0022_remove_flag_comment_flag_flagged_content'),
+        ("wioblapp", "0022_remove_flag_comment_flag_flagged_content"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='flag',
-            name='comment',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='flags', to='wioblapp.comment'),
+            model_name="flag",
+            name="comment",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="flags",
+                to="wioblapp.comment",
+            ),
         ),
     ]

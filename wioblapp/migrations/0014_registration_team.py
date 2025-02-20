@@ -5,15 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0013_alter_team_coaches'),
+        ("wioblapp", "0013_alter_team_coaches"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='registration',
-            name='team',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='registrations', to='wioblapp.team'),
+            model_name="registration",
+            name="team",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="registrations",
+                to="wioblapp.team",
+            ),
         ),
     ]
