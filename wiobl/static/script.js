@@ -23,15 +23,14 @@ function handleBurgerClick() {
     });
 }
 
+// Run ⁠ toggleBurger ⁠ whenever the window is resized
+window.addEventListener("resize", toggleBurger);
+
 // Run functions to handle burger menu when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
     toggleBurger();
     handleBurgerClick();
 });
-
-// Run ⁠ toggleBurger ⁠ whenever the window is resized
-window.addEventListener("resize", toggleBurger);
-
 
 // map api
 document.addEventListener('DOMContentLoaded', function () {
@@ -74,3 +73,72 @@ document.addEventListener('DOMContentLoaded', function () {
         .bindPopup(locationName_4)
         .openPopup();
 });
+
+// * * * * * * * * COMMENTS * * * * * * * * 
+
+// Display "edit comment" input
+function displayEditComment() {
+    const editContainers = document.querySelectorAll("#comment-edit");
+    const editBtns = document.querySelectorAll("#edit-btn");
+
+    editBtns.forEach((editBtn, index) => {
+        editBtn.addEventListener("click", () => {
+            editContainers[index].style.display = "block";
+        });
+    });
+}
+
+displayEditComment();
+
+// Open popup for flagging comments when flag is clicked.
+function openPopupFlag() {
+    const popups = document.querySelectorAll("#popup");
+    const flagIcons = document.querySelectorAll("#flag-icon");
+
+    flagIcons.forEach((flagIcon, index) => {
+        flagIcon.addEventListener("click", () => {
+            popups[index].style.display = "block";
+        });
+    });
+}
+
+openPopupFlag();
+
+// Cancel popup for flagging comments when cancel button is clicked.
+function cancelPopupFlag() {
+    const popups = document.querySelectorAll("#popup");
+    const cancelPopupBtns = document.querySelectorAll("#cancel-popup");
+
+    cancelPopupBtns.forEach((cancelPopupBtn, index) => {
+        cancelPopupBtn.addEventListener("click", () => {
+            popups[index].style.display = "none";
+        });
+    });
+}
+
+cancelPopupFlag();
+
+// Apply the CSS styles to make the message into a popup element if javascript is available.
+function stylePopupFlag() {
+    const popups = document.querySelectorAll("#popup");
+
+    popups.forEach((popup) => {
+        popup.style.display = "none"; 
+        popup.style.position = "absolute";
+        popup.style.right = "10%";
+        popup.style.zIndex = "10";
+        popup.style.padding = "24px";
+
+        if (window.innerWidth < 992) {
+            popup.style.left = "10%";
+        }
+
+    });
+
+    const flagIcons = document.querySelectorAll("#flag-icon");
+    flagIcons.forEach((flagIcon) => {
+        flagIcon.style.display = "block"; 
+    });
+}
+
+stylePopupFlag();
