@@ -3,8 +3,7 @@
 {% load static %}
 
 {% block content %}
-
-    <section class="teams-search">
+    <section class="teams-search teams">
         <div class="container">
 
             <div class="section-heading">
@@ -33,11 +32,11 @@
                                 <label for="group">Select a Group:</label>
                                 {{ filter_teams_form.group }}
                             </div>
-                        </div>
-                        <div class="search-left">
-                            <div class="label-flex">
-                                <label for="coach">Select a Coach:</label>
-                                {{ filter_teams_form.coach }}
+                            <div class="search-left">
+                                <div class="label-flex">
+                                    <label for="coach">Select a Coach:</label>
+                                    {{ filter_teams_form.coach }}
+                                </div>
                             </div>
                         </div>
                     </div>
