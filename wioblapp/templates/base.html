@@ -103,7 +103,7 @@
                 <ul class="footer-item">
                     {% if request.user.is_authenticated %}
                         <li class="list-item"><a href="{% url 'registration' %}">Registration</a></li>
-                        <li><a class="orange-url" href="{% url 'logout' %}">Logout</a></li>
+                        <li  class="list-item"><a class="orange-url" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                         <li class="list-item"><a class="orange-url" href="{% url 'sign-up' %}">Sign-up</a></li>
                         <li class="list-item"><a class="orange-url" href="{% url 'login' %}">Login</a></li>
