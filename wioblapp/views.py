@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse 
+from django.http import JsonResponse
 
 from .models import (
     Role,
@@ -313,6 +313,7 @@ def teams(request):
 
     return render(request, "teams.html", context)
 
+
 # --------------------------------------------------------------
 def like_team(request, team_name):
     team = Team.objects.get(name=team_name)
@@ -599,6 +600,7 @@ def about(request):
 
 
 # --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def getParks(request):

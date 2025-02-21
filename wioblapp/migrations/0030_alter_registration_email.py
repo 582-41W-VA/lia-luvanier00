@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0029_merge_20250220_2025'),
+        ("wioblapp", "0029_merge_20250220_2025"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='registration',
-            name='email',
-            field=models.EmailField(blank=True, max_length=254, null=True, verbose_name='Email Address'),
+            model_name="registration",
+            name="email",
+            field=models.EmailField(
+                blank=True, max_length=254, null=True, verbose_name="Email Address"
+            ),
         ),
     ]

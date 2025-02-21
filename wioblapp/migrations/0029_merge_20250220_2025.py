@@ -4,12 +4,10 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0016_merge_20250214_1342'),
-        ('wioblapp', '0028_favoriteteam'),
-        ('wioblapp', '0028_flag_reviewed'),
+        ("wioblapp", "0016_merge_20250214_1342"),
+        ("wioblapp", "0028_favoriteteam"),
+        ("wioblapp", "0028_flag_reviewed"),
     ]
 
-    operations = [
-    ]
+    operations = []

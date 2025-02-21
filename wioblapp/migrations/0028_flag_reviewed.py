@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0027_remove_useraccount_bio'),
+        ("wioblapp", "0027_remove_useraccount_bio"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='flag',
-            name='reviewed',
+            model_name="flag",
+            name="reviewed",
             field=models.BooleanField(default=False),
         ),
     ]
