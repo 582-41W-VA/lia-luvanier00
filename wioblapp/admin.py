@@ -124,9 +124,11 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ("user_account", "content", "date", "likes") 
     list_filter = ("date",)  
     ordering = ("likes",) 
+    search_fields = ("user_account__username", )
+
+
 
     def get_ordering(self, request):
-        """Allows sorting by likes both ascending and descending."""
         ordering = super().get_ordering(request)
         if request.GET.get("o") == "4": 
             return ["-likes"] 
@@ -144,6 +146,10 @@ class FlagAdmin(admin.ModelAdmin):
             obj.user_account = request.user  
         super().save_model(request, obj, form, change)
 
+class FavoriteTeamAdmin(admin.ModelAdmin):
+    list_display = ("user_account", "team") 
+    list_filter = ("team",)  
+    search_fields = ("user_account__username", "team__name")
 
 wiobl_site = WioblAdminArea(name='WioblAdmin')
 
@@ -152,7 +158,7 @@ wiobl_site = WioblAdminArea(name='WioblAdmin')
 wiobl_site.register(Role)
 wiobl_site.register(UserAccount)
 wiobl_site.register(Team)
-wiobl_site.register(FavoriteTeam)
+wiobl_site.register(FavoriteTeam, FavoriteTeamAdmin)
 wiobl_site.register(Player)
 wiobl_site.register(RegistrationType)
 wiobl_site.register(Registration, RegistrationAdmin)
