@@ -112,6 +112,7 @@ class RegistrationAdmin(admin.ModelAdmin):
 
 class AnnouncementAdmin(admin.ModelAdmin):
     list_display = ("title", "date", "user_account")
+    list_filter = ("date",)
     exclude = ("user_account",)
 
     def save_model(self, request, obj, form, change):
@@ -121,6 +122,17 @@ class AnnouncementAdmin(admin.ModelAdmin):
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ("user_account", "content", "date", "likes") 
+    list_filter = ("date",)  
+    ordering = ("likes",) 
+
+    def get_ordering(self, request):
+        """Allows sorting by likes both ascending and descending."""
+        ordering = super().get_ordering(request)
+        if request.GET.get("o") == "4": 
+            return ["-likes"] 
+        return ["likes"] 
+
+
 
 class FlagAdmin(admin.ModelAdmin):
     list_display = ("comment", "reviewed", "date")  
