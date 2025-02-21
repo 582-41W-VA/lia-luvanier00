@@ -1141,6 +1141,7 @@ input {
 }
 
 .teams-search .search-form input {
+    padding-left: 15px;
     margin-bottom: 32px;
     width: 100%;
 }
@@ -1182,6 +1183,7 @@ input {
 
 /* teams search form */
 .teams .search-form select {
+    padding-left: 15px;
     width: 70%;
 }
 

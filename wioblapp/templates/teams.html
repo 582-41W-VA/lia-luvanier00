@@ -77,7 +77,9 @@
                                 {% if team.coaches.all %}
                                 <ul>
                                     {% for coach in team.coaches.all %}
+                                    <div class="player-box">
                                         <li>{{ coach }}</li>
+                                    </div>
                                     {% endfor %}
                                 </ul>
                                 {% else %}
