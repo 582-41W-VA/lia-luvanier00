@@ -313,6 +313,8 @@ def teams(request):
 
     return render(request, "teams.html", context)
 
+# --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 def like_team(request, team_name):
