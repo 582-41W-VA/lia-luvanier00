@@ -169,6 +169,13 @@ class LikedCommentAdmin(admin.ModelAdmin):
 
     comment_preview.short_description = "Comment"
 
+class ParkAdmin(admin.ModelAdmin):
+    list_display = ("name", "address", "latitude", "longitude") 
+    search_fields = ("name", "address") 
+    list_filter = ("name",)  
+    ordering = ("name",) 
+
+
 
 wiobl_site = WioblAdminArea(name='WioblAdmin')
 
@@ -181,7 +188,7 @@ wiobl_site.register(FavoriteTeam, FavoriteTeamAdmin)
 wiobl_site.register(Player)
 wiobl_site.register(RegistrationType)
 wiobl_site.register(Registration, RegistrationAdmin)
-wiobl_site.register(Park)
+wiobl_site.register(Park, ParkAdmin)
 wiobl_site.register(Game, GameAdmin)
 wiobl_site.register(Announcement, AnnouncementAdmin)
 wiobl_site.register(LikedComment, LikedCommentAdmin)
