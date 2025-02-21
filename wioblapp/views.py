@@ -279,8 +279,12 @@ def teams(request):
         keyword = filter_teams_form.cleaned_data.get("search")
 
         if group:
-            teams = teams.filter(group=group)
-            players = players.filter(team_name__in=teams)
+            if group == "All":
+                teams = Team.objects.all()
+                players = Player.objects.all()
+            else:
+                teams = teams.filter(group=group)
+                players = players.filter(team_name__in=teams)
 
         if coach:
             teams = teams.filter(coaches=coach)
@@ -288,17 +292,17 @@ def teams(request):
 
         if keyword:
             keyword_teams = teams.filter(name__icontains=keyword)
-            if keyword_teams:
+            if keyword_teams.exists():
                 teams = keyword_teams
 
             keyword_players = players.filter(name__icontains=keyword)
-            if keyword_players:
+            if keyword_players.exists():
                 players = keyword_players
-                teams = Team.objects.filter(players__in=keyword_players)
+                teams = Team.objects.filter(players__in=keyword_players).distinct()
 
-            if not keyword_players and not keyword_teams:
-                players = []
-                teams = []
+            if not keyword_players.exists() and not keyword_teams.exists():
+                teams = Team.objects.none()
+                players = Player.objects.none()
 
     context = {
         "filter_teams_form": filter_teams_form,

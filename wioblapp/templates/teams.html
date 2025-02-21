@@ -49,7 +49,7 @@
             {% if filter_teams_form.group.value %}
             <div>
                 <div class="section-heading">
-                    <h5>Team {{ filter_teams_form.group.value }}'s Table:</h5>
+                    <h5>{{ filter_teams_form.group.value }}</h5>
                 </div>
 
                 {% if teams %}
@@ -86,15 +86,15 @@
                             </td>
                             <td>
                                 {% if players.all %}
-                                <div class="scroll-box">
-                                    <ul>
-                                        {% for player in players.all %}
-                                            {% if player.team_name == team %}
-                                                <li>{{ player }}</li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </ul>
-                                </div>
+                                    {% for player in players.all %}
+                                        {% if player.team_name == team %}
+                                            <div class="player-box">
+                                                <ul>
+                                                    <li><i class="fa-solid fa-basketball"></i>{{ player }}</li>
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 {% else %}
                                     <p>Not assigned players yet</p>
                                 {% endif %}
@@ -131,7 +131,7 @@
                 {% else %}
                     <p>No Teams or Players Found</p>
                 {% endif %}
-                {% else %}
+            {% else %}
                 <table>
                     <thead>
                         <tr>
