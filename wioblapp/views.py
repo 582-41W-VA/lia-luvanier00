@@ -286,10 +286,6 @@ def teams(request):
                 teams = teams.filter(group=group)
                 players = players.filter(team_name__in=teams)
 
-        if coach:
-            teams = teams.filter(coaches=coach)
-            players = players.filter(team_name__in=teams)
-
         if keyword:
             keyword_teams = teams.filter(name__icontains=keyword)
             if keyword_teams.exists():
@@ -304,6 +300,10 @@ def teams(request):
                 teams = Team.objects.none()
                 players = Player.objects.none()
 
+        if coach:
+            teams = teams.filter(coaches=coach)
+            players = players.filter(team_name__in=teams)
+
     context = {
         "filter_teams_form": filter_teams_form,
         "groups": groups,
@@ -312,10 +312,6 @@ def teams(request):
     }
 
     return render(request, "teams.html", context)
-
-
-# --------------------------------------------------------------
-
 
 # --------------------------------------------------------------
 def like_team(request, team_name):
