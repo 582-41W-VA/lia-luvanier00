@@ -151,6 +151,12 @@ class FavoriteTeamAdmin(admin.ModelAdmin):
     list_filter = ("team",)  
     search_fields = ("user_account__username", "team__name")
 
+class GameAdmin(admin.ModelAdmin):
+    list_display = ("team_1", "team_2", "date_time", "winner", "team1_score", "team2_score", "park")
+    list_filter = ("date_time", "winner", "park")  
+    search_fields = ("team_1__name", "team_2__name", "winner__name", "park__name") 
+    ordering = ("-date_time",) 
+
 wiobl_site = WioblAdminArea(name='WioblAdmin')
 
 
@@ -163,7 +169,7 @@ wiobl_site.register(Player)
 wiobl_site.register(RegistrationType)
 wiobl_site.register(Registration, RegistrationAdmin)
 wiobl_site.register(Park)
-wiobl_site.register(Game)
+wiobl_site.register(Game, GameAdmin)
 wiobl_site.register(Announcement, AnnouncementAdmin)
 wiobl_site.register(LikedComment)
 wiobl_site.register(Flag, FlagAdmin)
