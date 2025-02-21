@@ -143,6 +143,7 @@ class FilterTeamsForm(forms.Form):
         label="Group",
         queryset=RegistrationType.objects.all(),
         required=True,
+        empty_label=None,
         widget=forms.Select(),
     )
 
@@ -150,8 +151,14 @@ class FilterTeamsForm(forms.Form):
         label="Coach",
         queryset=UserAccount.objects.filter(role="Coach"),
         required=False,
+        empty_label=None,
         widget=forms.Select(),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["group"].choices = [("All", "All")] + list(self.fields["group"].choices)
+        self.fields["coach"].choices = [("", "None")] + list(self.fields["coach"].choices)
 
 
 # --------------------------------------------------------------
