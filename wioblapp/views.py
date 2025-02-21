@@ -315,6 +315,9 @@ def teams(request):
 
 
 # --------------------------------------------------------------
+
+
+# --------------------------------------------------------------
 def like_team(request, team_name):
     team = Team.objects.get(name=team_name)
 
