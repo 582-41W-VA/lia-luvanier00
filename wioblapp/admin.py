@@ -157,6 +157,19 @@ class GameAdmin(admin.ModelAdmin):
     search_fields = ("team_1__name", "team_2__name", "winner__name", "park__name") 
     ordering = ("-date_time",) 
 
+
+class LikedCommentAdmin(admin.ModelAdmin):
+    list_display = ("user_account", "comment_preview") 
+    list_filter = ("user_account",) 
+    search_fields = ("user_account__username", "comment__content")  
+    ordering = ("-id",) 
+
+    def comment_preview(self, obj):
+        return obj.comment.content[:50] + "..." if len(obj.comment.content) > 50 else obj.comment.content
+
+    comment_preview.short_description = "Comment"
+
+
 wiobl_site = WioblAdminArea(name='WioblAdmin')
 
 
@@ -171,6 +184,6 @@ wiobl_site.register(Registration, RegistrationAdmin)
 wiobl_site.register(Park)
 wiobl_site.register(Game, GameAdmin)
 wiobl_site.register(Announcement, AnnouncementAdmin)
-wiobl_site.register(LikedComment)
+wiobl_site.register(LikedComment, LikedCommentAdmin)
 wiobl_site.register(Flag, FlagAdmin)
 wiobl_site.register(Comment, CommentAdmin)
