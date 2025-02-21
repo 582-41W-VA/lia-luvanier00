@@ -223,7 +223,7 @@ th, td{
 
 #changelist .actions {
   padding: 10px;
-  background: white;
+  background: #f8f8f8;
   line-height: 1.5rem;
   color: #000000;
   width: auto;
@@ -269,6 +269,21 @@ ul.messagelist li.warning {
   border-radius: 8px 8px 0 0;
 }
 
+#changelist #toolbar {
+border-radius: 8px;
+}
+
+#toolbar form input[type="submit"] {
+  border: none;
+  background: orange;
+  cursor: pointer;
+  color: white;
+}
+
+#nav-filter {
+  border-radius: 8px;
+  padding: 8px 16px;
+}
 @media (max-width: 1015px) {
   .stat-item h3{
     font-size: 14px;
