@@ -157,8 +157,12 @@ class FilterTeamsForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["group"].choices = [("All", "All")] + list(self.fields["group"].choices)
-        self.fields["coach"].choices = [("", "None")] + list(self.fields["coach"].choices)
+        self.fields["group"].choices = [("All", "All")] + list(
+            self.fields["group"].choices
+        )
+        self.fields["coach"].choices = [("", "None")] + list(
+            self.fields["coach"].choices
+        )
 
 
 # --------------------------------------------------------------

@@ -4,11 +4,9 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wioblapp', '0014_registration_team'),
-        ('wioblapp', '0015_alter_flag_flagged_content'),
+        ("wioblapp", "0014_registration_team"),
+        ("wioblapp", "0015_alter_flag_flagged_content"),
     ]
 
-    operations = [
-    ]
+    operations = []
