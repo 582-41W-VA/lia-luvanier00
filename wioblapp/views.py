@@ -313,6 +313,7 @@ def teams(request):
 
     return render(request, "teams.html", context)
 
+
 # --------------------------------------------------------------
 
 
